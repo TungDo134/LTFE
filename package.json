@@ -11,6 +11,7 @@
     "server": "json-server --watch src/data/data_game.json --port 8000 "
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^2.11.2",
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/react-query": "^4.42.0",
     "@tanstack/react-query-devtools": "^4.42.0",
@@ -21,6 +22,7 @@
     "react-hook-form": "^7.68.0",
     "react-hot-toast": "^2.6.0",
     "react-icons": "^5.5.0",
+    "react-redux": "^9.2.0",
     "react-router-dom": "^6.30.2",
     "styled-components": "^6.1.19"
   },
