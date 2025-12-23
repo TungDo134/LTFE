@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { TableOfContents } from "lucide-react";
-import { getAllCategories } from "../../../services/apiProduct";
+import { getAllCategories } from "../../services/apiProduct.js";
 import { Link } from "react-router-dom";
 
 function HomeCategory() {
