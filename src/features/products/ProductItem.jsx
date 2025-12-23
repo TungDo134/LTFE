@@ -1,4 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/cartSlice";
+
 
 function ProductItem({ product }) {
   const {
@@ -12,7 +15,22 @@ function ProductItem({ product }) {
 
   const navigate = useNavigate();
 
-  return (
+    const dispatch = useDispatch();
+    const handleAddToCart = (e) => {
+        e.stopPropagation();
+
+        dispatch(
+            addToCart({
+                id: productId,
+                title,
+                price: sale_price,
+                thumbnail,
+            })
+        );
+    };
+
+
+    return (
     <div
       className="
       overflow-hidden
@@ -72,6 +90,19 @@ function ProductItem({ product }) {
             -{discount_percentage}%
           </span>
         </div>
+
+          {/* ADD TO CART */}
+          <button
+              onClick={handleAddToCart}
+              className="
+            w-full
+            rounded
+            bg-blue-600
+            py-1.5
+            text-sm
+            text-white
+            hover:bg-blue-700
+          ">Thêm vào giỏ hàng</button>
       </div>
     </div>
   );
