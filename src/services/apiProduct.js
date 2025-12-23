@@ -18,3 +18,12 @@ export async function getProduct(id) {
 
   return res.json();
 }
+export async function getAllCategories() {
+  const res = await fetch(`http://localhost:8000/categories`);
+
+  if (!res.ok) {
+    throw new Error("Categories not found");
+  }
+
+  return res.json();
+}
