@@ -27,8 +27,10 @@ export async function getAllCategories() {
     return res.json();
 }
 
-export async function getFeatureProducts() {
-    const res = await fetch(`http://localhost:8000/games?_limit=8`);
+export async function getFeatureProducts(page) {
+    const limit = 8;
+    const start = (page - 1) * limit;
+    const res = await fetch(`http://localhost:8000/games?_start=${start}&_limit=${limit}`);
     if (!res.ok) {
         throw new Error("Failed to fetch featured products");
     }
