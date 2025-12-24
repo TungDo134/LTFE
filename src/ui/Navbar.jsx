@@ -38,7 +38,7 @@ const Navbar = () => {
             </div>
           </Link>
 
-          <Link to={""}>
+            <Link to="/cart">
             <div className="flex items-center gap-2 border border-white rounded-md px-3 py-1.5 cursor-pointer hover:bg-white/10">
               <ShoppingCart size={20} />
               <span>Giỏ hàng</span>

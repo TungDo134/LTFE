@@ -6,6 +6,8 @@ import ProductDetail from "./features/products/ProductDetail";
 import AppLayout from "./ui/AppLayout";
 import Product from "./pages/Product";
 import Home from "./pages/Home";
+import Cart from "./pages/cart";
+
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -27,6 +29,7 @@ function App() {
             <Route path="home" element={<Home />} />
             <Route path="product" element={<Product />} />
             <Route path="/product/:productId" element={<ProductDetail />} />
+            <Route path="cart" element={<Cart />} />
           </Route>
         </Routes>
       </BrowserRouter>
