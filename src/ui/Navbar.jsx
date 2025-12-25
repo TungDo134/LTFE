@@ -31,7 +31,7 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-6 text-sm font-medium">
-          <Link to={""}>
+          <Link to={"/login"}>
             <div className="flex items-center gap-2 cursor-pointer hover:opacity-80">
               <UserCircle size={32} strokeWidth={1.5} />
               <span>Đăng nhập / Đăng ký</span>
