@@ -2,7 +2,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/cartSlice";
 
-
 function ProductItem({ product }) {
   const {
     id: productId,
@@ -15,22 +14,21 @@ function ProductItem({ product }) {
 
   const navigate = useNavigate();
 
-    const dispatch = useDispatch();
-    const handleAddToCart = (e) => {
-        e.stopPropagation();
+  const dispatch = useDispatch();
+  const handleAddToCart = (e) => {
+    e.stopPropagation();
 
-        dispatch(
-            addToCart({
-                id: productId,
-                title,
-                price: sale_price,
-                thumbnail,
-            })
-        );
-    };
+    dispatch(
+      addToCart({
+        id: productId,
+        title,
+        price: sale_price,
+        thumbnail,
+      })
+    );
+  };
 
-
-    return (
+  return (
     <div
       className="
       overflow-hidden
@@ -91,10 +89,10 @@ function ProductItem({ product }) {
           </span>
         </div>
 
-          {/* ADD TO CART */}
-          <button
-              onClick={handleAddToCart}
-              className="
+        {/* ADD TO CART */}
+        <button
+          onClick={handleAddToCart}
+          className="
             w-full
             rounded
             bg-blue-600
@@ -102,7 +100,10 @@ function ProductItem({ product }) {
             text-sm
             text-white
             hover:bg-blue-700
-          ">Thêm vào giỏ hàng</button>
+          "
+        >
+          Thêm vào giỏ hàng
+        </button>
       </div>
     </div>
   );

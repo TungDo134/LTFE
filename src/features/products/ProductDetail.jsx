@@ -1,7 +1,11 @@
-import { useProduct } from "./useProduct";
+import { useParams } from "react-router-dom";
 import Spinner from "../../ui/Spinner";
+import { useProduct } from "./useProduct";
+
 function ProductDetail() {
-  const { product, isLoading, error } = useProduct();
+  const { productId } = useParams();
+
+  const { product, isLoading, error } = useProduct(productId);
 
   if (isLoading) return <Spinner />;
   if (error) return <p>Có lỗi khi tải</p>;
