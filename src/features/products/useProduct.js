@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getProduct } from "../../services/apiProduct";
 
+// ctsp
 export function useProduct(id) {
   const [product, setProduct] = useState([]);
   const [isLoading, setIsLoading] = useState(true);

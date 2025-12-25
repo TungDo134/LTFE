@@ -2,6 +2,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/cartSlice";
 
+import { formatNumber } from "../../utils/formatNumber";
+
+import { FaCartPlus } from "react-icons/fa";
 function ProductItem({ product }) {
   const {
     id: productId,
@@ -56,7 +59,7 @@ function ProductItem({ product }) {
         <h3
           className="
           mb-1
-          text-sm
+          text-md
           font-medium
           leading-tight
           text-gray-900
@@ -66,17 +69,18 @@ function ProductItem({ product }) {
           {title}
         </h3>
 
-        <div className="flex items-center gap-2">
-          <span className="text-sm font-semibold text-gray-900">
-            {sale_price}đ
-          </span>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <span className="text-md font-semibold text-gray-900 tracking-tighter">
+              {formatNumber(sale_price)}
+            </span>
 
-          <span className="text-xs text-gray-400 line-through">
-            {original_price}đ
-          </span>
+            <span className="text-md text-gray-400 line-through tracking-tighter">
+              {formatNumber(original_price)}
+            </span>
 
-          <span
-            className="
+            <span
+              className="
             rounded
             bg-red-500
             px-1.5
@@ -84,26 +88,21 @@ function ProductItem({ product }) {
             text-xs
             font-semibold
             text-white"
-          >
-            -{discount_percentage}%
-          </span>
-        </div>
+            >
+              -{discount_percentage}%
+            </span>
+          </div>
 
-        {/* ADD TO CART */}
-        <button
-          onClick={handleAddToCart}
-          className="
-            w-full
-            rounded
-            bg-blue-600
-            py-1.5
-            text-sm
-            text-white
-            hover:bg-blue-700
-          "
-        >
-          Thêm vào giỏ hàng
-        </button>
+          {/* ADD TO CART */}
+          <div className="text-gray-500 ">
+            <button
+              onClick={handleAddToCart}
+              className="p-2 rounded-full hover:bg-gray-100 transition-all active:scale-95 group cursor-pointer"
+            >
+              <FaCartPlus className=" text-xl" />
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
