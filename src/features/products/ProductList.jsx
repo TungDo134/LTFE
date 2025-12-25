@@ -1,7 +1,9 @@
+import { useParams } from "react-router-dom";
+
+import { useProducts } from "./useProducts";
+
 import ProductItem from "./ProductItem";
 import Spinner from "../../ui/Spinner";
-import { useProducts } from "./useProducts";
-import { useParams } from "react-router-dom";
 
 function ProductList() {
   const { category } = useParams(); // undefined nếu không truyền cate
@@ -18,7 +20,7 @@ function ProductList() {
 
   if (isLoading && products.length === 0) return <Spinner />;
   if (error) return <p>{error}</p>;
-  console.log(totalProduct);
+  // console.log(totalProduct);
 
   return (
     <>
