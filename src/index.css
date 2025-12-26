@@ -5,10 +5,12 @@
   /* Định nghĩa font và size ở đây nếu config cũ không nhận */
   --font-mono: "Roboto Mono", monospace;
   --font-huge: 5rem;
+  --font-roboto: "Roboto", -apple-system, BlinkMacSystemFont, "Helvetica Neue",
+    Helvetica, Arial, sans-serif;
 }
 
 @layer base {
   html {
-    font-family: var(--font-mono);
+    font-family: var(--font-roboto);
   }
 }

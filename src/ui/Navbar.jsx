@@ -1,14 +1,25 @@
 import React from "react";
-import { Search, UserCircle, ShoppingCart, Eye, Flame, Percent, CreditCard } from "lucide-react";
+import {
+  Search,
+  UserCircle,
+  ShoppingCart,
+  Eye,
+  Flame,
+  Percent,
+  CreditCard,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
     const { isLogin, user } = useSelector((state) => state.auth);
   return (
-    <nav className="bg-[#2579f2] text-white w-full font-sans">
+    <nav className="bg-[#2579f2] text-white w-full font-sans ">
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
-        <Link to={"/home"} className="flex items-center gap-2 min-w-fit cursor-pointer group">
+        <Link
+          to={"/home"}
+          className="flex items-center gap-2 min-w-fit cursor-pointer group"
+        >
           <div className="w-10 h-10 border-2 border-white rounded-full">
             <img
               loading="lazy"
@@ -47,11 +58,13 @@ const Navbar = () => {
                 )}
             </div>
 
-            <Link to="/cart">
+          <Link to="/cart">
             <div className="flex items-center gap-2 border border-white rounded-md px-3 py-1.5 cursor-pointer hover:bg-white/10">
               <ShoppingCart size={20} />
               <span>Giỏ hàng</span>
-              <span className="bg-white text-[#2579f2] px-1.5 rounded-sm font-bold ml-1">0</span>
+              <span className="bg-white text-[#2579f2] px-1.5 rounded-sm font-bold ml-1">
+                0
+              </span>
             </div>
           </Link>
         </div>

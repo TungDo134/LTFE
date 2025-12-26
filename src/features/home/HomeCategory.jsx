@@ -1,31 +1,25 @@
 import { useState, useEffect } from "react";
 import { TableOfContents } from "lucide-react";
-import { getAllCategories } from "../../services/apiProduct.js";
 import { Link, useNavigate } from "react-router-dom";
+import { useCategories } from "../products/useCategories.js";
+import Spinner from "../../ui/Spinner.jsx";
 
 function HomeCategory() {
   const navigate = useNavigate();
 
-  const [item, setItem] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+
+  // hook custom lại
+  const { item } = useCategories();
 
   function toggleMenu() {
     setIsOpen(!isOpen);
   }
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const data = await getAllCategories();
-        setItem(data);
-      } catch (error) {
-        console.error("Error: ", error);
-      }
-    }
-    fetchData();
-  }, []);
+
+  if (!item) return <Spinner />;
 
   return (
-    <div className="w-full bg-gray-300">
+    <div className="w-full bg-gray-300 ">
       <div className="mx-auto max-w-7xl py-2">
         <div
           className="flex items-center my-3 gap-2 cursor-pointer"
@@ -36,6 +30,7 @@ function HomeCategory() {
             Danh mục sản phẩm
           </span>
         </div>
+
         {isOpen && (
           <ul className="absolute bg-white border shadow-md w-auto z-50 max-h-[400px] overflow-y-auto">
             {item.map((cat) => (
