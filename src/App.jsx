@@ -4,6 +4,7 @@ import AppLayout from "./ui/AppLayout";
 import Product from "./pages/Product";
 import Home from "./pages/Home";
 import Cart from "./pages/cart";
+import PaymentMethod from "./pages/PaymentMethod";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           {/* Detail Product */}
           <Route path="/product/:productId" element={<ProductDetail />} />
           <Route path="cart" element={<Cart />} />
+          <Route path="payment-method" element={<PaymentMethod />} />
         </Route>
       </Routes>
     </BrowserRouter>
