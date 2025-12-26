@@ -5,17 +5,17 @@ const authSlice = createSlice({
     name: 'auth',
     initialState: {
         user: storedUser || null,
-        isLoggedIn: storedUser ? true : false,
+        isLogin: storedUser ? true : false,
     },
     reducers: {
         login: (state, action) => {
             state.user = action.payload;
-            state.isLoggedIn = true;
+            state.isLogin = true;
             localStorage.setItem('currentUser', JSON.stringify(action.payload));
         },
         logout: (state) => {
             state.user = null;
-            state.isLoggedIn = false;
+            state.isLogin = false;
             localStorage.removeItem('currentUser');
         },
     },
