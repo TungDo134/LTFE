@@ -13,7 +13,9 @@ import { useSelector } from "react-redux";
 
 const Navbar = () => {
     const { isLogin, user } = useSelector((state) => state.auth);
-  return (
+    const cartCount = useSelector((state) => state.cart.list.reduce((sum, item) => sum + item.quantity, 0));
+
+    return (
     <nav className="bg-[#2579f2] text-white w-full font-sans ">
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
         <Link
@@ -62,9 +64,9 @@ const Navbar = () => {
             <div className="flex items-center gap-2 border border-white rounded-md px-3 py-1.5 cursor-pointer hover:bg-white/10">
               <ShoppingCart size={20} />
               <span>Giỏ hàng</span>
-              <span className="bg-white text-[#2579f2] px-1.5 rounded-sm font-bold ml-1">
-                0
-              </span>
+                <span className="bg-white text-[#2579f2] px-1.5 rounded-sm font-bold ml-1 min-w-[20px] text-center">
+                     {cartCount}
+                </span>
             </div>
           </Link>
         </div>

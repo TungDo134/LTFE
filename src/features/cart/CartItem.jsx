@@ -1,11 +1,17 @@
 import { useDispatch } from "react-redux";
-import { increase, decrease, remove } from "../../redux/cartSlice";
+import { increase, decrease, remove, toggleSelect } from "../../redux/cartSlice";
 
 function CartItem({ item }) {
     const dispatch = useDispatch();
 
     return (
-        <div className="flex gap-4 border p-3 rounded">
+        <div className="flex gap-4 border p-3 rounded items-center">
+            <input
+                type="checkbox"
+                checked={item.selected}
+                onChange={() => dispatch(toggleSelect(item.id))}
+            />
+
             <img src={item.thumbnail} className="w-24 rounded" />
 
             <div className="flex-1">
