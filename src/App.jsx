@@ -9,6 +9,7 @@ import { Toaster } from "react-hot-toast";
 import PaymentMethod from "./pages/Topup.jsx";
 import Checkout from "./pages/Checkout";
 import AboutUs from "./pages/AboutUs.jsx";
+import Contact from "./pages/Contact.jsx";
 
 function App() {
   return (
@@ -38,6 +39,8 @@ function App() {
 
           {/* About Us */}
           <Route path="about-us" element={<AboutUs />} />
+          {/* Contact */}
+          <Route path="contact" element={<Contact />} />
         </Route>
         <Route path={"login"} element={<Login />}></Route>
       </Routes>

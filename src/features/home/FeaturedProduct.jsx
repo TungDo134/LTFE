@@ -37,11 +37,7 @@ export default function FeaturedProduct() {
 
   if (loading) return <Spinner />;
   return (
-    <div
-      className={
-        "w-full mx-auto max-w-7xl py-2 mb-4 border-b-2 border-gray-500/50"
-      }
-    >
+    <div className={"w-full mx-auto max-w-7xl py-2 mb-4"}>
       <div className={"pt-8 pb-8"}>
         <div className={"text-lg font-bold"}>Sản phẩm nổi bật</div>
         <div className={"text"}>
