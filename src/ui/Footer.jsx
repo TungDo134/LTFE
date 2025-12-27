@@ -60,7 +60,7 @@ function Footer() {
                 <a>Game bản quyền là gì?</a>
               </li>
               <li>
-                <a>Giới thiệu Divine Shop</a>
+                <Link to={"about-us"}>Giới thiệu Divine Shop</Link>
               </li>
               <li>
                 <a>Điều khoản dịch vụ</a>

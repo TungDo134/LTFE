@@ -8,6 +8,7 @@ import Login from "./pages/Login.jsx";
 import { Toaster } from "react-hot-toast";
 import PaymentMethod from "./pages/Topup.jsx";
 import Checkout from "./pages/Checkout";
+import AboutUs from "./pages/AboutUs.jsx";
 
 function App() {
   return (
@@ -32,7 +33,11 @@ function App() {
           <Route path="cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
 
+          {/* Các phương thức thanh toán */}
           <Route path="topup" element={<PaymentMethod />} />
+
+          {/* About Us */}
+          <Route path="about-us" element={<AboutUs />} />
         </Route>
         <Route path={"login"} element={<Login />}></Route>
       </Routes>
