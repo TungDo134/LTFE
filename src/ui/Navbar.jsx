@@ -56,7 +56,7 @@ const Navbar = () => {
                                 {user.avt ? (
                                     <img
                                         src={user.avt} alt={user.name}
-                                        className="w-8 h-8 rounded-full "/>
+                                        className="w-11 h-11 rounded-full border-white border-0.5 "/>
                                 ) : (
                                     <UserCircle size={32} strokeWidth={1.5}/>
                                 )}
@@ -65,11 +65,11 @@ const Navbar = () => {
                                     <div
                                         className="absolute top-full mt-2 w-48 py-2 z-10 bg-white rounded-lg shadow-xl text-gray-800">
                                         <div className="absolute -top-3 h-3 w-full bg-transparent"></div>
-                                        <Link to={"profile"}
+                                        <Link to={"profile?tab=account"}
                                               className="block px-4 py-2 hover:bg-blue-50 transition-colors">
                                             Tài khoản của tôi
                                         </Link>
-                                        <Link to={""}
+                                        <Link to={"/profile?tab=orders"}
                                               className="block px-4 py-2 hover:bg-blue-50 transition-colors">
                                             Đơn mua
                                         </Link>

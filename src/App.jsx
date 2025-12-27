@@ -5,8 +5,8 @@ import Product from "./pages/Product";
 import Home from "./pages/Home";
 import Cart from "./pages/cart";
 import Login from "./pages/Login.jsx";
-
 import PaymentMethod from "./pages/PaymentMethod";
+import Profile from "./pages/Profile.jsx";
 
 function App() {
   return (
@@ -22,8 +22,9 @@ function App() {
           <Route path="/product/:productId" element={<ProductDetail />} />
           <Route path="cart" element={<Cart />} />
           <Route path="payment-method" element={<PaymentMethod />} />
+          <Route path="profile" element={<Profile />} />
         </Route>
-        <Route path={"login"} element={<Login />}></Route>
+        <Route path={"login"} element={<Login />} />
       </Routes>
     </BrowserRouter>
   );
