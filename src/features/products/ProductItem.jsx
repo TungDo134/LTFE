@@ -5,6 +5,9 @@ import { addToCart } from "../../redux/cartSlice";
 import { formatNumber } from "../../utils/formatNumber";
 
 import { FaCartPlus } from "react-icons/fa";
+
+import toast from "react-hot-toast";
+
 function ProductItem({ product }) {
   const {
     id: productId,
@@ -29,6 +32,7 @@ function ProductItem({ product }) {
         thumbnail,
       })
     );
+      toast.success("Đã thêm vào giỏ hàng 🛒");
   };
 
   return (
