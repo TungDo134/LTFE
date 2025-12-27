@@ -6,18 +6,18 @@ import Home from "./pages/Home";
 import Cart from "./pages/cart";
 import Login from "./pages/Login.jsx";
 import { Toaster } from "react-hot-toast";
-import PaymentMethod from "./pages/PaymentMethod";
+import PaymentMethod from "./pages/Topup.jsx";
 import Checkout from "./pages/Checkout";
 
 function App() {
   return (
     <BrowserRouter>
-        <Toaster
-            position="top-right"
-            toastOptions={{
-                duration: 1500,
-            }}
-        />
+      <Toaster
+        position="top-right"
+        toastOptions={{
+          duration: 1500,
+        }}
+      />
       <Routes>
         <Route element={<AppLayout />}>
           <Route index element={<Navigate replace to="home" />} />
@@ -28,15 +28,14 @@ function App() {
           {/* Detail Product */}
           <Route path="/product/:productId" element={<ProductDetail />} />
 
-            {/* cart -> checkout */}
+          {/* cart -> checkout */}
           <Route path="cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
 
-          <Route path="payment-method" element={<PaymentMethod />} />
+          <Route path="topup" element={<PaymentMethod />} />
         </Route>
         <Route path={"login"} element={<Login />}></Route>
       </Routes>
-
     </BrowserRouter>
   );
 }

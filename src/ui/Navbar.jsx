@@ -8,14 +8,17 @@ import {
   Percent,
   CreditCard,
 } from "lucide-react";
+import { FaSteam } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Navbar = () => {
-    const { isLogin, user } = useSelector((state) => state.auth);
-    const cartCount = useSelector((state) => state.cart.list.reduce((sum, item) => sum + item.quantity, 0));
+  const { isLogin, user } = useSelector((state) => state.auth);
+  const cartCount = useSelector((state) =>
+    state.cart.list.reduce((sum, item) => sum + item.quantity, 0)
+  );
 
-    return (
+  return (
     <nav className="bg-[#2579f2] text-white w-full font-sans ">
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
         <Link
@@ -34,7 +37,7 @@ const Navbar = () => {
             Divine Shop
           </span>
         </Link>
-        <div className="flex-grow max-w-2xl flex border-2 border-white-500 border-line rounded-xl p-1">
+        <div className="grow max-w-2xl flex border-2 border-white-500 border-line rounded-xl p-1">
           <input
             type="text"
             placeholder="Tìm kiếm sản phẩm"
@@ -46,34 +49,37 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-6 text-sm font-medium">
-            <div className="flex items-center gap-2 cursor-pointer hover:opacity-80">
-                <UserCircle size={32} strokeWidth={1.5} />
-                {isLogin && user ? (
-                    <span>
-                        {user.name}
-                    </span>
-                ) : (
-                    <Link to={"/login"}>
-                    <span>Đăng nhập / Đăng ký</span>
-                    </Link>
-
-                )}
-            </div>
+          <div className="flex items-center gap-2 cursor-pointer hover:opacity-80">
+            <UserCircle size={32} strokeWidth={1.5} />
+            {isLogin && user ? (
+              <span>{user.name}</span>
+            ) : (
+              <Link to={"/login"}>
+                <span>Đăng nhập / Đăng ký</span>
+              </Link>
+            )}
+          </div>
 
           <Link to="/cart">
             <div className="flex items-center gap-2 border border-white rounded-md px-3 py-1.5 cursor-pointer hover:bg-white/10">
               <ShoppingCart size={20} />
               <span>Giỏ hàng</span>
-                <span className="bg-white text-[#2579f2] px-1.5 rounded-sm font-bold ml-1 min-w-[20px] text-center">
-                     {cartCount}
-                </span>
+              <span className="bg-white text-[#2579f2] px-1.5 rounded-sm font-bold ml-1 min-w-[20px] text-center">
+                {cartCount}
+              </span>
             </div>
           </Link>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 pb-3 flex justify-between items-center text-[13px] font-medium">
+      <div className="max-w-7xl mx-auto px-4 pb-3 flex justify-between items-center text-[13px] font-medium mt-2">
         <div className="flex items-center gap-8">
+          <Link
+            to={"product"}
+            className="flex items-center gap-2 hover:opacity-80"
+          >
+            <FaSteam size={18} /> Tất cả sản phẩm
+          </Link>
           <Link to={""} className="flex items-center gap-2 hover:opacity-80">
             <Eye size={18} /> Sản phẩm bạn vừa xem
           </Link>
@@ -86,7 +92,10 @@ const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-8">
-          <Link to={""} className="flex items-center gap-2 hover:opacity-80">
+          <Link
+            to={"topup"}
+            className="flex items-center gap-2 hover:opacity-80"
+          >
             <CreditCard size={18} /> Hình thức thanh toán
           </Link>
         </div>
