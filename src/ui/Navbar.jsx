@@ -53,13 +53,9 @@ const Navbar = () => {
                          onMouseLeave={() => setShowMenu(false)}>
                         {isLogin && user ? (
                             <>
-                                {user.avt ? (
-                                    <img
-                                        src={user.avt} alt={user.name}
-                                        className="w-11 h-11 rounded-full border-white border-0.5 "/>
-                                ) : (
-                                    <UserCircle size={32} strokeWidth={1.5}/>
-                                )}
+                                <img
+                                    src={user.avt} alt={user.name}
+                                    className="w-11 h-11 rounded-full border-white border-0.5 "/>
                                 <span className="font-medium">{user.name}</span>
                                 {showMenu && (
                                     <div

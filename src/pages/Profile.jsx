@@ -15,10 +15,12 @@ function Profile() {
                 <Menu activeTab={activeTab}/>
             </div>
 
-            {activeTab === "account" && <UserInfo/>}
-            {activeTab === "orders" && <Orders/>}
-            {activeTab === "purchase-history" && <PurchaseHistory/>}
-            {activeTab === "security" && <Security/>}
+            <div className={"w-full h-fit border-2 border-blue-500 rounded-lg p-6"}>
+                {activeTab === "account" && <UserInfo/>}
+                {activeTab === "orders" && <Orders/>}
+                {activeTab === "purchase-history" && <PurchaseHistory/>}
+                {activeTab === "security" && <Security/>}
+            </div>
         </div>
     );
 }

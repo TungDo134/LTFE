@@ -4,8 +4,11 @@
       "id": "1",
       "avt": "https://cdn.divineshop.vn/image/catalog/icon/avatar-khach-hang-2-52544.png?hash=1649933269",
       "name": "Xuân Trung",
+      "username": "vadolaxt",
       "email": "a@gmail.com",
-      "pwd": "123"
+      "pwd": "123",
+      "balance": "0",
+      "used": "99"
     },
     {
       "id": "2",
@@ -192,6 +195,16 @@
       "name": "trung",
       "email": "c@gmail.com",
       "pwd": "123"
+    },
+    {
+      "id": "7ebe",
+      "name": "meo",
+      "email": "aa@gmail.com",
+      "pwd": "123",
+      "balance": "0",
+      "used": "0",
+      "username": "meo",
+      "avt": "https://cdn.divineshop.vn/image/catalog/icon/avatar-khach-hang-2-52544.png?hash=1649933269"
     }
   ],
   "categories": [

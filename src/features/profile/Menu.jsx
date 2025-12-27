@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 
 export default function Menu({activeTab}) {
 
-    const baseClass = "flex p-6 gap-4 border-b-1 border-blue-500 opacity-70"
+    const baseClass = "flex p-6 gap-4 border-b-1 border-blue-500"
     const selectedClass = "border-l-6";
 
     return (
