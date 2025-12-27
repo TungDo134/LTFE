@@ -3,21 +3,21 @@ import { Link } from "react-router-dom";
 function Footer() {
   return (
     <>
-      <div className="bg-[#f3f4f6]">
+      <div className="bg-white">
         {/* Phương thức thanh toán */}
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4 ">
           <div className="cursor-pointer">
             <Link
-              to={`payment-method`}
+              to={`topup`}
               className="flex items-center justify-between gap-3 "
             >
               <img
                 className="block h-7 max-w-full align-middle"
-                src="pic\momo.svg"
+                src="/pic/momo.svg"
               />
               <img
                 className="block h-7 max-w-full align-middle"
-                src="pic\vnpay.svg"
+                src="/pic/vnpay.svg"
               />
               <img
                 className="block h-7 max-w-full align-middle"
@@ -25,7 +25,7 @@ function Footer() {
               />
               <img
                 className="block h-7 max-w-full align-middle"
-                src="pic\master_card.svg"
+                src="/pic/master_card.svg"
               />
               <small>và nhiều hình thức thanh toán khác</small>
             </Link>
@@ -38,11 +38,11 @@ function Footer() {
         <a className="flex items-center justify-between gap-3 ">
           <img
             className="block h-7 max-w-full align-middle"
-            src="pic\facebook.svg"
+            src="/pic/facebook.svg"
           />
           <img
             className="block h-7 max-w-full align-middle"
-            src="pic\youtube.svg"
+            src="/pic/youtube.svg"
           />
         </a>
       </div>
