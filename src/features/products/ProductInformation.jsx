@@ -5,7 +5,7 @@ const ProductInformation = ({ metadata }) => {
   if (!details) return null;
 
   return (
-    <div className="max-w-5xl mx-auto p-4 md:p-8 bg-white text-[#444] leading-relaxed">
+    <div className="max-w-5xl mx-auto p-4 md:p-8  text-[#444] leading-relaxed">
       {/* SECTION: Sơ lược thông tin */}
       <div className="grid grid-cols-1 md:grid-cols-[250px_1fr] gap-4 mb-10">
         <h2 className="text-xl font-bold text-gray-800">Chi tiết sản phẩm</h2>

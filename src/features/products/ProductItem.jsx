@@ -32,7 +32,7 @@ function ProductItem({ product }) {
         thumbnail,
       })
     );
-      toast.success("Đã thêm vào giỏ hàng 🛒");
+    toast.success("Đã thêm vào giỏ hàng 🛒");
   };
 
   return (
@@ -40,9 +40,6 @@ function ProductItem({ product }) {
       className="
       overflow-hidden
       rounded-md
-      border
-      bg-white
-      shadow-sm
       transition
       hover:shadow-md
       cursor-pointer
@@ -54,12 +51,12 @@ function ProductItem({ product }) {
         <img
           src={thumbnail}
           alt={title}
-          className="h-full w-full object-cover"
+          className="h-full w-full object-cover rounded-md shadow-md"
         />
       </div>
 
       {/* Content */}
-      <div className="p-2">
+      <div className="py-2.5 px-0.5">
         <h3
           className="
           mb-1

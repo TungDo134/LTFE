@@ -8,7 +8,7 @@ function Heading({ as, children }) {
   }
 
   // default h2
-  return <h2 className=" mb-3 text-3xl font-medium">{children}</h2>;
+  return <h2 className=" mb-3 text-3xl font-bold mt-4">{children}</h2>;
 }
 
 export default Heading;
