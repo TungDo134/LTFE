@@ -41,3 +41,13 @@ export async function updateProfile(userId, updateData) {
     if (!res.ok) throw new Error("Không thể cập nhật thông tin");
     return res.json();
 }
+
+export async function getPasswordByUserId(userId) {
+    const res = await fetch(`http://localhost:8000/users/${userId}`);
+
+    if (!res.ok) throw new Error("Không thể tìm thấy người dùng");
+
+    const data = await res.json();
+
+    return data.pwd;
+}

@@ -1,8 +1,8 @@
 import {useSearchParams} from "react-router-dom";
 import Menu from "../features/profile/Menu.jsx";
 import UserInfo from "../features/profile/UserInfo.jsx";
-import Security from "../features/profile/Security.jsx";
 import PurchaseHistory from "../features/profile/PurchaseHistory.jsx";
+import Security from "../features/profile/Security.jsx";
 import Orders from "../features/profile/Orders.jsx";
 
 function Profile() {
@@ -10,16 +10,16 @@ function Profile() {
     const activeTab = param.get("tab");
 
     return (
-        <div className={"max-w-7xl mx-auto px-4 py-3 flex gap-8"}>
+        <div className={"max-w-7xl min-h-[500px] mx-auto px-4 py-3 flex gap-8"}>
             <div className={"w-[25%]"}>
                 <Menu activeTab={activeTab}/>
             </div>
 
             <div className={"w-full h-fit border-2 border-blue-500 rounded-lg p-6"}>
                 {activeTab === "account" && <UserInfo/>}
+                {activeTab === "security" && <Security/>}
                 {activeTab === "orders" && <Orders/>}
                 {activeTab === "purchase-history" && <PurchaseHistory/>}
-                {activeTab === "security" && <Security/>}
             </div>
         </div>
     );

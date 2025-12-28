@@ -1,4 +1,4 @@
-import {User, ShoppingCart, FingerprintPattern, HandCoins} from 'lucide-react';
+import {User, Fingerprint, ShoppingCart, HandCoins} from 'lucide-react';
 import {Link} from 'react-router-dom';
 
 export default function Menu({activeTab}) {
@@ -16,6 +16,13 @@ export default function Menu({activeTab}) {
             </Link>
 
             <Link
+                to="?tab=security"
+                className={`${baseClass} ${activeTab === 'security' ? selectedClass : ''}`}>
+                <Fingerprint size={20}/>
+                <span>Bảo mật</span>
+            </Link>
+
+            <Link
                 to="?tab=orders"
                 className={`${baseClass} ${activeTab === 'orders' ? selectedClass : ''}`}>
                 <ShoppingCart size={20}/>
@@ -27,13 +34,6 @@ export default function Menu({activeTab}) {
                 className={`${baseClass} ${activeTab === 'purchase-history' ? selectedClass : ''}`}>
                 <HandCoins size={20}/>
                 <span>Lịch sử thanh toán</span>
-            </Link>
-
-            <Link
-                to="?tab=security"
-                className={`${baseClass} ${activeTab === 'security' ? selectedClass : ''}`}>
-                <FingerprintPattern size={20}/>
-                <span>Mật khẩu và bảo mật</span>
             </Link>
         </div>
     );
