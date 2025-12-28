@@ -28,3 +28,16 @@ export async function checkExisted(email) {
     }
     return res.json();
 }
+
+export async function updateProfile(userId, updateData) {
+    const res = await fetch(`http://localhost:8000/users/${userId}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(updateData)
+    });
+
+    if (!res.ok) throw new Error("Không thể cập nhật thông tin");
+    return res.json();
+}

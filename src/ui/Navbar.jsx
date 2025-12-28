@@ -13,16 +13,14 @@ import {useSelector, useDispatch} from "react-redux";
 import {useState} from "react";
 import {logout} from "../redux/authSlice.js";
 import { FaSteam } from "react-icons/fa";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
 
 const Navbar = () => {
-  const { isLogin, user } = useSelector((state) => state.auth);
-  const cartCount = useSelector((state) =>
-    state.cart.list.reduce((sum, item) => sum + item.quantity, 0)
-  );
+    const {isLogin, user} = useSelector((state) => state.auth);
+    const [showMenu, setShowMenu] = useState(false);
+    const dispatch = useDispatch()
+    const cartCount = useSelector((state) => state.cart.list.reduce((sum, item) => sum + item.quantity, 0));
 
-  return (
+    return (
     <nav className="bg-[#2579f2] text-white w-full font-sans ">
       <div className="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
         <Link
@@ -40,17 +38,17 @@ const Navbar = () => {
           <span className="text-xl font-bold tracking-tight group-hover:text-blue-100 transition-colors">
             Divine Shop
           </span>
-        </Link>
-        <div className="grow max-w-2xl flex border-2 border-white-500 border-line rounded-xl p-1">
-          <input
-            type="text"
-            placeholder="Tìm kiếm sản phẩm"
-            className="w-full px-4 py-2 rounded-l-md text-white focus:outline-none"
-          />
-          <button className="bg-[#1a5fb4] px-4 py-2 rounded-r-md hover:bg-blue-800 transition">
-            <Search size={20} />
-          </button>
-        </div>
+                </Link>
+                <div className="flex-grow max-w-2xl flex border-2 border-white-500 border-line rounded-xl p-1">
+                    <input
+                        type="text"
+                        placeholder="Tìm kiếm sản phẩm"
+                        className="w-full px-4 py-2 rounded-l-md text-white focus:outline-none"
+                    />
+                    <button className="bg-[#1a5fb4] px-4 py-2 rounded-r-md hover:bg-blue-800 transition">
+                        <Search size={20}/>
+                    </button>
+                </div>
 
                 <div className="flex items-center gap-6 text-sm font-medium">
                     <div className="flex items-center justify-center gap-2 cursor-pointer relative group min-w-[200px]"
@@ -92,17 +90,19 @@ const Navbar = () => {
                         )}
                     </div>
 
-          <Link to="/cart">
-            <div className="flex items-center gap-2 border border-white rounded-md px-3 py-1.5 cursor-pointer hover:bg-white/10">
-              <ShoppingCart size={20} />
-              <span>Giỏ hàng</span>
-              <span className="bg-white text-[#2579f2] px-1.5 rounded-sm font-bold ml-1 min-w-[20px] text-center">
-                {cartCount}
-              </span>
+                    <Link to="/cart">
+                        <div
+                            className="flex items-center gap-2 border border-white rounded-md px-3 py-1.5 cursor-pointer hover:bg-white/10">
+                            <ShoppingCart size={20}/>
+                            <span>Giỏ hàng</span>
+                            <span
+                                className="bg-white text-[#2579f2] px-1.5 rounded-sm font-bold ml-1 min-w-[20px] text-center">
+                     {cartCount}
+                </span>
+                        </div>
+                    </Link>
+                </div>
             </div>
-          </Link>
-        </div>
-      </div>
 
       <div className="max-w-7xl mx-auto px-4 pb-3 flex justify-between items-center text-[13px] font-medium mt-2">
         <div className="flex items-center gap-8">
