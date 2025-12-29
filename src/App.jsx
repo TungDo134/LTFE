@@ -3,14 +3,13 @@ import ProductDetail from "./features/products/ProductDetail";
 import AppLayout from "./ui/AppLayout";
 import Product from "./pages/Product";
 import Home from "./pages/Home";
-import Cart from "./pages/Cart.jsx";
+import Cart from "./pages/cart";
 import Login from "./pages/Login.jsx";
 import { Toaster } from "react-hot-toast";
 import PaymentMethod from "./pages/Topup.jsx";
+import OrderHistoryPage from "./pages/OrderHistoryPage.jsx";
 import AboutUs from "./pages/AboutUs.jsx";
 import Contact from "./pages/Contact.jsx";
-import OrderHistoryPage from "./pages/OrderHistoryPage.jsx";
-
 
 function App() {
   return (
@@ -33,11 +32,9 @@ function App() {
 
           {/* cart -> checkout */}
           <Route path="cart" element={<Cart />} />
-            <Route path="OrderHistoryPage" element={<OrderHistoryPage />} />
+          <Route path="OrderHistoryPage" element={<OrderHistoryPage />} />
 
-
-
-            {/* Các phương thức thanh toán */}
+          {/* Các phương thức thanh toán */}
           <Route path="topup" element={<PaymentMethod />} />
 
           {/* About Us */}
