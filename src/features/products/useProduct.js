@@ -30,3 +30,5 @@ export function useProduct(id) {
 
   return { product, isLoading, error };
 }
+
+

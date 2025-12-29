@@ -11,6 +11,19 @@
 //   return res.json();
 // }
 
+// best seller data (Fake "isBestSeller": true)
+export async function getProductBestSeller() {
+  const res = await fetch("http://localhost:8000/games");
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch products");
+  }
+
+  const products = await res.json();
+
+  return products.filter((p) => p.isBestSeller);
+}
+
 // all data have pagination
 export async function getProducts({ page = 1, limit = 12, category }) {
   const res = await fetch("http://localhost:8000/games");
