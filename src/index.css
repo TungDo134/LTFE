@@ -14,3 +14,19 @@
     font-family: var(--font-roboto);
   }
 }
+
+/* CSS swiper */
+.swiper-button-next,
+.swiper-button-prev {
+  color: white;
+}
+.swiper-pagination-bullet {
+  background: #ccc;
+  opacity: 1;
+  width: 10px;
+  height: 10px;
+  border: 3px solid #ccc;
+}
+.swiper-pagination-bullet-active {
+  background: white;
+}

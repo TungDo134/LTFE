@@ -11,6 +11,19 @@
 //   return res.json();
 // }
 
+// best seller data (Fake "isBestSeller": true)
+export async function getProductBestSeller() {
+  const res = await fetch("http://localhost:8000/games");
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch products");
+  }
+
+  const products = await res.json();
+
+  return products.filter((p) => p.isBestSeller);
+}
+
 // all data have pagination
 export async function getProducts({ page = 1, limit = 12, category }) {
   const res = await fetch("http://localhost:8000/games");
@@ -74,14 +87,32 @@ export async function getAllCategories() {
   return res.json();
 }
 
-export async function getFeatureProducts(page) {
-  const limit = 8;
-  const start = (page - 1) * limit;
-  const res = await fetch(
-    `http://localhost:8000/games?_start=${start}&_limit=${limit}`
-  );
+// export async function getFeatureProducts(page) {
+//   const limit = 8;
+//   const start = (page - 1) * limit;
+
+//   // Filter theo cate (nếu có)
+//   if (category) {
+//     data = data.filter((product) => product.includes(product.isFeatureProduct));
+//   }
+
+//   const res = await fetch(
+//     `http://localhost:8000/games?_start=${start}&_limit=${limit}`
+//   );
+//   if (!res.ok) {
+//     throw new Error("Failed to fetch featured products");
+//   }
+//   return res.json();
+// }
+
+export async function getFeatureProducts() {
+  const res = await fetch("http://localhost:8000/games");
+
   if (!res.ok) {
-    throw new Error("Failed to fetch featured products");
+    throw new Error("Failed to fetch products");
   }
-  return res.json();
+
+  const products = await res.json();
+  console.log();
+  return products.filter((p) => p.isFeatureProduct);
 }

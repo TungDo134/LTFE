@@ -14,6 +14,7 @@ import { formatNumber } from "../../utils/formatNumber";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/cartSlice";
 import ProductInformation from "./ProductInformation";
+import toast from "react-hot-toast";
 
 function ProductDetail() {
   const { productId } = useParams();
@@ -45,6 +46,8 @@ function ProductDetail() {
         thumbnail,
       })
     );
+
+    toast.success("Đã thêm vào giỏ hàng 🛒");
   };
 
   return (
@@ -108,10 +111,9 @@ function ProductDetail() {
               </p>
             </div>
 
-            <div className="border-b border-gray-500/50 w-[40%]"></div>
-
             {/* Other */}
-            <p className="text-md font-bold">Sản phẩm khác:</p>
+            {/* <div className="border-b border-gray-500/50 w-[40%]"></div> */}
+            {/* <p className="text-md font-bold">Sản phẩm khác:</p>
             <div className="flex">
               {metadata.related_products?.length > 0 ? (
                 metadata.related_products.map((item, index) => (
@@ -134,7 +136,7 @@ function ProductDetail() {
                   Không có sản phẩm liên quan
                 </span>
               )}
-            </div>
+            </div> */}
 
             <div className="border-b border-gray-500/50 w-[60%]"></div>
             {/* Thanh toán */}
