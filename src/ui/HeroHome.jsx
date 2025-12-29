@@ -24,19 +24,28 @@ function HeroHome() {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto p-4 grid grid-cols-3 gap-3">
-      <Slider productBestSeller={productBestSeller} />
-      {/* right */}
-      <div className="flex flex-col items-center justify-between gap-3">
-        {slides.map((s) => (
-          <Link to={`/product/${s.id}`}>
-            <div>
-              <img className="w-full rounded-xl" src={s.thumbnail}></img>
-            </div>
-          </Link>
-        ))}
+    <>
+      <div className="w-full mx-auto ">
+        <img
+          className="inline-block h-auto w-full align-middle rounded-2xl
+           mask-[linear-gradient(to_bottom,rgba(0,0,0,1)_65%,rgba(0,0,0,0)_96%)]"
+          src="/pic/page_bg_vietnamese.jpg"
+        ></img>
       </div>
-    </div>
+      <div className="max-w-7xl mx-auto p-4 grid grid-cols-3 gap-3">
+        <Slider productBestSeller={productBestSeller} />
+        {/* right */}
+        <div className="flex flex-col items-center justify-between gap-3">
+          {slides.map((s) => (
+            <Link to={`/product/${s.id}`}>
+              <div>
+                <img className="w-full rounded-xl" src={s.thumbnail}></img>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </div>
+    </>
   );
 }
 
