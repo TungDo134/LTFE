@@ -1,4 +1,4 @@
-import { Minus, Send } from "lucide-react";
+import { Minus, Send, MessageCircle } from "lucide-react";
 import { useEffect, useRef } from "react";
 
 export default function ChatBox({ isOpen, setIsOpen, history, message, setMessage, send }) {
@@ -6,7 +6,10 @@ export default function ChatBox({ isOpen, setIsOpen, history, message, setMessag
 
     useEffect(() => {
         if (scrollRef.current) {
-            scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+            scrollRef.current.scrollTo({
+                top: scrollRef.current.scrollHeight,
+                behavior: "smooth"
+            });
         }
     }, [history, isOpen]);
 
@@ -40,7 +43,7 @@ export default function ChatBox({ isOpen, setIsOpen, history, message, setMessag
                         >
                             {msg.content}
                             <div className={`text-[10px] mt-1 opacity-70 ${msg.isUser ? "text-right" : "text-left"}`}>
-                                {new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                {msg.timestamp}
                             </div>
                         </div>
                     ))
