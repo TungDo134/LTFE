@@ -20,7 +20,6 @@ function ProductList() {
 
   if (isLoading && products.length === 0) return <Spinner />;
   if (error) return <p>{error}</p>;
-  // console.log(totalProduct);
 
   return (
     <>
@@ -43,7 +42,7 @@ function ProductList() {
               if (!isFetchingMore && !isLoading) loadMore();
             }}
             disabled={isFetchingMore}
-            className="px-6 py-2 bg-blue-600 text-white rounded-md
+            className="px-6 py-2 bg-blue-600 text-white rounded-md mb-3
           hover:bg-blue-700 disabled:bg-gray-400"
           >
             {isFetchingMore ? "Đang tải..." : "Xem thêm"}
