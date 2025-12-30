@@ -1,8 +1,5 @@
-export default function Orders() {
+import OrderHistoryContainer from "../orders/OrderHistoryContainer";
 
-    return (
-        <div>
-            Orders
-        </div>
-    )
+export default function Orders() {
+    return <OrderHistoryContainer />;
 }
