@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
 
 function SuggestCreateLogin({ isLogin }) {
+  const color = !isLogin ? "bg-black" : "bg-white";
+
   return (
-    <div className="w-full bg-black py-2 mb-4">
+    <div className={`w-full ${color} py-2 mb-4`}>
       {isLogin ? (
-        "Đã login"
+        <div></div>
       ) : (
         <div className="my-8 w-full mx-auto max-w-7xl text-white">
           <div className="grid grid-cols-3 items-center gap-2 justify-between">

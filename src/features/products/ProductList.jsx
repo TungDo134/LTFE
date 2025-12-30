@@ -2,11 +2,12 @@ import { useParams } from "react-router-dom";
 
 import { useProducts } from "./useProducts";
 
+import ProductSkeleton from "../products/ProductSkeleton";
 import ProductItem from "./ProductItem";
 import Spinner from "../../ui/Spinner";
 
 function ProductList() {
-  const { category } = useParams(); // undefined nếu không truyền cate
+  const { category } = useParams();
   const {
     products,
     isLoading,
@@ -14,42 +15,38 @@ function ProductList() {
     hasMore: totalProduct,
     isFetchingMore,
     error,
-  } = useProducts({
-    category,
-  });
+  } = useProducts({ category });
 
-  if (isLoading && products.length === 0) return <Spinner />;
-  if (error) return <p>{error}</p>;
+  if (error) return <p className="text-red-500">{error}</p>;
 
   return (
-    <>
-      <div className="mt-3 grid grid-cols-4 gap-6">
-        {products.map((product) => (
-          <ProductItem key={product.id} product={product} />
-        ))}
-
-        {/* LOAD MORE BUTTON */}
+    <div>
+      <div className="min-h-screen">
+        <div className="mt-3 grid grid-cols-4 gap-6">
+          {/* render trc 8 cái skeleton */}
+          {isLoading && products.length === 0
+            ? Array.from({ length: 8 }).map((_, i) => (
+                <ProductSkeleton key={i} />
+              ))
+            : products.map((product) => (
+                <ProductItem key={product.id} product={product} />
+              ))}
+        </div>
+        <div className="mt-8 flex justify-center">
+          {products.length >= totalProduct && products.length > 0 ? (
+            <span className="font-semibold text-xl">Đã xem hết sản phẩm</span>
+          ) : (
+            <button
+              onClick={loadMore}
+              disabled={isFetchingMore || isLoading}
+              className="..."
+            >
+              {isFetchingMore ? <Spinner /> : "Xem thêm"}
+            </button>
+          )}
+        </div>
       </div>
-      {products.length === totalProduct ? (
-        <div className="mt-4 mb-4 flex justify-center font-semibold text-xl">
-          Đã xem hết sản phẩm
-        </div>
-      ) : (
-        <div className="mt-4 mb-4 flex justify-center">
-          <button
-            type="button"
-            onClick={() => {
-              if (!isFetchingMore && !isLoading) loadMore();
-            }}
-            disabled={isFetchingMore}
-            className="px-6 py-2 bg-blue-600 text-white rounded-md mb-3
-          hover:bg-blue-700 disabled:bg-gray-400"
-          >
-            {isFetchingMore ? "Đang tải..." : "Xem thêm"}
-          </button>
-        </div>
-      )}
-    </>
+    </div>
   );
 }
 

@@ -76,10 +76,10 @@ function Footer() {
               <p className="mb-2 font-bold">Tài khoản</p>
               <ul className="text-sm gap-1 flex flex-col justify-evenly font-normal cursor-pointer [&>li]:hover:underline">
                 <li>
-                  <a>Đăng nhập</a>
+                  <Link to={"/login"}>Đăng nhập</Link>
                 </li>
                 <li>
-                  <a>Đăng ký</a>
+                  <Link to={"/login"}>Đăng kí</Link>
                 </li>
               </ul>
             </div>

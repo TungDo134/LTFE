@@ -1,4 +1,7 @@
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { useProduct } from "./useProduct";
+import { useDispatch } from "react-redux";
 
 import { PiPackage } from "react-icons/pi";
 import { LuCodeXml } from "react-icons/lu";
@@ -6,22 +9,29 @@ import { GoTag } from "react-icons/go";
 import { HiOutlineShoppingCart } from "react-icons/hi";
 import { FaBell, FaHeart, FaCreditCard } from "react-icons/fa";
 
-import { useProduct } from "./useProduct";
-
-import Spinner from "../../ui/Spinner";
-import HomeCategory from "../home/HomeCategory";
 import { formatNumber } from "../../utils/formatNumber";
-import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/cartSlice";
-import ProductInformation from "./ProductInformation";
+import { addRecentView } from "./addRecentView";
+
 import toast from "react-hot-toast";
+import ProductInformation from "./ProductInformation";
+import ProductSkeleton from "./ProductSkeleton";
+import HomeCategory from "../home/HomeCategory";
 
 function ProductDetail() {
   const { productId } = useParams();
 
   const { product, isLoading, error } = useProduct(productId);
 
-  if (isLoading) return <Spinner />;
+  // Chức năng sp đã xem
+  useEffect(() => {
+    if (product && product.id) {
+      addRecentView(product);
+    }
+  }, [product]);
+
+  if (isLoading) return <ProductSkeleton />;
+
   if (error) return <p>Có lỗi khi tải</p>;
 
   const {
