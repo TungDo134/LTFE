@@ -1,4 +1,28 @@
 {
+  "messages": [
+    {
+      "id": "1",
+      "sendId": "1",
+      "receiveId": "admin",
+      "history": [
+        {
+          "content": "Chào Admin, mình cần hỗ trợ về đơn hàng!",
+          "timestamp": "2025-10-27T08:30:00.000Z",
+          "isUser": true
+        },
+        {
+          "content": "Chào bạn, bạn vui lòng cung cấp mã đơn hàng nhé.",
+          "timestamp": "2025-10-27T08:31:00.000Z",
+          "isUser": false
+        },
+        {
+          "content": "hi",
+          "timestamp": "2025-12-29T16:32:57.047Z",
+          "isUser": true
+        }
+      ]
+    }
+  ],
   "users": [
     {
       "id": "1",
