@@ -6,6 +6,8 @@ import { getPurchaseHistory } from "../../services/apiProfile";
 import Spinner from "../../ui/Spinner";
 
 import { formatNumber } from "../../utils/formatNumber";
+// import SendMail from "../mail/SendMail";
+import SendEmailV2 from "../mail/SendEmailV2";
 
 export default function PurchaseHistory() {
   const { isLogin, user } = useSelector((state) => state.auth);
@@ -19,6 +21,7 @@ export default function PurchaseHistory() {
 
   return (
     <div>
+      <SendEmailV2 />
       <div className="flex flex-col gap-y-2">
         <p className="text-xl font-bold">Lịch sử giao dịch</p>
         <p className="text-sm">
