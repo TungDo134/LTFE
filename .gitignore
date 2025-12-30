@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Chặn không cho file chứa key lên Git
+.env
+.env.local
