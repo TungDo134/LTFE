@@ -7,7 +7,7 @@ import Cart from "./pages/cart";
 import Login from "./pages/Login.jsx";
 import { Toaster } from "react-hot-toast";
 import PaymentMethod from "./pages/Topup.jsx";
-import Checkout from "./pages/Checkout";
+
 import Profile from "./pages/Profile.jsx";
 import AboutUs from "./pages/AboutUs.jsx";
 import Contact from "./pages/Contact.jsx";
@@ -33,7 +33,7 @@ function App() {
 
                     {/* cart -> checkout */}
                     <Route path="cart" element={<Cart />} />
-                    <Route path="/checkout" element={<Checkout />} />
+
 
                     {/* Các phương thức thanh toán */}
                     <Route path="topup" element={<PaymentMethod />} />
