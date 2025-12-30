@@ -10,7 +10,6 @@
       "balance": 30,
       "used": "99"
     },
-
     {
       "id": "2",
       "avt": "https://cdn.divineshop.vn/image/catalog/icon/avatar-khach-hang-2-52544.png?hash=1649933269",
@@ -18,17 +17,15 @@
       "username": "td",
       "email": "td@gmail.com",
       "pwd": "123",
-      "balance": 3000,
+      "balance": 103000,
       "used": "100"
     },
-
     {
       "id": "05e6",
       "name": "trung",
       "email": "c@gmail.com",
       "pwd": "123"
     },
-
     {
       "id": "7ebe",
       "name": "meo",
@@ -40,25 +37,32 @@
       "avt": "https://cdn.divineshop.vn/image/catalog/icon/avatar-khach-hang-2-52544.png?hash=1649933269"
     }
   ],
-
   "purchase_history": [
     {
       "id_user": 1,
       "time": "2024-05-02 22:01:25",
       "transaction_type": "DEPOSIT",
-      "desc": "Nạp tiền qua VNPay",
-      "balance": 99000
+      "desc": "Nạp tiền qua Thanh toán VNPAY-QR",
+      "amount": 99000,
+      "id": "b0bb"
     },
-
     {
       "id_user": 2,
       "time": "2024-05-02 22:01:25",
       "transaction_type": "DEPOSIT",
-      "desc": "Nạp tiền qua VNPay",
-      "balance": 99000
+      "desc": "Nạp tiền qua Thanh toán VNPAY-QR",
+      "amount": 99000,
+      "id": "869f"
+    },
+    {
+      "id": "2a97",
+      "id_user": "2",
+      "time": "2025-12-29 20:56:17",
+      "transaction_type": "DEPOSIT",
+      "desc": "Nạp tiền qua Thanh toán VNPAY-QR",
+      "amount": 100000
     }
   ],
-
   "categories": [
     {
       "id": "1",
@@ -271,7 +275,6 @@
       "slug": "utilities"
     }
   ],
-
   "games": [
     {
       "id": "1",

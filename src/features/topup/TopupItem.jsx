@@ -4,6 +4,7 @@ import { update } from "../../redux/authSlice.js";
 import { updateProfile } from "../../services/apiAuth";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
+import { createTransaction } from "../../services/apiProfile.js";
 
 function TopupItem({ item, isSelected, isDimmed, onSelect, isLogin, user }) {
   const dispatch = useDispatch();
@@ -21,6 +22,18 @@ function TopupItem({ item, isSelected, isDimmed, onSelect, isLogin, user }) {
       // Tính toán số dư mới (ép kiểu)
       const newBalance = Number(user.balance) + depositAmount;
       const updatedUser = await updateProfile(user.id, { balance: newBalance });
+
+      // Lưu lsu gd
+      const newTransaction = {
+        id_user: user.id,
+        time: new Date().toLocaleString("sv-SE"),
+        transaction_type: "DEPOSIT",
+        desc: `Nạp tiền qua ${item.name}`,
+        amount: depositAmount,
+      };
+      await createTransaction(newTransaction);
+
+      // Update redux auth
       dispatch(update(updatedUser));
 
       // Reset input sau khi nạp thành công
@@ -29,7 +42,7 @@ function TopupItem({ item, isSelected, isDimmed, onSelect, isLogin, user }) {
       return updatedUser;
     };
 
-    // 3. Thực thi và hiển thị thông báo
+    // Show tbao
     await toast.promise(savePromise(), {
       loading: "Đang xử lý giao dịch...",
       success: "Nạp tiền thành công!",

@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Search,
   UserCircle,
@@ -8,11 +7,16 @@ import {
   Percent,
   CreditCard,
 } from "lucide-react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
+
 import { logout } from "../redux/authSlice.js";
+
+import { FaCirclePlus } from "react-icons/fa6";
 import { FaSteam } from "react-icons/fa";
+
+import { formatNumber } from "../utils/formatNumber.js";
 
 const Navbar = () => {
   const { isLogin, user } = useSelector((state) => state.auth);
@@ -69,6 +73,19 @@ const Navbar = () => {
                 {showMenu && (
                   <div className="absolute top-full mt-2 w-48 py-2 z-10 bg-white rounded-lg shadow-xl text-gray-800">
                     <div className="absolute -top-3 h-3 w-full bg-transparent"></div>
+                    <div className="block px-4 py-2 hover:bg-blue-50 transition-colors">
+                      <p>Số dư tài khoản</p>
+                      <div>
+                        <Link
+                          to={"/topup"}
+                          className="flex items-center gap-x-2"
+                        >
+                          <p>{formatNumber(user.balance)}</p>
+                          <FaCirclePlus size={15} />{" "}
+                        </Link>
+                      </div>
+                    </div>
+
                     <Link
                       to={"profile?tab=account"}
                       className="block px-4 py-2 hover:bg-blue-50 transition-colors"

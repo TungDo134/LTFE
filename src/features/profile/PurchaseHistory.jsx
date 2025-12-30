@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { useProfile } from "./useProfile";
 import { getPurchaseHistory } from "../../services/apiProfile";
 
+import Spinner from "../../ui/Spinner";
+
 import { formatNumber } from "../../utils/formatNumber";
 
 export default function PurchaseHistory() {
@@ -13,7 +15,7 @@ export default function PurchaseHistory() {
     user?.id
   );
 
-  if (loading) return <div>Đang tải dữ liệu...</div>;
+  if (loading) return <Spinner />;
 
   return (
     <div>
@@ -55,7 +57,7 @@ export default function PurchaseHistory() {
                     }`}
                   >
                     {item.transaction_type === "DEPOSIT" ? "+ " : ""}
-                    {formatNumber(item.balance)}
+                    {formatNumber(item.amount)}
                   </td>
                 </tr>
               ))
