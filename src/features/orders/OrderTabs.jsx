@@ -1,8 +1,6 @@
 function OrderTabs({ active, setActive }) {
     const tabs = [
         { key: "all", label: "Tất cả" },
-        { key: "packing", label: "Đang đóng gói" },
-        { key: "shipping", label: "Đang giao" },
         { key: "completed", label: "Hoàn thành" },
         { key: "canceled", label: "Đã hủy" },
     ];

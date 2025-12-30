@@ -28,7 +28,7 @@ function UserMenu({ user }) {
             </Link>
 
             <Link
-                to="/OrderHistoryPage"
+                to="/OrderHistoryPge"
                 className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100"
             >
                 <History size={16} /> Lịch sử đơn hàng
