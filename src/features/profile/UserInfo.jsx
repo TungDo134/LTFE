@@ -6,6 +6,7 @@ import { updateProfile } from "../../services/apiAuth.js";
 import toast from "react-hot-toast";
 import { update } from "../../redux/authSlice.js";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 
 export default function UserInfo() {
   const dispatch = useDispatch();
@@ -145,7 +146,15 @@ export default function UserInfo() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <span className="text-gray-500 text-sm">Số dư</span>
+          <div className="flex gap-2 items-center">
+            <span className="text-gray-500 text-sm">Số dư</span>
+            <Link
+              to={"/topup"}
+              className="cursor-pointer text-gray-400 hover:text-blue-500 transition-colors"
+            >
+              <Pen size={14} />
+            </Link>
+          </div>
           <span className="font-bold text-gray-800">
             {formatNumber(user.balance)}
           </span>
