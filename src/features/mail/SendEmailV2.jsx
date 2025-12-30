@@ -22,7 +22,7 @@ const SendMailV2 = ({ user }) => {
   ];
 
   const handleCheckoutEmail = async () => {
-    // 1. Logic xử lý từng item trong giỏ hàng
+    // Xử lý từng item trong giỏ hàng
     const processedCart = cart.map((item) => {
       // Với mỗi sản phẩm, tạo danh sách TK/MK tương ứng với số lượng (quantity)
       const listCredentials = Array.from({ length: item.quantity }, () => ({
@@ -62,10 +62,10 @@ const SendMailV2 = ({ user }) => {
 
     // 4. Các tham số gửi đi
     const templateParams = {
-      order_id: "#ORD" + Math.floor(Math.random() * 1000000),
-      user_name: "Khách hàng",
+      order_id: "#ORD" + Math.floor(Math.random() * 1000000), // Fake ORDER ID
+      user_name: "Khách hàng", // tên KH
       email: "sont4036@gmail.com", // Email người nhận
-      product_list_html: productListHtml, // BIẾN QUAN TRỌNG NHẤT
+      product_list_html: productListHtml, // List sản phẩm + tk/mk tương ứng
       total_price: totalPrice.toLocaleString() + "đ",
     };
 
@@ -76,7 +76,7 @@ const SendMailV2 = ({ user }) => {
         templateParams,
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       );
-      alert("Đã gửi thông tin đơn hàng vào email!");
+      alert("Đã gửi thông tin đơn hàng tới email!");
     } catch (error) {
       console.error("Lỗi gửi mail:", error);
     }
@@ -85,9 +85,9 @@ const SendMailV2 = ({ user }) => {
   return (
     <button
       onClick={handleCheckoutEmail}
-      className="bg-blue-600 text-white px-6 py-2 rounded-md"
+      className="bg-green-500 text-white px-6 py-2 rounded-md mb-2"
     >
-      Thanh toán & Nhận mail
+      Gửi mail
     </button>
   );
 };

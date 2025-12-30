@@ -21,7 +21,10 @@ export default function PurchaseHistory() {
 
   return (
     <div>
+      {/* Để nhờ để test chức năng */}
       <SendEmailV2 />
+      {/* Để nhờ để test chức năng */}
+
       <div className="flex flex-col gap-y-2">
         <p className="text-xl font-bold">Lịch sử giao dịch</p>
         <p className="text-sm">
