@@ -12,7 +12,23 @@ import Profile from "./pages/Profile.jsx";
 import AboutUs from "./pages/AboutUs.jsx";
 import Contact from "./pages/Contact.jsx";
 
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { loadOrdersFromJson } from "./redux/orderSlice";
+import data from "./data/data_game.json";
+
 function App() {
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        const existed = localStorage.getItem("orders");
+        if (!existed) {
+            dispatch(loadOrdersFromJson(data.orders));
+        }
+    }, []);
+
+
     return (
         <BrowserRouter>
             <Toaster

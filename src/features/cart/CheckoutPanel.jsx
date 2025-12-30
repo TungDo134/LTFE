@@ -1,6 +1,9 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import { ArrowLeft, X } from "lucide-react";
+import { useDispatch, useSelector } from "react-redux";
+import { createOrder } from "../../redux/orderSlice";
+import { resetCart } from "../../redux/cartSlice";
+
 
 function CheckoutPanel() {
     // ================= STATE =================
@@ -10,6 +13,10 @@ function CheckoutPanel() {
     const [showGift, setShowGift] = useState(false);
     const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [email, setEmail] = useState("");
+
+    const dispatch = useDispatch();
+    const { user } = useSelector(state => state.auth);
+
 
     // ================= DATA =================
     const selectedItems = useSelector((state) =>
@@ -30,11 +37,22 @@ function CheckoutPanel() {
             return;
         }
 
-        alert(`Thanh toán thành công!\nEmail: ${email}`);
+        dispatch(
+            createOrder({
+                userId: user.id,
+                items: selectedItems,
+                total,
+            })
+        );
+
+        dispatch(resetCart());
+
+        alert("Thanh toán thành công!");
         setShowConfirmModal(false);
         setPaymentMethod(null);
         setEmail("");
     };
+
 
     return (
         <>
