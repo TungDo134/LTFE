@@ -25,8 +25,8 @@ function AboutUsContent() {
       </div>
 
       {/* Section 2 */}
-      <div className="bg-red-500 my-50">
-        <div className="max-w-7xl m-auto px-4 py-3 grid grid-cols-4 items-center justify-between gap-6 absolute top-125 right-62">
+      <div className=" my-5">
+        <div className="max-w-7xl m-auto px-4 py-3 grid grid-cols-4 items-center justify-between gap-6 ">
           <div className="flex flex-col items-center justify-center p-7.5 bg-white border border-gray-200 shadow-sm rounded-sm w-55 h-58 ">
             <div className="mb-4">
               <img
