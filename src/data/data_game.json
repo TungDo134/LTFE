@@ -12038,5 +12038,59 @@
       "discount_percentage": 75,
       "isFeatureProduct": true
     }
+  ],
+  "carts": [
+    {
+      "id": "cart_1",
+      "userId": "1",
+      "items": [
+        {
+          "productId": "1",
+          "title": "Random Code Steam",
+          "price": 99000,
+          "quantity": 2
+        },
+        {
+          "productId": "2",
+          "title": "Split Fiction - Thuê game (1 ngày)",
+          "price": 899000,
+          "quantity": 1
+        }
+      ]
+    }
+  ],
+  "orders": [
+    {
+      "id": "order-001",
+      "userId": "1",
+      "items": [
+        {
+          "productId": "1",
+          "title": "Random Code Steam",
+          "price": 99000,
+          "quantity": 2
+        }
+      ],
+      "total": 198000,
+      "status": "completed",
+      "date": "2024-12-01",
+      "canReview": true
+    },
+    {
+      "id": "order-002",
+      "userId": "1",
+      "items": [
+        {
+          "productId": "2",
+          "title": "Netflix Premium 1 Tháng",
+          "price": 55000,
+          "quantity": 1
+        }
+      ],
+      "total": 55000,
+      "status": "canceled",
+      "date": "2024-12-05",
+      "canReview": false
+    }
   ]
 }
