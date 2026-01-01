@@ -14,6 +14,13 @@ export const updateOrderStatus = createAsyncThunk(
         return res.data;
     }
 );
+export const fetchOrdersByUser = createAsyncThunk(
+    "orders/fetchByUser",
+    async ({ userId, status }) => {
+        const res = await getOrdersByUserApi(userId, status);
+        return res.data;
+    }
+);
 
 const orderSlice = createSlice({
     name: "orders",
@@ -24,30 +31,48 @@ const orderSlice = createSlice({
     reducers: {},
     extraReducers: (builder) => {
         builder
-            .addCase(createOrder.pending, (state) => {
-                state.loading = true;
-            })
-            .addCase(createOrder.fulfilled, (state, action) => {
-                state.loading = false;
-                state.list.unshift(action.payload);
-            })
             .addCase(fetchOrdersByUser.pending, (state) => {
                 state.loading = true;
             })
             .addCase(fetchOrdersByUser.fulfilled, (state, action) => {
                 state.loading = false;
                 state.list = action.payload;
-            })
-            .addCase(updateOrderStatus.fulfilled, (state, action) => {
-                const idx = state.list.findIndex(
-                    (o) => o.id === action.payload.id
-                );
-                if (idx !== -1) {
-                    state.list[idx] = action.payload;
-                }
             });
     },
 });
+// const orderSlice = createSlice({
+//     name: "orders",
+//     initialState: {
+//         list: [],
+//         loading: false,
+//     },
+//     reducers: {},
+//     extraReducers: (builder) => {
+//         builder
+//             .addCase(createOrder.pending, (state) => {
+//                 state.loading = true;
+//             })
+//             .addCase(createOrder.fulfilled, (state, action) => {
+//                 state.loading = false;
+//                 state.list.unshift(action.payload);
+//             })
+//             .addCase(fetchOrdersByUser.pending, (state) => {
+//                 state.loading = true;
+//             })
+//             .addCase(fetchOrdersByUser.fulfilled, (state, action) => {
+//                 state.loading = false;
+//                 state.list = action.payload;
+//             })
+//             .addCase(updateOrderStatus.fulfilled, (state, action) => {
+//                 const idx = state.list.findIndex(
+//                     (o) => o.id === action.payload.id
+//                 );
+//                 if (idx !== -1) {
+//                     state.list[idx] = action.payload;
+//                 }
+//             });
+//     },
+// });
 export const createOrder = createAsyncThunk(
     "orders/create",
     async ({ userId, items, total }) => {
@@ -78,12 +103,12 @@ export const createOrder = createAsyncThunk(
         return createRes.data;
     }
 );
-export const fetchOrdersByUser = createAsyncThunk(
-    "orders/fetchByUser",
-    async (userId) => {
-        const res = await getOrdersByUserApi(userId);
-        return res.data;
-    }
-);
+// export const fetchOrdersByUser = createAsyncThunk(
+//     "orders/fetchByUser",
+//     async (userId) => {
+//         const res = await getOrdersByUserApi(userId);
+//         return res.data;
+//     }
+// );
 
 export default orderSlice.reducer;

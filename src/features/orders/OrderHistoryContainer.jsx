@@ -15,16 +15,13 @@ function OrderHistoryContainer() {
     const userOrders = orders.filter(o => o.userId === user.id);
     useEffect(() => {
         if (user) {
-            dispatch(fetchOrdersByUser(user.id));
+            dispatch(fetchOrdersByUser({ userId: user.id }));
         }
-    }, [user, dispatch]);
+    }, [user,  dispatch]);
     const filteredOrders =
         activeTab === "all"
             ? userOrders
             : userOrders.filter(o => o.status === activeTab);
-
-
-
     return (
         <>
             <Heading>Lịch sử đơn hàng</Heading>

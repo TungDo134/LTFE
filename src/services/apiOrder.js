@@ -12,14 +12,16 @@ export const updateOrderStatusApi = (orderId, status) => {
     });
 };
 
-export const getOrdersByStatusApi = (status) => {
-    return axios.get(`${BASE_URL}?status=${status}`);
+export const getOrdersByUserApi = (userId, status) => {
+    let url = `${BASE_URL}?userId=${userId}`;
+
+    if (status) {
+        url += `&status=${status}`;
+    }
+
+    return axios.get(url);
 };
-export const getOrdersByUserApi = (userId) => {
-    return axios.get(`${BASE_URL}?userId=${userId}`);
-};
-export const getLastOrderApi = () => {
-    return axios.get(
-        "http://localhost:8000/orders?_sort=id&_order=desc&_limit=1"
-    );
-};
+
+
+
+
