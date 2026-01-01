@@ -7,7 +7,7 @@ import Spinner from "../../ui/Spinner";
 
 import { formatNumber } from "../../utils/formatNumber";
 // import SendMail from "../mail/SendMail";
-import SendEmailV2 from "../mail/SendEmailV2";
+import SendEmailV2 from "../mail/SendEmail";
 
 export default function PurchaseHistory() {
   const { isLogin, user } = useSelector((state) => state.auth);
@@ -21,12 +21,8 @@ export default function PurchaseHistory() {
 
   return (
     <div>
-      {/* Để nhờ để test chức năng */}
-      <SendEmailV2 />
-      {/* Để nhờ để test chức năng */}
-
       <div className="flex flex-col gap-y-2">
-        <p className="text-xl font-bold">Lịch sử giao dịch</p>
+        <p className="text-xl font-bold">Lịch sử thanh toán</p>
         <p className="text-sm">
           Hiển thị tất cả các giao dịch bạn dã thực hiện tại Divine Shop
         </p>
