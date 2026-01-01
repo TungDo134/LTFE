@@ -1,12 +1,7 @@
 import { Star } from "lucide-react";
 
 function OrderItem({ order }) {
-    const statusMap = {
-        completed: "Hoàn thành",
-        shipping: "Đang giao",
-        packing: "Đang đóng gói",
-        canceled: "Đã hủy",
-    };
+
 
     return (
         <div className="border rounded-md p-4 space-y-2 bg-white">
@@ -16,7 +11,7 @@ function OrderItem({ order }) {
             </div>
 
             <div className="text-sm text-gray-600">
-                Trạng thái: <b>{statusMap[order.status]}</b>
+                Trạng thái: <b>{[order.status]}</b>
             </div>
 
             <ul className="text-sm list-disc pl-5">

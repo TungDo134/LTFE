@@ -5,7 +5,7 @@ import CheckoutPanel from "./CheckoutPanel";
 import Heading from "../../ui/Heading";
 
 function CartContainer() {
-    const list = useSelector((state) => state.cart.list);
+    const list = useSelector((state) => state.cart.items);
 
     if (list.length === 0) {
         return (

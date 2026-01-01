@@ -3,7 +3,7 @@ import CartItem from "./CartItem";
 import CartActions from "./CartActions";
 
 function CartList() {
-    const list = useSelector((state) => state.cart.list);
+    const list = useSelector((state) => state.cart.items);
 
     if (list.length === 0) {
         return (
