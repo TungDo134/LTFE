@@ -40,7 +40,7 @@
       "avt": "https://cdn.divineshop.vn/image/catalog/icon/avatar-khach-hang-2-52544.png?hash=1649933269",
       "name": "Tùng Đỗ",
       "username": "td",
-      "email": "td@gmail.com",
+      "email": "sont4036@gmail.com",
       "pwd": "123",
       "balance": 103000,
       "used": "100",
@@ -12069,6 +12069,28 @@
           "selected": true
         }
       ]
+    },
+    {
+      "id": "f50a",
+      "userId": "2",
+      "items": [
+        {
+          "productId": "2",
+          "title": "ELDEN RING Shadow of the Erdtree Deluxe Edition - Tài khoản Steam Offline",
+          "price": 99000,
+          "thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/1245620/header.jpg",
+          "quantity": 2,
+          "selected": true
+        },
+        {
+          "productId": "6",
+          "title": "Dispatch - Tài khoản Steam Offline",
+          "price": 59000,
+          "thumbnail": "https://cdn.divineshop.vn/image/catalog/header (1)-52907.jpg?hash=1763956743",
+          "quantity": 1,
+          "selected": true
+        }
+      ]
     }
   ],
   "orders": [
@@ -12367,6 +12389,32 @@
       ],
       "total": 148000,
       "status": "waiting",
+      "date": "2026-01-01",
+      "canReview": false
+    },
+    {
+      "id": "order-012",
+      "userId": "2",
+      "items": [
+        {
+          "productId": "2",
+          "title": "ELDEN RING Shadow of the Erdtree Deluxe Edition - Tài khoản Steam Offline",
+          "price": 99000,
+          "thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/1245620/header.jpg",
+          "quantity": 2,
+          "selected": true
+        },
+        {
+          "productId": "6",
+          "title": "Dispatch - Tài khoản Steam Offline",
+          "price": 59000,
+          "thumbnail": "https://cdn.divineshop.vn/image/catalog/header (1)-52907.jpg?hash=1763956743",
+          "quantity": 1,
+          "selected": true
+        }
+      ],
+      "total": 257000,
+      "status": "success",
       "date": "2026-01-01",
       "canReview": false
     }
