@@ -22,6 +22,12 @@ export const getOrdersByUserApi = (userId, status) => {
     return axios.get(url);
 };
 
+export const updateOrderCanReview = (orderId, canReview) => {
+    return axios.patch(`${BASE_URL}/${orderId}`, {
+        canReview,
+    });
+};
+
 
 
 

@@ -1,28 +1,4 @@
 {
-  "messages": [
-    {
-      "id": "1",
-      "sendId": "1",
-      "receiveId": "admin",
-      "history": [
-        {
-          "content": "Chào Admin, mình cần hỗ trợ về đơn hàng!",
-          "timestamp": "2025-10-27T08:30:00.000Z",
-          "isUser": true
-        },
-        {
-          "content": "Chào bạn, bạn vui lòng cung cấp mã đơn hàng nhé.",
-          "timestamp": "2025-10-27T08:31:00.000Z",
-          "isUser": false
-        },
-        {
-          "content": "hi",
-          "timestamp": "2025-12-29T16:32:57.047Z",
-          "isUser": true
-        }
-      ]
-    }
-  ],
   "users": [
     {
       "id": "1",
@@ -12093,6 +12069,16 @@
       ]
     }
   ],
+  "reviews": [
+    {
+      "id": "a791",
+      "content": "hay à nghen",
+      "userId": "1",
+      "reviewAt": "2/1/2026",
+      "productId": "1",
+      "orderId": "order-001"
+    }
+  ],
   "orders": [
     {
       "id": "order-001",
@@ -12108,7 +12094,7 @@
       "total": 198000,
       "status": "success",
       "date": "2024-12-01",
-      "canReview": true
+      "canReview": false
     },
     {
       "id": "order-002",
@@ -12140,7 +12126,7 @@
         }
       ],
       "total": 99000,
-      "status": "waiting",
+      "status": "success",
       "date": "2026-01-01",
       "canReview": false
     },
@@ -12415,6 +12401,32 @@
       ],
       "total": 257000,
       "status": "success",
+      "date": "2026-01-01",
+      "canReview": false
+    },
+    {
+      "id": "order-013",
+      "userId": "1",
+      "items": [
+        {
+          "productId": "2",
+          "title": "ELDEN RING Shadow of the Erdtree Deluxe Edition - Tài khoản Steam Offline",
+          "price": 99000,
+          "thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/1245620/header.jpg",
+          "quantity": 1,
+          "selected": true
+        },
+        {
+          "productId": "3",
+          "title": "Five Hearts Under One Roof - Tài khoản Steam Offline",
+          "price": 49000,
+          "thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/3021100/header.jpg",
+          "quantity": 1,
+          "selected": true
+        }
+      ],
+      "total": 148000,
+      "status": "waiting",
       "date": "2026-01-01",
       "canReview": false
     }
