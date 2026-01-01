@@ -19,9 +19,10 @@ function CheckoutPanel() {
 
 
     // ================= DATA =================
-    const selectedItems = useSelector((state) =>
-        state.cart.list.filter((item) => item.selected)
+    const selectedItems = useSelector(
+        state => state.cart.items.filter(i => i.selected)
     );
+
 
     if (selectedItems.length === 0) return null;
 
