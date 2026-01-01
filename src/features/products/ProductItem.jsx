@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../redux/cartSlice";
+import { addToCartAndSync } from "../../redux/cartSlice";
+
 
 import { formatNumber } from "../../utils/formatNumber";
 
@@ -19,23 +20,23 @@ function ProductItem({ product }) {
   } = product;
 
   const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const handleAddToCart = (e) => {
+        e.stopPropagation();
 
-  const dispatch = useDispatch();
-  const handleAddToCart = (e) => {
-    e.stopPropagation();
+        dispatch(
+            addToCartAndSync({
+                id: productId,
+                title,
+                price: sale_price,
+                thumbnail,
+        }));
 
-    dispatch(
-      addToCart({
-        id: productId,
-        title,
-        price: sale_price,
-        thumbnail,
-      })
-    );
-    toast.success("Đã thêm vào giỏ hàng 🛒");
-  };
+        toast.success("Đã thêm vào giỏ hàng 🛒");
+    };
 
-  return (
+
+    return (
     <div
       className="
       overflow-hidden

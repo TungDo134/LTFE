@@ -22,9 +22,9 @@ const Navbar = () => {
   const { isLogin, user } = useSelector((state) => state.auth);
   const [showMenu, setShowMenu] = useState(false);
   const dispatch = useDispatch();
-  const cartCount = useSelector((state) =>
-    state.cart.list.reduce((sum, item) => sum + item.quantity, 0)
-  );
+    const cartCount = useSelector((state) =>
+        state.cart.items.reduce((sum, item) => sum + item.quantity, 0)
+    );
 
   return (
     <nav className="bg-[#2579f2] text-white w-full font-sans ">

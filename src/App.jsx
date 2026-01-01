@@ -1,66 +1,44 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-import ProductDetail from "./features/products/ProductDetail";
-import AppLayout from "./ui/AppLayout";
-import Product from "./pages/Product";
-import Home from "./pages/Home";
-import Cart from "./pages/cart";
-import Login from "./pages/Login.jsx";
-import { Toaster } from "react-hot-toast";
-import PaymentMethod from "./pages/Topup.jsx";
-
-import Profile from "./pages/Profile.jsx";
-import AboutUs from "./pages/AboutUs.jsx";
-import Contact from "./pages/Contact.jsx";
-
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { loadOrdersFromJson } from "./redux/orderSlice";
-import data from "./data/data_game.json";
+import { useDispatch, useSelector } from "react-redux";
+import AppLayout from "./ui/AppLayout";
+import Home from "./pages/Home";
+import Product from "./pages/Product";
+import ProductDetail from "./features/products/ProductDetail";
+import Cart from "./pages/cart";
+import Login from "./pages/Login";
+import PaymentMethod from "./pages/Topup";
+import Profile from "./pages/Profile";
+import AboutUs from "./pages/AboutUs";
+import Contact from "./pages/Contact";
+import { fetchCart} from "./redux/cartSlice";
 
 function App() {
-
     const dispatch = useDispatch();
+    const { user, isLogin } = useSelector(state => state.auth);
 
     useEffect(() => {
-        const existed = localStorage.getItem("orders");
-        if (!existed) {
-            dispatch(loadOrdersFromJson(data.orders));
+        if (isLogin && user) {
+            dispatch(fetchCart(user.id));
         }
-    }, []);
-
+    }, [isLogin, user, dispatch]);
 
     return (
         <BrowserRouter>
-            <Toaster
-                position="top-right"
-                toastOptions={{
-                    duration: 1500,
-                }}
-            />
             <Routes>
                 <Route element={<AppLayout />}>
                     <Route index element={<Navigate replace to="home" />} />
                     <Route path="home" element={<Home />} />
                     <Route path="product" element={<Product />} />
-                    {/* Products by cate */}
                     <Route path="product/categories/:category" element={<Product />} />
-                    {/* Detail Product */}
-                    <Route path="/product/:productId" element={<ProductDetail />} />
-
-                    {/* cart -> checkout */}
+                    <Route path="product/:productId" element={<ProductDetail />} />
                     <Route path="cart" element={<Cart />} />
-
-
-                    {/* Các phương thức thanh toán */}
                     <Route path="topup" element={<PaymentMethod />} />
-
-                    {/* About Us */}
                     <Route path="about-us" element={<AboutUs />} />
-                    {/* Contact */}
                     <Route path="contact" element={<Contact />} />
                     <Route path="profile" element={<Profile />} />
                 </Route>
-                <Route path={"login"} element={<Login />} />
+                <Route path="login" element={<Login />} />
             </Routes>
         </BrowserRouter>
     );

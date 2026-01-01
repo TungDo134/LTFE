@@ -2,6 +2,7 @@ function OrderTabs({ active, setActive }) {
     const tabs = [
         { key: "all", label: "Tất cả" },
         { key: "completed", label: "Hoàn thành" },
+        { key: "waiting", label: "Đang chờ" },
         { key: "canceled", label: "Đã hủy" },
     ];
 

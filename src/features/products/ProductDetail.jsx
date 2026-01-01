@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams} from "react-router-dom";
 import { useProduct } from "./useProduct";
 import { useDispatch } from "react-redux";
 
@@ -10,7 +10,8 @@ import { HiOutlineShoppingCart } from "react-icons/hi";
 import { FaBell, FaHeart, FaCreditCard } from "react-icons/fa";
 
 import { formatNumber } from "../../utils/formatNumber";
-import { addToCart } from "../../redux/cartSlice";
+// import { addToCart } from "../../redux/cartSlice";
+import { addToCartAndSync } from "../../redux/cartSlice";
 import { addRecentView } from "./addRecentView";
 
 import toast from "react-hot-toast";
@@ -46,19 +47,16 @@ function ProductDetail() {
   // Add cart
   const dispatch = useDispatch();
   const handleAddToCart = (e) => {
-    e.stopPropagation();
+        e.stopPropagation();
+        dispatch(addToCartAndSync({
+            id: productId,
+            title,
+            price: sale_price,
+            thumbnail,
+        }));
 
-    dispatch(
-      addToCart({
-        id: productId,
-        title,
-        price: sale_price,
-        thumbnail,
-      })
-    );
-
-    toast.success("Đã thêm vào giỏ hàng 🛒");
-  };
+        toast.success("Đã thêm vào giỏ hàng 🛒");
+    };
 
   return (
     <>

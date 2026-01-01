@@ -16,6 +16,7 @@
     "@tailwindcss/vite": "^4.1.18",
     "@tanstack/react-query": "^4.42.0",
     "@tanstack/react-query-devtools": "^4.42.0",
+    "axios": "^1.13.2",
     "date-fns": "^4.1.0",
     "firebase": "^12.7.0",
     "json-server": "^1.0.0-beta.3",
