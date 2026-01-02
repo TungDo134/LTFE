@@ -12051,16 +12051,7 @@
     {
       "id": "cart_1",
       "userId": "1",
-      "items": [
-        {
-          "productId": "2",
-          "title": "ELDEN RING Shadow of the Erdtree Deluxe Edition - Tài khoản Steam Offline",
-          "price": 99000,
-          "thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/1245620/header.jpg",
-          "quantity": 1,
-          "selected": true
-        }
-      ]
+      "items": []
     },
     {
       "id": "f50a",
@@ -12468,6 +12459,130 @@
         }
       ],
       "total": 8100,
+      "status": "waiting",
+      "date": "2026-01-02",
+      "canReview": false
+    },
+    {
+      "id": "order-016",
+      "userId": "1",
+      "items": [
+        {
+          "productId": "2",
+          "title": "ELDEN RING Shadow of the Erdtree Deluxe Edition - Tài khoản Steam Offline",
+          "price": 99000,
+          "thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/1245620/header.jpg",
+          "quantity": 1,
+          "selected": true
+        },
+        {
+          "productId": "1",
+          "title": "Random Code Steam",
+          "price": 9000,
+          "thumbnail": "https://cdn.divineshop.vn/image/catalog/Anh/Banner/Random Code Steam.png?hash=1623754090",
+          "quantity": 1,
+          "selected": true
+        },
+        {
+          "productId": "4",
+          "title": "Five Hearts Under One Roof 2- Tài khoản Steam Offline",
+          "price": 49000,
+          "thumbnail": "https://cdn.divineshop.vn/image/catalog/header-10370.jpg?hash=1763956464",
+          "quantity": 1,
+          "selected": true
+        }
+      ],
+      "total": 141300,
+      "status": "waiting",
+      "date": "2026-01-02",
+      "canReview": false
+    },
+    {
+      "id": "order-017",
+      "userId": "1",
+      "items": [
+        {
+          "productId": "2",
+          "title": "ELDEN RING Shadow of the Erdtree Deluxe Edition - Tài khoản Steam Offline",
+          "price": 99000,
+          "thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/1245620/header.jpg",
+          "quantity": 1,
+          "selected": true
+        }
+      ],
+      "total": 99000,
+      "status": "waiting",
+      "date": "2026-01-02",
+      "canReview": false
+    },
+    {
+      "id": "order-018",
+      "userId": "1",
+      "items": [
+        {
+          "productId": "2",
+          "title": "ELDEN RING Shadow of the Erdtree Deluxe Edition - Tài khoản Steam Offline",
+          "price": 99000,
+          "thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/1245620/header.jpg",
+          "quantity": 1,
+          "selected": true
+        }
+      ],
+      "total": 99000,
+      "status": "waiting",
+      "date": "2026-01-02",
+      "canReview": false
+    },
+    {
+      "id": "order-019",
+      "userId": "1",
+      "items": [
+        {
+          "productId": "4",
+          "title": "Five Hearts Under One Roof 2- Tài khoản Steam Offline",
+          "price": 49000,
+          "thumbnail": "https://cdn.divineshop.vn/image/catalog/header-10370.jpg?hash=1763956464",
+          "quantity": 1,
+          "selected": true
+        }
+      ],
+      "total": 49000,
+      "status": "waiting",
+      "date": "2026-01-02",
+      "canReview": false
+    },
+    {
+      "id": "order-020",
+      "userId": "1",
+      "items": [
+        {
+          "productId": "3",
+          "title": "Five Hearts Under One Roof - Tài khoản Steam Offline",
+          "price": 49000,
+          "thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/3021100/header.jpg",
+          "quantity": 1,
+          "selected": true
+        }
+      ],
+      "total": 44100,
+      "status": "waiting",
+      "date": "2026-01-02",
+      "canReview": false
+    },
+    {
+      "id": "order-021",
+      "userId": "1",
+      "items": [
+        {
+          "productId": "4",
+          "title": "Five Hearts Under One Roof 2- Tài khoản Steam Offline",
+          "price": 49000,
+          "thumbnail": "https://cdn.divineshop.vn/image/catalog/header-10370.jpg?hash=1763956464",
+          "quantity": 1,
+          "selected": true
+        }
+      ],
+      "total": 49000,
       "status": "waiting",
       "date": "2026-01-02",
       "canReview": false

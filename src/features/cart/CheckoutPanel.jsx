@@ -2,7 +2,8 @@ import { useState } from "react";
 import { ArrowLeft, X } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { createOrder } from "../../redux/orderSlice";
-import { resetCart } from "../../redux/cartSlice";
+// import { resetCart} from "../../redux/cartSlice";
+import { clearCartAndSync } from "../../redux/cartSlice";
 import { useNavigate } from "react-router-dom";
 import { applyVoucher} from "../../redux/voucherSlice";
 import { clearVoucher } from "../../redux/voucherSlice";
@@ -66,8 +67,7 @@ function CheckoutPanel() {
           total: finalTotal,
         })
       ).unwrap();
-
-      dispatch(resetCart());
+      await dispatch(clearCartAndSync()).unwrap();
       dispatch(clearVoucher());
 
       alert("Thanh toán thành công!");

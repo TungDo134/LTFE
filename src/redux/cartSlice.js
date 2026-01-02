@@ -40,6 +40,18 @@ export const fetchCart = createAsyncThunk(
         return res.data[0];
     }
 );
+//clear
+export const clearCartAndSync = createAsyncThunk(
+    "cart/clearAndSync",
+    async (_, { getState }) => {
+        const { cartId } = getState().cart;
+        if (!cartId) return;
+
+        await cartApi.updateCart(cartId, { items: [] });
+        return [];
+    }
+);
+
 
 // Sync cart
 export const syncCart = createAsyncThunk(
@@ -130,7 +142,11 @@ const cartSlice = createSlice({
                 state.status = "success";
                 state.cartId = action.payload.id;
                 state.items = action.payload.items || [];
+            })
+            .addCase(clearCartAndSync.fulfilled, (state) => {
+                state.items = [];
             });
+
     },
 });
 
