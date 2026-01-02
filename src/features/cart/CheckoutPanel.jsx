@@ -2,8 +2,11 @@ import { useState } from "react";
 import { ArrowLeft, X } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { createOrder } from "../../redux/orderSlice";
-import { resetCart } from "../../redux/cartSlice";
+// import { resetCart} from "../../redux/cartSlice";
+import { clearCartAndSync } from "../../redux/cartSlice";
 import { useNavigate } from "react-router-dom";
+import { applyVoucher} from "../../redux/voucherSlice";
+import { clearVoucher } from "../../redux/voucherSlice";
 
 function CheckoutPanel() {
   // ================= STATE =================
@@ -16,6 +19,9 @@ function CheckoutPanel() {
 
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+  const [voucherCode, setVoucherCode] = useState("");
+  const { voucher, error } = useSelector(state => state.voucher);
+
 
   const navigate = useNavigate();
 
@@ -30,8 +36,21 @@ function CheckoutPanel() {
     (sum, item) => sum + item.price * item.quantity,
     0
   );
+    const discount = voucher
+        ? voucher.type === "percent"
+            ? Math.min((total * voucher.value) / 100, voucher.maxDiscount || Infinity)
+            : voucher.value
+        : 0;
 
-  // ================= HANDLER =================
+    const finalTotal = Math.max(total - discount, 0);
+
+    const handleApplyVoucher = () => {
+        if (!voucherCode.trim()) return;
+        dispatch(applyVoucher(voucherCode));
+    };
+
+
+    // ================= HANDLER =================\
   const handleConfirmPayment = async () => {
     // Thêm async
     if (!email) {
@@ -45,12 +64,12 @@ function CheckoutPanel() {
         createOrder({
           userId: user.id,
           items: selectedItems,
-          total,
-          status: "waiting",
+          total: finalTotal,
         })
       ).unwrap();
+      await dispatch(clearCartAndSync()).unwrap();
+      dispatch(clearVoucher());
 
-      dispatch(resetCart());
       alert("Thanh toán thành công!");
 
       setShowConfirmModal(false);
@@ -62,7 +81,11 @@ function CheckoutPanel() {
       alert("Lỗi thanh toán: " + err.message);
     }
   };
-  return (
+
+
+
+
+    return (
     <>
       {/* ================= PANEL ================= */}
       <div className="w-full max-w-sm border rounded-md p-4 bg-white space-y-4">
@@ -92,14 +115,31 @@ function CheckoutPanel() {
                 <span>Bạn có mã ưu đãi?</span>
                 <span>%</span>
               </button>
-              {showVoucher && (
-                <input
-                  placeholder="Nhập mã giảm giá"
-                  className="w-full border rounded px-3 py-1 text-sm"
-                />
-              )}
+                {showVoucher && (
+                    <div className="flex gap-2">
+                        <input
+                            value={voucherCode}
+                            onChange={(e) => setVoucherCode(e.target.value)}
+                            placeholder="Nhập mã giảm giá"
+                            className="flex-1 border rounded px-3 py-1 text-sm"
+                        />
+                        <button
+                            onClick={handleApplyVoucher}
+                            disabled={!!voucher}
+                            className={`px-3 rounded text-sm text-white ${
+                                voucher ? "bg-gray-400 cursor-not-allowed" : "bg-blue-600"
+                            }`}
+                        >
+                            {voucher ? "Đã áp dụng" : "Áp dụng"}
+                        </button>
 
-              <button
+                    </div>
+                )}
+
+                {error && <p className="text-red-500 text-sm">{error}</p>}
+
+
+                <button
                 onClick={() => setShowGift(!showGift)}
                 className="flex justify-between w-full"
               >
@@ -124,14 +164,25 @@ function CheckoutPanel() {
             </div>
 
             {/* SUMMARY */}
-            <div className="text-sm border-t pt-3 space-y-1">
               <div className="flex justify-between">
-                <span>Tổng thanh toán</span>
-                <span className="font-semibold">{total.toLocaleString()}đ</span>
+                  <span>Tạm tính</span>
+                  <span>{total.toLocaleString()}đ</span>
               </div>
-            </div>
 
-            {/* PAYMENT */}
+              {discount > 0 && (
+                  <div className="flex justify-between text-green-600">
+                      <span>Giảm giá</span>
+                      <span>-{discount.toLocaleString()}đ</span>
+                  </div>
+              )}
+
+              <div className="flex justify-between font-semibold">
+                  <span>Thanh toán</span>
+                  <span>{finalTotal.toLocaleString()}đ</span>
+              </div>
+
+
+              {/* PAYMENT */}
             <div className="space-y-2">
               <button
                 onClick={() => setPaymentMethod("VNPAY")}
@@ -173,7 +224,7 @@ function CheckoutPanel() {
               </div>
               <div className="flex justify-between font-semibold">
                 <span>Tổng thanh toán</span>
-                <span>{total.toLocaleString()}đ</span>
+                <span>{finalTotal.toLocaleString()}đ</span>
               </div>
             </div>
 

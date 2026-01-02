@@ -40,39 +40,7 @@ const orderSlice = createSlice({
             });
     },
 });
-// const orderSlice = createSlice({
-//     name: "orders",
-//     initialState: {
-//         list: [],
-//         loading: false,
-//     },
-//     reducers: {},
-//     extraReducers: (builder) => {
-//         builder
-//             .addCase(createOrder.pending, (state) => {
-//                 state.loading = true;
-//             })
-//             .addCase(createOrder.fulfilled, (state, action) => {
-//                 state.loading = false;
-//                 state.list.unshift(action.payload);
-//             })
-//             .addCase(fetchOrdersByUser.pending, (state) => {
-//                 state.loading = true;
-//             })
-//             .addCase(fetchOrdersByUser.fulfilled, (state, action) => {
-//                 state.loading = false;
-//                 state.list = action.payload;
-//             })
-//             .addCase(updateOrderStatus.fulfilled, (state, action) => {
-//                 const idx = state.list.findIndex(
-//                     (o) => o.id === action.payload.id
-//                 );
-//                 if (idx !== -1) {
-//                     state.list[idx] = action.payload;
-//                 }
-//             });
-//     },
-// });
+
 export const createOrder = createAsyncThunk(
     "orders/create",
     async ({ userId, items, total }) => {
