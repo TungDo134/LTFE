@@ -6,8 +6,7 @@ import { getPurchaseHistory } from "../../services/apiProfile";
 import Spinner from "../../ui/Spinner";
 
 import { formatNumber } from "../../utils/formatNumber";
-// import SendMail from "../mail/SendMail";
-import SendEmailV2 from "../mail/SendEmail";
+import Heading from "../../ui/Heading";
 
 export default function PurchaseHistory() {
   const { isLogin, user } = useSelector((state) => state.auth);
@@ -22,7 +21,7 @@ export default function PurchaseHistory() {
   return (
     <div>
       <div className="flex flex-col gap-y-2">
-        <p className="text-xl font-bold">Lịch sử thanh toán</p>
+        <Heading>Lịch sử thanh toán</Heading>
         <p className="text-sm">
           Hiển thị tất cả các giao dịch bạn dã thực hiện tại Divine Shop
         </p>
@@ -58,7 +57,7 @@ export default function PurchaseHistory() {
                         : "text-red-600"
                     }`}
                   >
-                    {item.transaction_type === "DEPOSIT" ? "+ " : ""}
+                    {item.transaction_type === "DEPOSIT" ? "+ " : "- "}
                     {formatNumber(item.amount)}
                   </td>
                 </tr>

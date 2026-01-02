@@ -1,9 +1,15 @@
 import { useDispatch } from "react-redux";
-import { increase, decrease, remove, toggleSelect,syncCart} from "../../redux/cartSlice";
-
-
+import {
+  increase,
+  decrease,
+  remove,
+  toggleSelect,
+  syncCart,
+} from "../../redux/cartSlice";
+import { formatNumber } from "../../utils/formatNumber";
 
 function CartItem({ item }) {
+
     const dispatch = useDispatch();
     return (
         <div className="flex gap-4 border p-3 rounded items-center">
@@ -16,30 +22,45 @@ function CartItem({ item }) {
                 className="cursor-pointer"
             />
 
-            <img src={item.thumbnail} className="w-24 rounded" />
 
-            <div className="flex-1">
-                <h3 className="font-medium">{item.title}</h3>
-                <p>{item.price} đ</p>
+      <img src={item.thumbnail} className="w-24 rounded" />
 
-                <div className="flex items-center gap-2 mt-2">
-                    <button onClick={() => {dispatch(decrease(item.productId));
-                        dispatch(syncCart());}
-                      }>-</button>
-                    <span>{item.quantity}</span>
-                    <button onClick={() => {dispatch(increase(item.productId));
-                        dispatch(syncCart());}
-                        }>+</button>
+      <div className="flex-1">
+        <h3 className="font-medium">{item.title}</h3>
+        <p>{formatNumber(item.price)}</p>
 
-                    <button onClick={() => {dispatch(remove(item.productId));
-                        dispatch(syncCart());}
-                        } className="ml-auto text-red-500">
-                        Xóa
-                    </button>
-                </div>
-            </div>
+        <div className="flex items-center gap-2 mt-2">
+          <button
+            onClick={() => {
+              dispatch(decrease(item.productId));
+              dispatch(syncCart());
+            }}
+          >
+            -
+          </button>
+          <span>{item.quantity}</span>
+          <button
+            onClick={() => {
+              dispatch(increase(item.productId));
+              dispatch(syncCart());
+            }}
+          >
+            +
+          </button>
+
+          <button
+            onClick={() => {
+              dispatch(remove(item.productId));
+              dispatch(syncCart());
+            }}
+            className="ml-auto text-red-500"
+          >
+            Xóa
+          </button>
         </div>
-    );
+      </div>
+    </div>
+  );
 }
 
 export default CartItem;
