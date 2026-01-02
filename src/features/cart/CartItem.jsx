@@ -13,6 +13,7 @@ function CartItem({ item }) {
                 onChange={() => {dispatch(toggleSelect(item.productId));
                     dispatch(syncCart());}
               }
+                className="cursor-pointer"
             />
 
             <img src={item.thumbnail} className="w-24 rounded" />

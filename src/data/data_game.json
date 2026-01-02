@@ -12051,7 +12051,16 @@
     {
       "id": "cart_1",
       "userId": "1",
-      "items": []
+      "items": [
+        {
+          "productId": "1",
+          "title": "Random Code Steam",
+          "price": 9000,
+          "thumbnail": "https://cdn.divineshop.vn/image/catalog/Anh/Banner/Random Code Steam.png?hash=1623754090",
+          "quantity": 1,
+          "selected": false
+        }
+      ]
     },
     {
       "id": "f50a",
@@ -12583,6 +12592,24 @@
         }
       ],
       "total": 49000,
+      "status": "waiting",
+      "date": "2026-01-02",
+      "canReview": false
+    },
+    {
+      "id": "order-022",
+      "userId": "1",
+      "items": [
+        {
+          "productId": "3",
+          "title": "Five Hearts Under One Roof - Tài khoản Steam Offline",
+          "price": 49000,
+          "thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/3021100/header.jpg",
+          "quantity": 1,
+          "selected": true
+        }
+      ],
+      "total": 44100,
       "status": "waiting",
       "date": "2026-01-02",
       "canReview": false
