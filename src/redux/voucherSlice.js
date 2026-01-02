@@ -3,37 +3,14 @@ import { getVoucherByCodeApi } from "../services/apiVoucher";
 
 export const applyVoucher = createAsyncThunk(
     "voucher/apply",
-    async ({ code, total }, { rejectWithValue }) => {
-        try {
-            const res = await getVoucherByCodeApi(code);
-            const voucher = res.data;
+    async (code, { rejectWithValue }) => {
+        const res = await getVoucherByCodeApi(code);
 
-            if (voucher.expired) {
-                return rejectWithValue("Voucher đã hết hạn");
-            }
-
-            if (total < voucher.minOrder) {
-                return rejectWithValue("Đơn hàng chưa đủ điều kiện");
-            }
-
-            let discount = 0;
-
-            if (voucher.type === "percent") {
-                discount = (total * voucher.value) / 100;
-                if (voucher.maxDiscount) {
-                    discount = Math.min(discount, voucher.maxDiscount);
-                }
-            } else {
-                discount = voucher.value;
-            }
-
-            return {
-                voucher,
-                discount,
-            };
-        } catch {
-            return rejectWithValue("Voucher không tồn tại");
+        if (res.data.length === 0) {
+            return rejectWithValue("Mã giảm giá không hợp lệ");
         }
+
+        return res.data[0];
     }
 );
 
@@ -54,12 +31,13 @@ const voucherSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(applyVoucher.fulfilled, (state, action) => {
-                state.voucher = action.payload.voucher;
-                state.discount = action.payload.discount;
+                state.voucher = action.payload;
                 state.error = null;
             })
             .addCase(applyVoucher.rejected, (state, action) => {
                 state.error = action.payload;
+                state.voucher = null;
+                state.discount = 0;
             });
     },
 });
