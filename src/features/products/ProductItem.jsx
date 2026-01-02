@@ -2,7 +2,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCartAndSync } from "../../redux/cartSlice";
 
-
 import { formatNumber } from "../../utils/formatNumber";
 
 import { FaCartPlus } from "react-icons/fa";
@@ -19,87 +18,47 @@ function ProductItem({ product }) {
     discount_percentage,
   } = product;
 
-  const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const handleAddToCart = (e) => {
-        e.stopPropagation();
+  const dispatch = useDispatch();
+  const handleAddToCart = (e) => {
+    e.stopPropagation();
 
-        dispatch(
-            addToCartAndSync({
-                id: productId,
-                title,
-                price: sale_price,
-                thumbnail,
-        }));
+    dispatch(
+      addToCartAndSync({
+        id: productId,
+        title,
+        price: sale_price,
+        thumbnail,
+      })
+    );
 
-        toast.success("Đã thêm vào giỏ hàng 🛒");
-    };
+    toast.success("Đã thêm vào giỏ hàng 🛒");
+  };
 
-
-    return (
-    <div
-      className="
-      overflow-hidden
-      rounded-md
-      transition
-      hover:shadow-md
-      cursor-pointer
-    "
-      onClick={() => navigate(`/product/${productId}`)}
-    >
-      {/* Image */}
-      <div className="aspect-16/7 overflow-hidden bg-gray-100">
-        <img
-          src={thumbnail}
-          alt={title}
-          className="h-full w-full object-cover rounded-md shadow-md"
-        />
-      </div>
-
-      {/* Content */}
-      <div className="py-2.5 px-0.5">
-        <h3
-          className="
-          mb-1
-          text-md
-          font-medium
-          leading-tight
-          text-gray-900
-          line-clamp-2
-        "
-        >
-          {title}
-        </h3>
-
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="text-md font-semibold text-gray-900 tracking-tighter">
-              {formatNumber(sale_price)}
-            </span>
-
-            <span className="text-md text-gray-400 line-through tracking-tighter">
-              {formatNumber(original_price)}
-            </span>
-
-            <span
-              className="
-            rounded
-            bg-red-500
-            px-1.5
-            py-0.5
-            text-xs
-            font-semibold
-            text-white"
-            >
-              -{discount_percentage}%
-            </span>
-          </div>
-
-          {/* ADD TO CART */}
+  return (
+    <div className="mb-2">
+      <Link to={`/product/${productId}`}>
+        <img className={"rounded-lg mb-2"} src={thumbnail} />
+        <div className={"text-[14px] mb-2"}>{title}</div>
+      </Link>
+      <div className="flex items-center">
+        <span className="mr-2 text-[14px] font-bold">
+          {sale_price?.toLocaleString("vi-VN")}đ
+        </span>
+        <span className="mr-6 text-[14px] text-gray-500/80 line-through">
+          {original_price?.toLocaleString("vi-VN")}đ
+        </span>
+        <div className="flex items-center justify-between w-full">
+          <span
+            className={
+              "bg-red-700 text-white rounded-lg pt-1 pb-1 pl-2 pr-2 text-[14px]"
+            }
+          >
+            -{discount_percentage}%{/* ADD TO CART */}
+          </span>
           <div className="text-gray-500 ">
             <button
               onClick={handleAddToCart}
-              className="p-2 rounded-full hover:bg-gray-100 transition-all active:scale-95 group cursor-pointer"
+              className="p-2 rounded-full hover:bg-gray-300 transition-all active:scale-95 group cursor-pointer"
             >
               <FaCartPlus className=" text-xl" />
             </button>
