@@ -11123,7 +11123,16 @@
     {
       "id": "cart_1",
       "userId": "1",
-      "items": []
+      "items": [
+        {
+          "productId": "1",
+          "title": "Random Code Steam",
+          "price": 9000,
+          "thumbnail": "https://cdn.divineshop.vn/image/catalog/Anh/Banner/Random Code Steam.png?hash=1623754090",
+          "quantity": 1,
+          "selected": false
+        }
+      ]
     },
     {
       "id": "f50a",
@@ -11648,24 +11657,6 @@
       ],
       "total": 49000,
       "status": "waiting",
-      "date": "2026-01-02",
-      "canReview": false
-    },
-    {
-      "id": "order-022",
-      "userId": "2",
-      "items": [
-        {
-          "productId": "2",
-          "title": "ELDEN RING Shadow of the Erdtree Deluxe Edition - Tài khoản Steam Offline",
-          "price": 99000,
-          "thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/1245620/header.jpg",
-          "quantity": 1,
-          "selected": true
-        }
-      ],
-      "total": 99000,
-      "status": "success",
       "date": "2026-01-02",
       "canReview": false
     }

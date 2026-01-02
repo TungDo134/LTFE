@@ -9,17 +9,19 @@ import {
 import { formatNumber } from "../../utils/formatNumber";
 
 function CartItem({ item }) {
-  const dispatch = useDispatch();
-  return (
-    <div className="flex gap-4 border p-3 rounded items-center">
-      <input
-        type="checkbox"
-        checked={item.selected}
-        onChange={() => {
-          dispatch(toggleSelect(item.productId));
-          dispatch(syncCart());
-        }}
-      />
+
+    const dispatch = useDispatch();
+    return (
+        <div className="flex gap-4 border p-3 rounded items-center">
+            <input
+                type="checkbox"
+                checked={item.selected}
+                onChange={() => {dispatch(toggleSelect(item.productId));
+                    dispatch(syncCart());}
+              }
+                className="cursor-pointer"
+            />
+
 
       <img src={item.thumbnail} className="w-24 rounded" />
 

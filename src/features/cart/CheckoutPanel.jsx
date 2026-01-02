@@ -142,7 +142,7 @@ function CheckoutPanel() {
                 onClick={() => setShowReferral(!showReferral)}
                 className="flex justify-between w-full"
               >
-                <span>Bạn có mã giới thiệu?</span>
+                <span className = "cursor-pointer">Bạn có mã giới thiệu?</span>
                 <span>""</span>
               </button>
               {showReferral && (
@@ -156,7 +156,7 @@ function CheckoutPanel() {
                 onClick={() => setShowVoucher(!showVoucher)}
                 className="flex justify-between w-full"
               >
-                <span>Bạn có mã ưu đãi?</span>
+                <span className = "cursor-pointer">Bạn có mã ưu đãi?</span>
                 <span>%</span>
               </button>
               {showVoucher && (
@@ -185,7 +185,7 @@ function CheckoutPanel() {
                 onClick={() => setShowGift(!showGift)}
                 className="flex justify-between w-full"
               >
-                <span>Bạn muốn tặng cho bạn bè?</span>
+                <span className = "cursor-pointer">Bạn muốn tặng cho bạn bè?</span>
                 <span>""</span>
               </button>
               {showGift && (
@@ -218,28 +218,29 @@ function CheckoutPanel() {
               </div>
             )}
 
-            <div className="flex justify-between font-semibold">
-              <span>Thanh toán</span>
-              <span>{finalTotal.toLocaleString()}đ</span>
-            </div>
+              <div className="flex justify-between font-semibold">
+                  <span >Thanh toán</span>
+                  <span>{finalTotal.toLocaleString()}đ</span>
+              </div>
 
-            {/* PAYMENT */}
+
+              {/* PAYMENT */}
             <div className="space-y-2">
               <button
                 onClick={() => setPaymentMethod("VNPAY")}
-                className="w-full bg-blue-700 text-white py-2 rounded"
+                className="w-full bg-blue-700 text-white py-2 rounded cursor-pointer"
               >
                 Thanh toán VNPAY & Banking
               </button>
               <button
                 onClick={() => setPaymentMethod("QR Banking")}
-                className="w-full bg-blue-800 text-white py-2 rounded"
+                className="w-full bg-blue-800 text-white py-2 rounded cursor-pointer"
               >
                 Thanh toán QR Banking
               </button>
               <button
                 onClick={() => setPaymentMethod("MoMo")}
-                className="w-full bg-pink-600 text-white py-2 rounded"
+                className="w-full bg-pink-600 text-white py-2 rounded cursor-pointer"
               >
                 Thanh toán MoMo
               </button>
@@ -260,7 +261,7 @@ function CheckoutPanel() {
           <>
             <button
               onClick={() => setPaymentMethod(null)}
-              className="flex items-center gap-2 text-sm text-blue-600"
+              className="flex items-center gap-2 text-sm text-blue-600 cursor-pointer"
             >
               <ArrowLeft size={16} />
               Quay lại chọn phương thức
@@ -295,7 +296,8 @@ function CheckoutPanel() {
                   ? toast.error("Không đủ số dư Dcoin, vui lòng nạp thêm")
                   : setShowConfirmModal(true)
               }
-              className="w-full bg-green-600 text-white py-2 rounded font-semibold"
+              className="w-full bg-green-600 text-white py-2 rounded font-semibold cursor-pointer"
+
             >
               Xác nhận thanh toán
             </button>

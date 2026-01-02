@@ -15,6 +15,7 @@ function CartActions() {
                 onChange={(e) =>
                     dispatch(toggleSelectAll(e.target.checked))
                 }
+                className="cursor-pointer"
             />
             <span className="text-sm">
                 {allSelected ? "Bỏ chọn tất cả" : "Chọn tất cả"}
