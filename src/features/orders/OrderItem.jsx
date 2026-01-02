@@ -1,6 +1,50 @@
 import { Star } from "lucide-react";
+import {submitReview} from "../../services/apiReview.js";
+import {useSelector} from "react-redux";
+import {useState} from "react";
+import {updateOrderCanReview} from "../../services/apiOrder.js";
+import toast from "react-hot-toast";
 
 function OrderItem({ order }) {
+    const [isReviewing, setIsReviewing] = useState(false);
+    const [reviewText, setReviewText] = useState("");
+    const [canReview, setCanReview] = useState(order.canReview);
+    const { user } = useSelector((state) => state.auth);
+
+    const handleReviewSubmit = () => {
+        const today = new Date();
+        const review = {
+            content: reviewText,
+            user: {
+                id: user.id,
+                name: user.name,
+                username: user.username,
+                avt: user.avt
+            },
+            reviewAt: today.toLocaleDateString('vi-VN'),
+            productId: order.items[0].productId,
+            orderId: order.id
+        }
+        toast.promise(
+            (async () => {
+                await submitReview(review);
+                await updateOrderCanReview(order.id, false);
+            })(),
+            {
+                loading: 'Đang gửi đánh giá...',
+                success: 'Đánh giá thành công! Cảm ơn bạn.',
+                error: 'Gửi đánh giá thất bại, vui lòng thử lại.',
+            }
+        ).then(() => {
+            setIsReviewing(false);
+            setReviewText("");
+            setCanReview(false);
+        }).catch((err) => {
+            console.error(err);
+        });
+    };
+
+
   // Màu chữ cho các status
   const getStatusLabel = (status) => {
     switch (status) {
@@ -40,16 +84,40 @@ function OrderItem({ order }) {
         ))}
       </ul>
 
-      <div className="flex justify-between items-center pt-2">
+      <div className="pt-2">
         <span className="font-semibold text-blue-600">
           {order.total.toLocaleString()}đ
         </span>
 
-        {order.canReview && (
-          <button className="flex items-center gap-1 text-sm text-yellow-500">
-            <Star size={16} /> Đánh giá
-          </button>
-        )}
+        <div className={"flex justify-end"}>
+            {canReview && !isReviewing && (
+                <button className="flex items-center gap-1 text-sm cursor-pointer text-yellow-500"
+                        onClick={() => setIsReviewing(true)}>
+                    <Star size={16} /> Đánh giá
+                </button>
+            )}
+            {isReviewing && (
+                <div className="mt-2 flex flex-col gap-2">
+                    <input type={"text"}
+                           className="w-lg p-2 border rounded-md text-sm focus:ring-1 focus:ring-yellow-500 outline-none"
+                           placeholder="Viết đánh giá của bạn..."
+                           value={reviewText}
+                           onChange={(e) => setReviewText(e.target.value)}/>
+                    <div className="flex gap-2">
+                        <button
+                            onClick={handleReviewSubmit}
+                            className="bg-yellow-500 text-white px-3 py-1 cursor-pointer rounded text-sm flex items-center gap-1">
+                            Gửi
+                        </button>
+                        <button
+                            onClick={() => setIsReviewing(false)}
+                            className="text-gray-500 cursor-pointer text-sm">
+                            Hủy
+                        </button>
+                    </div>
+                </div>
+            )}
+        </div>
       </div>
     </div>
   );

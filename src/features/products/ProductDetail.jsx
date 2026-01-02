@@ -18,6 +18,7 @@ import toast from "react-hot-toast";
 import ProductInformation from "./ProductInformation";
 import ProductSkeleton from "./ProductSkeleton";
 import HomeCategory from "../home/HomeCategory";
+import ProductReview from "./ProductReview.jsx";
 
 function ProductDetail() {
   const { productId } = useParams();
@@ -170,6 +171,9 @@ function ProductDetail() {
       <div>
         <ProductInformation metadata={metadata} />
       </div>
+        <div>
+            <ProductReview productId={productId}/>
+        </div>
     </>
   );
 }
