@@ -32,6 +32,7 @@ const Navbar = () => {
 
   // Search
   const [query, setQuery] = useState("");
+
   const handleSearch = (e) => {
     e.preventDefault();
     if (!query.trim()) return navigate("/product");
@@ -63,7 +64,7 @@ const Navbar = () => {
         <form
           onSubmit={handleSearch}
           // className="grow max-w-2xl flex border-2 border-line rounded-xl p-1"
-          className="w-[400px] flex border-2 border-line rounded-xl p-1"
+          className="w-100 flex border-2 border-line rounded-xl p-1"
         >
           <input
             type="text"

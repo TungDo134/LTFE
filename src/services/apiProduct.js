@@ -57,20 +57,44 @@ export async function getProductByCate(category) {
   );
 }
 
-// search by keyword
-export async function searchProductByKeyword(keyword = "") {
-  const url = `http://localhost:8000/games`; // Lấy toàn bộ
+// search by keyword + sort
+export async function searchProductByKeyword(keyword = "", sortBy = "") {
+  const url = `http://localhost:8000/games`;
   const res = await axios.get(url);
+  let data = res.data;
 
-  if (!keyword.trim()) return res;
+  // Search
+  if (keyword.trim()) {
+    data = data.filter((item) =>
+      item.title.toLowerCase().includes(keyword.toLowerCase())
+    );
+  }
 
-  // Search bằng filter
-  const filteredData = res.data.filter((item) =>
-    item.title.toLowerCase().includes(keyword.toLowerCase())
-  );
+  // Sort
+  if (sortBy) {
+    const [field, order] = sortBy.split("-");
 
-  //  object có cấu trúc giống axios response
-  return { ...res, data: filteredData };
+    data = [...data].sort((a, b) => {
+      let valA, valB;
+
+      if (field === "price") {
+        valA = Number(a.sale_price);
+        valB = Number(b.sale_price);
+        return order === "asc" ? valA - valB : valB - valA;
+      }
+
+      if (field === "name" || field === "title") {
+        valA = (a.title || "").toLowerCase();
+        valB = (b.title || "").toLowerCase();
+        if (order === "asc") return valA.localeCompare(valB);
+        if (order === "desc") return valB.localeCompare(valA);
+      }
+
+      return 0;
+    });
+  }
+
+  return { ...res, data };
 }
 
 // detail

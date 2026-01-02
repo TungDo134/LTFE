@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "react-router-dom";
+
 import { useProducts } from "./useProducts";
 import { searchProductByKeyword } from "../../services/apiProduct";
+
 import ProductItem from "./ProductItem";
 import ProductSkeleton from "./ProductSkeleton";
 import Spinner from "../../ui/Spinner";
 
 function ProductList() {
-  const { category } = useParams();
+  const { category } = useParams(); // đọc param từ route
+
   const [searchParams] = useSearchParams();
   const keyword = searchParams.get("search") || "";
+  const sortBy = searchParams.get("sort") || "";
 
-  // Dữ liệu từ Hook cho trường hợp xem theo Category/Tất cả
   const {
     products: normalProducts,
     isLoading: isNormalLoading,
@@ -26,22 +29,27 @@ function ProductList() {
   const [isSearching, setIsSearching] = useState(false);
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      setIsSearching(true);
-      try {
-        const res = await searchProductByKeyword(keyword);
-        setSearchResult(res.data);
-      } catch (err) {
-        console.error("Lỗi search:", err);
-      } finally {
-        setIsSearching(false);
-      }
-    };
-    fetchProducts();
-  }, [keyword]);
+    if (keyword || sortBy) {
+      const fetchProducts = async () => {
+        setIsSearching(true);
+        try {
+          const res = await searchProductByKeyword(keyword, sortBy);
+          setSearchResult(res.data);
+        } catch (err) {
+          console.error("Lỗi search:", err);
+        } finally {
+          setIsSearching(false);
+        }
+      };
+      fetchProducts();
+    }
+  }, [keyword, sortBy]);
 
-  // if keyword thì dùng searchResult else dùng normalProducts
-  const displayProducts = keyword ? searchResult : normalProducts;
+  // if keyword dùng searchResult else dùng normalProducts
+
+  const isFiltering = keyword || sortBy;
+
+  const displayProducts = isFiltering ? searchResult : normalProducts;
   const showLoading = keyword
     ? isSearching
     : isNormalLoading && normalProducts.length === 0;
