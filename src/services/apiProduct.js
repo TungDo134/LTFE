@@ -1,15 +1,4 @@
-// Fake API from folder data (json-server)
-
-// all data
-// export async function getProducts() {
-//   const res = await fetch("http://localhost:8000/games");
-
-//   if (!res.ok) {
-//     throw new Error("Failed to fetch products");
-//   }
-
-//   return res.json();
-// }
+import axios from "axios";
 
 // best seller data (Fake "isBestSeller": true)
 export async function getProductBestSeller() {
@@ -66,6 +55,51 @@ export async function getProductByCate(category) {
   return products.filter((product) =>
     product.metadata?.categories?.includes(category)
   );
+}
+
+// search (keyword) + sort + category
+export async function searchProductByKeyword(
+  keyword = "",
+  sortBy = "",
+  category = ""
+) {
+  const url = `http://localhost:8000/games`;
+  const res = await axios.get(url);
+  let data = res.data;
+
+  // Filter cate
+  if (category) {
+    data = data.filter((item) => item.metadata?.categories?.includes(category));
+  }
+
+  // Filter search
+  if (keyword.trim()) {
+    data = data.filter((item) =>
+      item.title.toLowerCase().includes(keyword.toLowerCase())
+    );
+  }
+
+  // Filter sort
+  if (sortBy) {
+    const [field, order] = sortBy.split("-");
+    data = [...data].sort((a, b) => {
+      let valA, valB;
+      if (field === "price") {
+        valA = Number(a.sale_price);
+        valB = Number(b.sale_price);
+        return order === "asc" ? valA - valB : valB - valA;
+      }
+      if (field === "name" || field === "title") {
+        valA = (a.title || "").toLowerCase();
+        valB = (b.title || "").toLowerCase();
+        if (order === "asc") return valA.localeCompare(valB);
+        if (order === "desc") return valB.localeCompare(valA);
+      }
+      return 0;
+    });
+  }
+
+  return { ...res, data };
 }
 
 // detail

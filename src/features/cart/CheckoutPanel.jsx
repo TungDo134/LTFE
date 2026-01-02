@@ -1,9 +1,24 @@
-import { useState } from "react";
-import { ArrowLeft, X } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
-import { createOrder } from "../../redux/orderSlice";
-import { resetCart } from "../../redux/cartSlice";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+import { update } from "../../redux/authSlice.js";
+
+import { createOrder } from "../../redux/orderSlice";
+
+import { clearCartAndSync } from "../../redux/cartSlice";
+// import { resetCart} from "../../redux/cartSlice";
+
+import { applyVoucher } from "../../redux/voucherSlice";
+import { clearVoucher } from "../../redux/voucherSlice";
+
+import { ArrowLeft, X } from "lucide-react";
+import { formatNumber } from "../../utils/formatNumber";
+
+import { updateProfile } from "../../services/apiAuth";
+import { createTransaction } from "../../services/apiProfile.js";
+
+import toast from "react-hot-toast";
 
 function CheckoutPanel() {
   // ================= STATE =================
@@ -16,6 +31,8 @@ function CheckoutPanel() {
 
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
+  const [voucherCode, setVoucherCode] = useState("");
+  const { voucher, error } = useSelector((state) => state.voucher);
 
   const navigate = useNavigate();
 
@@ -30,38 +47,88 @@ function CheckoutPanel() {
     (sum, item) => sum + item.price * item.quantity,
     0
   );
+  const discount = voucher
+    ? voucher.type === "percent"
+      ? Math.min((total * voucher.value) / 100, voucher.maxDiscount || Infinity)
+      : voucher.value
+    : 0;
 
-  // ================= HANDLER =================
+  const finalTotal = Math.max(total - discount, 0);
+
+  const handleApplyVoucher = () => {
+    if (!voucherCode.trim()) return;
+    dispatch(applyVoucher(voucherCode));
+  };
+
+  // ================= HANDLER =================\
   const handleConfirmPayment = async () => {
-    // Thêm async
     if (!email) {
-      alert("Vui lòng nhập email xác nhận");
+      toast.error("Vui lòng nhập email xác nhận");
       return;
     }
 
-    try {
-      // Đợi đơn hàng tạo xong trên Server
+    const savePromise = async () => {
+      // Dùng Dcoin, kiểm tra và trừ tiền trước
+      if (paymentMethod === "Dcoin") {
+        if (Number(user.balance) < finalTotal) {
+          throw new Error("Số dư Dcoin không đủ!");
+        }
+
+        const newBalance = Number(user.balance) - finalTotal; // Lấy cũ trừ đi giá đơn hàng
+
+        // Cập nhật Profile trên Server
+        const updatedUser = await updateProfile(user.id, {
+          balance: newBalance,
+        });
+
+        // Lưu lịch sử giao dịch
+        const newTransaction = {
+          id_user: user.id,
+          time: new Date().toLocaleString("sv-SE"),
+          transaction_type: "PAYMENT",
+          desc: `Thanh toán đơn hàng bằng Dcoin`,
+          amount: finalTotal,
+        };
+        await createTransaction(newTransaction);
+
+        // Cập nhật Redux Auth --> Ui rendex số dư mới
+        dispatch(update(updatedUser));
+      }
+
+      // Tạo đơn hàng
       await dispatch(
         createOrder({
           userId: user.id,
           items: selectedItems,
-          total,
-          status: "waiting",
+          total: finalTotal,
         })
       ).unwrap();
 
-      dispatch(resetCart());
-      alert("Thanh toán thành công!");
+      //Clear cart + voucher
+      await dispatch(clearCartAndSync()).unwrap();
+      dispatch(clearVoucher());
 
-      setShowConfirmModal(false);
-      setEmail("");
+      return "Thanh toán hoàn tất!";
+    };
 
-      // Chuyển trang khi đơn hàng đã lưu xong
-      navigate("/send-mail");
-    } catch (err) {
-      alert("Lỗi thanh toán: " + err.message);
-    }
+    await toast.promise(savePromise(), {
+      loading: "Đang xử lý thanh toán...",
+      success: (msg) => {
+        setShowConfirmModal(false);
+        setEmail("");
+        navigate("/send-mail");
+        return msg;
+      },
+      error: (err) => `Lỗi: ${err.message}`,
+    });
   };
+
+  // chọn Dcoin để thanh toán
+  function handlePaymentByDcoin(paymentMethod) {
+    console.log(`User balance: ${user.balance}`);
+    setPaymentMethod(paymentMethod);
+  }
+
   return (
     <>
       {/* ================= PANEL ================= */}
@@ -93,11 +160,26 @@ function CheckoutPanel() {
                 <span>%</span>
               </button>
               {showVoucher && (
-                <input
-                  placeholder="Nhập mã giảm giá"
-                  className="w-full border rounded px-3 py-1 text-sm"
-                />
+                <div className="flex gap-2">
+                  <input
+                    value={voucherCode}
+                    onChange={(e) => setVoucherCode(e.target.value)}
+                    placeholder="Nhập mã giảm giá"
+                    className="flex-1 border rounded px-3 py-1 text-sm"
+                  />
+                  <button
+                    onClick={handleApplyVoucher}
+                    disabled={!!voucher}
+                    className={`px-3 rounded text-sm text-white ${
+                      voucher ? "bg-gray-400 cursor-not-allowed" : "bg-blue-600"
+                    }`}
+                  >
+                    {voucher ? "Đã áp dụng" : "Áp dụng"}
+                  </button>
+                </div>
               )}
+
+              {error && <p className="text-red-500 text-sm">{error}</p>}
 
               <button
                 onClick={() => setShowGift(!showGift)}
@@ -124,11 +206,21 @@ function CheckoutPanel() {
             </div>
 
             {/* SUMMARY */}
-            <div className="text-sm border-t pt-3 space-y-1">
-              <div className="flex justify-between">
-                <span>Tổng thanh toán</span>
-                <span className="font-semibold">{total.toLocaleString()}đ</span>
+            <div className="flex justify-between">
+              <span>Tạm tính</span>
+              <span>{total.toLocaleString()}đ</span>
+            </div>
+
+            {discount > 0 && (
+              <div className="flex justify-between text-green-600">
+                <span>Giảm giá</span>
+                <span>-{discount.toLocaleString()}đ</span>
               </div>
+            )}
+
+            <div className="flex justify-between font-semibold">
+              <span>Thanh toán</span>
+              <span>{finalTotal.toLocaleString()}đ</span>
             </div>
 
             {/* PAYMENT */}
@@ -151,6 +243,14 @@ function CheckoutPanel() {
               >
                 Thanh toán MoMo
               </button>
+
+              {/* Dcoin */}
+              <button
+                onClick={() => handlePaymentByDcoin("Dcoin")}
+                className="w-full bg-blue-400 text-white py-2 rounded"
+              >
+                Thanh toán bằng Dcoin
+              </button>
             </div>
           </>
         )}
@@ -171,14 +271,30 @@ function CheckoutPanel() {
                 <span>Phương thức</span>
                 <span className="font-semibold">{paymentMethod}</span>
               </div>
+
+              {/* Thanh toán bằng Dcoins */}
+              {paymentMethod === "Dcoin" ? (
+                <div className="flex justify-between">
+                  <span>Số dư Dcoin</span>
+                  <span className="font-semibold">
+                    {formatNumber(user.balance)}
+                  </span>
+                </div>
+              ) : (
+                ""
+              )}
               <div className="flex justify-between font-semibold">
                 <span>Tổng thanh toán</span>
-                <span>{total.toLocaleString()}đ</span>
+                <span>{formatNumber(finalTotal)}</span>
               </div>
             </div>
 
             <button
-              onClick={() => setShowConfirmModal(true)}
+              onClick={() =>
+                user.balance < finalTotal
+                  ? toast.error("Không đủ số dư Dcoin, vui lòng nạp thêm")
+                  : setShowConfirmModal(true)
+              }
               className="w-full bg-green-600 text-white py-2 rounded font-semibold"
             >
               Xác nhận thanh toán

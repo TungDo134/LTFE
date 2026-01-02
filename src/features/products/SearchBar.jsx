@@ -1,17 +1,15 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import { CiFilter } from "react-icons/ci";
 
 import { useCategories } from "./useCategories";
-
 function SearchBar() {
-  // Select Category + Sort
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
-  const [value, setValue] = useState("");
-
-  const [sortVal, setSortVal] = useState("");
+  const [value, setValue] = useState(searchParams.get("category") || "");
+  const [sortVal, setSortVal] = useState(searchParams.get("sort") || "");
 
   const { item } = useCategories();
 
@@ -26,20 +24,33 @@ function SearchBar() {
   if (!item) return;
 
   function handleSubmit() {
-    //  Cate
+    // giữ lại 'search' (nếu có)
+    const params = new URLSearchParams(searchParams);
+
+    // Category
     const selectedCategory = item.find(
       (cat) => String(cat.id) === String(value)
     );
-
     if (selectedCategory) {
-      navigate(`/product/categories/${selectedCategory.name}`);
+      params.set("category", selectedCategory.name);
+    } else {
+      params.delete("category");
     }
+
+    // Sort
+    if (sortVal) {
+      params.set("sort", sortVal);
+    } else {
+      params.delete("sort");
+    }
+
+    navigate(`/product?${params.toString()}`);
   }
 
   return (
-    <div className="grid grid-cols-3 mb-3">
+    <div className="flex items-center gap-x-3 mb-3">
       {/* Category */}
-      <div>
+      <div className="flex items-center gap-2">
         <label>Thể loại: </label>
         <select
           value={value}
@@ -47,11 +58,9 @@ function SearchBar() {
           name="tag"
           className="px-8 py-1 border border-solid rounded-sm text-sm w-[50%]"
         >
+          <option value="">Tất cả</option>
           {item.map((cat) => (
-            <option
-              onClick={() => navigate(`/product/categories/${cat.name}`)}
-              value={cat.id}
-            >
+            <option key={cat.id} value={cat.id}>
               {cat.name}
             </option>
           ))}
@@ -59,31 +68,33 @@ function SearchBar() {
       </div>
 
       {/* Sort */}
-      <div>
-        <label>Sắp xếp: </label>
-        <select
-          value={sortVal}
-          onChange={(e) => handleChangeSort(e)}
-          className="px-8 py-1 border border-solid rounded-sm"
-          name="sort"
-        >
-          <option value="">Mặc định</option>
-          <option value="price-asc">Giá thấp - cao</option>
-          <option value="price-desc">Giá cao - thấp</option>
-          <option value="name-asc">Tên từ A - Z</option>
-          <option value="name-desc">Tên từ Z - A</option>
-        </select>
+      <div className="flex items-center gap-2 ">
+        <div>
+          <label>Sắp xếp: </label>
+          <select
+            value={sortVal}
+            onChange={(e) => handleChangeSort(e)}
+            className="px-8 py-1 border border-solid rounded-sm"
+            name="sort"
+          >
+            <option value="">Mặc định</option>
+            <option value="price-asc">Giá thấp - cao</option>
+            <option value="price-desc">Giá cao - thấp</option>
+            <option value="name-asc">Tên từ A - Z</option>
+            <option value="name-desc">Tên từ Z - A</option>
+          </select>
+        </div>
+        <div className="ml-4">
+          <button
+            onClick={handleSubmit}
+            className={`p-1 w-20 border border-solid rounded-sm bg-blue-500 text-white flex items-center justify-around cursor-pointer`}
+          >
+            <CiFilter />
+            Lọc
+          </button>
+        </div>
       </div>
-
-      <button
-        onClick={handleSubmit}
-        className={`p-1 w-20  border border-solid rounded-sm bg-blue-500 text-white flex items-center justify-around cursor-pointer`}
-      >
-        <CiFilter />
-        Lọc
-      </button>
     </div>
   );
 }
-
 export default SearchBar;
