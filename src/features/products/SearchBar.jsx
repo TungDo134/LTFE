@@ -4,20 +4,14 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { CiFilter } from "react-icons/ci";
 
 import { useCategories } from "./useCategories";
-
 function SearchBar() {
-  // Select Category + Sort
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
-  // handle value cho input
-  const [value, setValue] = useState("");
-
-  // lấy ds cate
-  const { item } = useCategories();
-
-  // sort
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [value, setValue] = useState(searchParams.get("category") || "");
   const [sortVal, setSortVal] = useState(searchParams.get("sort") || "");
+
+  const { item } = useCategories();
 
   function handleChangeSelect(e) {
     setValue(e.target.value);
@@ -25,31 +19,32 @@ function SearchBar() {
 
   function handleChangeSort(e) {
     setSortVal(e.target.value);
-    if (value) {
-      searchParams.set("sort", value);
-    } else {
-      searchParams.delete("sort");
-    }
   }
 
   if (!item) return;
 
   function handleSubmit() {
-    // Cate
+    // giữ lại 'search' (nếu có)
+    const params = new URLSearchParams(searchParams);
+
+    // Category
     const selectedCategory = item.find(
       (cat) => String(cat.id) === String(value)
     );
-
-    let targetPath = selectedCategory
-      ? `/product/categories/${selectedCategory.name}`
-      : `/product`;
+    if (selectedCategory) {
+      params.set("category", selectedCategory.name);
+    } else {
+      params.delete("category");
+    }
 
     // Sort
     if (sortVal) {
-      targetPath += `?sort=${sortVal}`;
+      params.set("sort", sortVal);
+    } else {
+      params.delete("sort");
     }
 
-    navigate(targetPath);
+    navigate(`/product?${params.toString()}`);
   }
 
   return (
@@ -63,11 +58,9 @@ function SearchBar() {
           name="tag"
           className="px-8 py-1 border border-solid rounded-sm text-sm w-[50%]"
         >
+          <option value="">Tất cả</option>
           {item.map((cat) => (
-            <option
-              onClick={() => navigate(`/product/categories/${cat.name}`)}
-              value={cat.id}
-            >
+            <option key={cat.id} value={cat.id}>
               {cat.name}
             </option>
           ))}
@@ -94,7 +87,7 @@ function SearchBar() {
         <div className="ml-4">
           <button
             onClick={handleSubmit}
-            className={`p-1 w-20  border border-solid rounded-sm bg-blue-500 text-white flex items-center justify-around cursor-pointer`}
+            className={`p-1 w-20 border border-solid rounded-sm bg-blue-500 text-white flex items-center justify-around cursor-pointer`}
           >
             <CiFilter />
             Lọc
@@ -104,5 +97,4 @@ function SearchBar() {
     </div>
   );
 }
-
 export default SearchBar;

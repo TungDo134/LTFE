@@ -9,12 +9,14 @@ import ProductSkeleton from "./ProductSkeleton";
 import Spinner from "../../ui/Spinner";
 
 function ProductList() {
-  const { category } = useParams(); // đọc param từ route
-
+  // query params (lấy từ url)
   const [searchParams] = useSearchParams();
+
   const keyword = searchParams.get("search") || "";
   const sortBy = searchParams.get("sort") || "";
+  const category = searchParams.get("category") || "";
 
+  // lấy data mặc định (không filter)
   const {
     products: normalProducts,
     isLoading: isNormalLoading,
@@ -24,33 +26,33 @@ function ProductList() {
     error,
   } = useProducts({ category });
 
-  // Search
   const [searchResult, setSearchResult] = useState([]);
   const [isSearching, setIsSearching] = useState(false);
 
+  // Trigger khi bất kỳ tham số nào trên URL thay đổi
   useEffect(() => {
-    if (keyword || sortBy) {
+    if (keyword || sortBy || category) {
       const fetchProducts = async () => {
         setIsSearching(true);
         try {
-          const res = await searchProductByKeyword(keyword, sortBy);
+          // Truyền cả 3 tham số vào API
+          const res = await searchProductByKeyword(keyword, sortBy, category);
           setSearchResult(res.data);
         } catch (err) {
-          console.error("Lỗi search:", err);
+          console.error("Lỗi filter:", err);
         } finally {
           setIsSearching(false);
         }
       };
       fetchProducts();
     }
-  }, [keyword, sortBy]);
+  }, [keyword, sortBy, category]);
 
-  // if keyword dùng searchResult else dùng normalProducts
-
-  const isFiltering = keyword || sortBy;
+  const isFiltering = keyword || sortBy || category;
 
   const displayProducts = isFiltering ? searchResult : normalProducts;
-  const showLoading = keyword
+
+  const showLoading = isFiltering
     ? isSearching
     : isNormalLoading && normalProducts.length === 0;
 

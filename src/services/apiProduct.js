@@ -57,39 +57,44 @@ export async function getProductByCate(category) {
   );
 }
 
-// search by keyword + sort
-export async function searchProductByKeyword(keyword = "", sortBy = "") {
+// search (keyword) + sort + category
+export async function searchProductByKeyword(
+  keyword = "",
+  sortBy = "",
+  category = ""
+) {
   const url = `http://localhost:8000/games`;
   const res = await axios.get(url);
   let data = res.data;
 
-  // Search
+  // Filter cate
+  if (category) {
+    data = data.filter((item) => item.metadata?.categories?.includes(category));
+  }
+
+  // Filter search
   if (keyword.trim()) {
     data = data.filter((item) =>
       item.title.toLowerCase().includes(keyword.toLowerCase())
     );
   }
 
-  // Sort
+  // Filter sort
   if (sortBy) {
     const [field, order] = sortBy.split("-");
-
     data = [...data].sort((a, b) => {
       let valA, valB;
-
       if (field === "price") {
         valA = Number(a.sale_price);
         valB = Number(b.sale_price);
         return order === "asc" ? valA - valB : valB - valA;
       }
-
       if (field === "name" || field === "title") {
         valA = (a.title || "").toLowerCase();
         valB = (b.title || "").toLowerCase();
         if (order === "asc") return valA.localeCompare(valB);
         if (order === "desc") return valB.localeCompare(valA);
       }
-
       return 0;
     });
   }
