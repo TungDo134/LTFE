@@ -3,6 +3,7 @@ import {submitReview} from "../../services/apiReview.js";
 import {useSelector} from "react-redux";
 import {useState} from "react";
 import {updateOrderCanReview} from "../../services/apiOrder.js";
+import toast from "react-hot-toast";
 
 function OrderItem({ order }) {
     const [isReviewing, setIsReviewing] = useState(false);
@@ -14,16 +15,33 @@ function OrderItem({ order }) {
         const today = new Date();
         const review = {
             content: reviewText,
-            userId: user.id,
+            user: {
+                id: user.id,
+                name: user.name,
+                username: user.username,
+                avt: user.avt
+            },
             reviewAt: today.toLocaleDateString('vi-VN'),
             productId: order.items[0].productId,
             orderId: order.id
         }
-        submitReview(review)
-        updateOrderCanReview(order.id, false)
-        setIsReviewing(false);
-        setReviewText("")
-        setCanReview(false)
+        toast.promise(
+            (async () => {
+                await submitReview(review);
+                await updateOrderCanReview(order.id, false);
+            })(),
+            {
+                loading: 'Đang gửi đánh giá...',
+                success: 'Đánh giá thành công! Cảm ơn bạn.',
+                error: 'Gửi đánh giá thất bại, vui lòng thử lại.',
+            }
+        ).then(() => {
+            setIsReviewing(false);
+            setReviewText("");
+            setCanReview(false);
+        }).catch((err) => {
+            console.error(err);
+        });
     };
 
 
