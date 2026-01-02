@@ -16,7 +16,8 @@ function CheckoutPanel() {
 
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
-
+  const {voucherCode, setVoucherCode} = useState("");
+  const {discount, error} = useSelector(state => state.voucher);
   const navigate = useNavigate();
 
   // ================= DATA =================
@@ -30,6 +31,7 @@ function CheckoutPanel() {
     (sum, item) => sum + item.price * item.quantity,
     0
   );
+  const finalTotal = Math.max(total - discount, 0);
 
   // ================= HANDLER =================
   const handleConfirmPayment = async () => {
