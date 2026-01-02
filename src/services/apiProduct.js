@@ -1,15 +1,4 @@
-// Fake API from folder data (json-server)
-
-// all data
-// export async function getProducts() {
-//   const res = await fetch("http://localhost:8000/games");
-
-//   if (!res.ok) {
-//     throw new Error("Failed to fetch products");
-//   }
-
-//   return res.json();
-// }
+import axios from "axios";
 
 // best seller data (Fake "isBestSeller": true)
 export async function getProductBestSeller() {
@@ -66,6 +55,22 @@ export async function getProductByCate(category) {
   return products.filter((product) =>
     product.metadata?.categories?.includes(category)
   );
+}
+
+// search by keyword
+export async function searchProductByKeyword(keyword = "") {
+  const url = `http://localhost:8000/games`; // Lấy toàn bộ
+  const res = await axios.get(url);
+
+  if (!keyword.trim()) return res;
+
+  // Search bằng filter
+  const filteredData = res.data.filter((item) =>
+    item.title.toLowerCase().includes(keyword.toLowerCase())
+  );
+
+  //  object có cấu trúc giống axios response
+  return { ...res, data: filteredData };
 }
 
 // detail

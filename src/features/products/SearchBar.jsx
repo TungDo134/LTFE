@@ -9,10 +9,12 @@ function SearchBar() {
   // Select Category + Sort
   const navigate = useNavigate();
 
+  // handle value cho input
   const [value, setValue] = useState("");
 
   const [sortVal, setSortVal] = useState("");
 
+  // lấy ds cate
   const { item } = useCategories();
 
   function handleChangeSelect(e) {
