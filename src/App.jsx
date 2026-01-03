@@ -47,6 +47,8 @@ function App() {
           <Route path="send-mail" element={<SendMail />} />
         </Route>
         <Route path="login" element={<Login />} />
+        <Route path="register" element={<Login isRegister={true} />} />
+        <Route path="forgot-password" element={<Login isForget={true} />} />
       </Routes>
     </BrowserRouter>
   );

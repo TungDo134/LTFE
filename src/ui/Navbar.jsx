@@ -10,22 +10,17 @@ import {
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-
 import { logout } from "../redux/authSlice.js";
-
 import { FaCirclePlus } from "react-icons/fa6";
 import { FaSteam } from "react-icons/fa";
-
 import { formatNumber } from "../utils/formatNumber.js";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const { isLogin, user } = useSelector((state) => state.auth);
-
   const [showMenu, setShowMenu] = useState(false);
-
   const cartCount = useSelector((state) =>
     state.cart.items.reduce((sum, item) => sum + item.quantity, 0)
   );
@@ -39,6 +34,11 @@ const Navbar = () => {
 
     navigate(`/product?search=${query.trim()}`);
   };
+
+    const handleLogout = () => {
+        dispatch(logout());
+        toast.success("Đã đăng xuất thành công. Hẹn gặp lại!");
+    };
 
   return (
     <nav className="bg-[#2579f2] text-white w-full font-sans ">
@@ -122,7 +122,7 @@ const Navbar = () => {
                     </Link>
                     <hr className="my-1 border-gray-100" />
                     <button
-                      onClick={() => dispatch(logout())}
+                      onClick={handleLogout}
                       className="w-full text-left px-4 py-2 text-red-600 hover:bg-red-50 transition-colors"
                     >
                       Đăng xuất

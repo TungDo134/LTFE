@@ -1,6 +1,8 @@
 import {useState} from "react";
 import {register, checkExisted} from "../../services/apiAuth.js";
 import {Info} from "lucide-react";
+import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 export default function RegisterForm({onSwitch}) {
     const [name, setName] = useState("");
@@ -39,7 +41,11 @@ export default function RegisterForm({onSwitch}) {
             };
 
             await register(newUser);
-            alert("Đăng ký thành công! Vui lòng đăng nhập.");
+            toast.success("Đăng ký thành công! Đang chuyển sang đăng nhập.");
+            setTimeout(() => {
+                onSwitch();
+            }, 1500);
+
             onSwitch();
         } catch (err) {
             setError("Có lỗi xảy ra, vui lòng thử lại sau.");
@@ -122,11 +128,9 @@ export default function RegisterForm({onSwitch}) {
 
             <div className="mt-8 text-center text-sm">
                 <span className="text-gray-400">Đã có tài khoản? </span>
-                <span
-                    className="text-blue-400 font-semibold hover:underline cursor-pointer"
-                    onClick={onSwitch}>
+                <Link to="/login" className="text-blue-400 font-semibold hover:underline">
                     Đăng nhập tại đây
-                </span>
+                </Link>
             </div>
         </div>
     );

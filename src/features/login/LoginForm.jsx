@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { login } from "../../redux/authSlice.js";
 import {getUser} from "../../services/apiAuth.js";
 import {Info} from "lucide-react"
+import toast from "react-hot-toast";
 
 export default function LoginForm({onSwitch}) {
     const navigate = useNavigate();
@@ -11,6 +12,7 @@ export default function LoginForm({onSwitch}) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
+    const [rememberMe, setRememberMe] = useState(false);
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -20,7 +22,11 @@ export default function LoginForm({onSwitch}) {
             if (users && users.length > 0) {
                 const user = users[0];
                 delete user.pwd;
-                dispatch(login(user));
+                dispatch(login({
+                    user: user,
+                    rememberMe: rememberMe
+                }));
+                toast.success(`Chào mừng ${user.username} trở lại!`);
                 navigate("/home");
             } else {
                 setError("Email hoặc mật khẩu không chính xác!");
@@ -73,10 +79,12 @@ export default function LoginForm({onSwitch}) {
 
                 <div className="flex items-center justify-between text-xs">
                     <label className="flex items-center gap-2 cursor-pointer">
-                        <input type="checkbox" className="rounded bg-white/20 border-white/30"/>
+                        <input type="checkbox" checked={rememberMe}
+                               onChange={(e) => setRememberMe(e.target.checked)}
+                               className="rounded bg-white/20 border-white/30"/>
                         <span>Ghi nhớ tôi</span>
                     </label>
-                    <Link to={""} className="hover:text-blue-400 transition-colors">Quên mật khẩu?</Link>
+                    <Link to={"/forgot-password"} className="hover:text-blue-400 transition-colors">Quên mật khẩu?</Link>
                 </div>
 
                 <button
@@ -88,10 +96,9 @@ export default function LoginForm({onSwitch}) {
 
             <div className="mt-8 text-center text-sm">
                 <span className="text-gray-400">Chưa có tài khoản? </span>
-                <span className="text-blue-400 font-semibold cursor-pointer hover:underline"
-                      onClick={onSwitch}>
-                            Đăng ký ngay
-                    </span>
+                <Link to="/register" className="text-blue-400 font-semibold hover:underline">
+                    Đăng ký ngay
+                </Link>
             </div>
         </div>
     )
