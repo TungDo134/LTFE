@@ -1,6 +1,12 @@
 import {createSlice} from '@reduxjs/toolkit';
 
-const storedUser = JSON.parse(localStorage.getItem('currentUser'));
+// ktra user từ cả session va local storage khi load trang
+const getStoredUser = () => {
+    const localUser = localStorage.getItem('currentUser');
+    const sessionUser = sessionStorage.getItem('currentUser');
+    return localUser ? JSON.parse(localUser) : (sessionUser ? JSON.parse(sessionUser) : null);
+};
+const storedUser = getStoredUser();
 const authSlice = createSlice({
     name: 'auth',
     initialState: {
@@ -9,9 +15,17 @@ const authSlice = createSlice({
     },
     reducers: {
         login: (state, action) => {
-            state.user = action.payload;
+            const { user, rememberMe } = action.payload;
+            state.user = user;
             state.isLogin = true;
-            localStorage.setItem('currentUser', JSON.stringify(action.payload));
+            const userData = JSON.stringify(user);
+            if (rememberMe) {
+                localStorage.setItem('currentUser', userData);
+                sessionStorage.removeItem('currentUser');
+            } else {
+                sessionStorage.setItem('currentUser', userData);
+                localStorage.removeItem('currentUser');
+            }
         },
         logout: (state) => {
             state.user = null;
@@ -22,7 +36,12 @@ const authSlice = createSlice({
             const updatedData  = {...state.user, ...action.payload};
             delete updatedData.pwd;
             state.user = updatedData;
-            localStorage.setItem('currentUser', JSON.stringify(updatedData));
+            const userData = JSON.stringify(updatedData);
+            if (localStorage.getItem('currentUser')) {
+                localStorage.setItem('currentUser', userData);
+            } else {
+                sessionStorage.setItem('currentUser', userData);
+            }
         }
     },
 });

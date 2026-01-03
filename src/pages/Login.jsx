@@ -1,18 +1,26 @@
 import background from "../img/pixel-art-13.webp";
 import LoginForm from "../features/login/LoginForm.jsx";
 import RegisterForm from "../features/login/RegisterForm.jsx";
-import {useState} from "react";
+import ForgetPassword from "../features/login/ForgetPassword.jsx";
+import { Link, useNavigate } from "react-router-dom";
 
-export default function Login() {
-    const [isLogin, setIsLogin] = useState(true);
+
+export default function Login({isRegister, isForget}) {
+    const navigate = useNavigate();
 
     return (
         <div className="relative w-screen h-screen flex items-center justify-center overflow-hidden font-sans">
             <img className="absolute w-full h-full object-cover" src={background}/>
-            {isLogin ? (
-                <LoginForm onSwitch={() => setIsLogin(false)}/>
+
+            {isRegister ? (
+                <RegisterForm onSwitch={() => navigate("/login")}/>
+            ) : isForget ? (
+                <ForgetPassword onBack={() => navigate("/login")}/>
             ) : (
-                <RegisterForm onSwitch={() => setIsLogin(true)}/>
+                <LoginForm
+                    onSwitch={() => navigate("/register")}
+                    onForget={() => navigate("/forgot-password")}
+                />
             )}
         </div>
     );
