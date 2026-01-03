@@ -13,6 +13,7 @@ import AboutUs from "./pages/AboutUs";
 import Contact from "./pages/Contact";
 import { fetchCart } from "./redux/cartSlice";
 import SendMail from "./features/mail/SendEmail";
+import LoginRequired from "./ui/LoginRequired.jsx";
 
 function App() {
   const dispatch = useDispatch();
@@ -33,11 +34,14 @@ function App() {
           <Route path="product" element={<Product />} />
           <Route path="product/categories/:category" element={<Product />} />
           <Route path="product/:productId" element={<ProductDetail />} />
-          <Route path="cart" element={<Cart />} />
-          <Route path="topup" element={<PaymentMethod />} />
           <Route path="about-us" element={<AboutUs />} />
           <Route path="contact" element={<Contact />} />
-          <Route path="profile" element={<Profile />} />
+
+            <Route element={<LoginRequired />}>
+                <Route path="cart" element={<Cart />} />
+                <Route path="topup" element={<PaymentMethod />} />
+                <Route path="profile" element={<Profile />} />
+            </Route>
 
           {/* Send mail */}
           <Route path="send-mail" element={<SendMail />} />
