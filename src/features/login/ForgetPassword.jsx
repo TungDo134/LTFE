@@ -1,9 +1,10 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import {Link, useNavigate} from "react-router-dom";
 import {getUserByEmail, resetPassword} from "../../services/apiAuth.js";
-import {Mail, ShieldCheck, Lock} from "lucide-react";
+import {Mail, ShieldCheck, Lock, Timer} from "lucide-react";
 import emailjs from "@emailjs/browser";
 import toast from "react-hot-toast";
+import {formatTime} from "./formatTime.js";
 
 export default function ForgetPassword() {
     const navigate = useNavigate();
@@ -15,6 +16,21 @@ export default function ForgetPassword() {
     const [generatedOtp, setGeneratedOtp] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [timeLeft, setTimeLeft] = useState(600);
+
+    useEffect(() => {
+        let timer;
+        if (step === 2 && timeLeft > 0) {
+            timer = setInterval(() => {
+                setTimeLeft((prev) => prev - 1);
+            }, 1000);
+        } else if (timeLeft === 0) {
+            setGeneratedOtp("");
+            toast.error("Mã OTP đã hết hạn!");
+        }
+
+        return () => clearInterval(timer);
+    }, [step, timeLeft]);
 
     const handleSendOTP = async (e) => {
         e.preventDefault();
@@ -30,9 +46,8 @@ export default function ForgetPassword() {
             setGeneratedOtp(code);
 
             const templateParams = {
-                to_email: email,
+                email: email,
                 otp_code: code,
-                user_name: user.username || "khách hàng",
             };
 
             await emailjs.send(
@@ -43,6 +58,7 @@ export default function ForgetPassword() {
             );
 
             toast.success("Mã xác thực đã được gửi!");
+            setTimeLeft(600);
             setStep(2);
         } catch (error) {
             console.log(error)
@@ -51,7 +67,6 @@ export default function ForgetPassword() {
             setLoading(false);
         }
     };
-
 
     const handleFinalSubmit = async (e) => {
         e.preventDefault();
@@ -98,8 +113,7 @@ export default function ForgetPassword() {
                                 required
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder-gray-400"
-                                placeholder="example@gmail.com"
+                                className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                             />
                             <Mail className="absolute right-3 top-3.5 opacity-40" size={18}/>
                         </div>
@@ -117,6 +131,12 @@ export default function ForgetPassword() {
 
             {step === 2 && (
                 <form onSubmit={handleFinalSubmit} className="space-y-5">
+                    <div
+                        className={"flex items-center justify-center gap-2 py-2 rounded-lg border text-sm font-mono transition-colors"}>
+                        <Timer size={16} />
+                        <span>Mã hết hạn sau: {formatTime(timeLeft)}</span>
+                    </div>
+
                     <div>
                         <label className="block text-sm font-medium mb-1">Mã xác thực (OTP)</label>
                         <div className="relative">
@@ -126,8 +146,7 @@ export default function ForgetPassword() {
                                 maxLength="6"
                                 value={otpInput}
                                 onChange={(e) => setOtpInput(e.target.value)}
-                                className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-center text-xl tracking-[0.5em] focus:outline-none focus:ring-2 focus:ring-green-500"
-                                placeholder="000000"
+                                className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg text-center text-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
                             />
                             <ShieldCheck className="absolute right-3 top-3.5 opacity-40" size={18}/>
                         </div>
@@ -142,7 +161,6 @@ export default function ForgetPassword() {
                                 value={newPassword}
                                 onChange={(e) => setNewPassword(e.target.value)}
                                 className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                placeholder="••••••••"
                             />
                             <Lock className="absolute right-3 top-3.5 opacity-40" size={18}/>
                         </div>
@@ -156,27 +174,26 @@ export default function ForgetPassword() {
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             className="w-full px-4 py-3 bg-white/20 border border-white/30 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            placeholder="••••••••"
                         />
                     </div>
 
                     <button
                         type="submit"
                         disabled={loading}
-                        className="w-full py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-lg shadow-lg transition-all mt-2"
+                        className="w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-lg shadow-lg transition-all mt-2"
                     >
                         {loading ? "ĐANG XỬ LÝ..." : "XÁC NHẬN ĐỔI MẬT KHẨU"}
                     </button>
-
-                    <p className="text-center text-xs text-gray-400">
-                        Sai email? <span className="text-blue-400 cursor-pointer hover:underline"
-                                         onClick={() => setStep(1)}>Quay lại</span>
-                    </p>
                 </form>
             )}
 
-            <div className="mt-8 text-center text-sm">
-                <Link to="/login" className="text-blue-400 font-semibold hover:underline">
+            <div className="flex gap-6 justify-center mt-8 text-center text-sm">
+                <button
+                    onClick={handleSendOTP}
+                    className={"text-white font-semibold hover:text-blue-600 cursor-pointer"}>
+                    Gửi lại mã
+                </button>
+                <Link to="/login" className="text-white font-semibold hover:text-blue-600 cursor-pointer">
                     Quay lại đăng nhập
                 </Link>
             </div>
