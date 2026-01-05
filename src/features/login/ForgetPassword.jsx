@@ -4,7 +4,7 @@ import {getUserByEmail, resetPassword} from "../../services/apiAuth.js";
 import {Mail, ShieldCheck, Lock, Timer} from "lucide-react";
 import emailjs from "@emailjs/browser";
 import toast from "react-hot-toast";
-import {formatTime} from "./formatTime.js";
+import {formatTime} from "../../utils/formatTime.js";
 
 export default function ForgetPassword() {
     const navigate = useNavigate();
