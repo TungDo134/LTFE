@@ -2,10 +2,10 @@
   "users": [
     {
       "id": "1",
-      "avt": "https://cdn.divineshop.vn/image/catalog/icon/avatar-khach-hang-2-52544.png?hash=1649933269",
+      "avt": "https://res.cloudinary.com/dgqu3s9o0/image/upload/v1767547088/a2bkmb369ifwyfmeqers.png",
       "name": "Xuân Trung",
       "username": "xtt",
-      "email": "a@gmail.com",
+      "email": "xuantrung19022004@gmail.com",
       "pwd": "123",
       "balance": 1000122,
       "used": "99",
