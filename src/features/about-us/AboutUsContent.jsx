@@ -101,7 +101,7 @@ function AboutUsContent() {
               Giới Thiệu DEVINE SHOP
             </h1>
             <div className="text-lg text-black">
-              KAMIKEY luôn bán hàng với tiêu chí <strong>rõ ràng</strong>. Đối
+              DEVINE luôn bán hàng với tiêu chí <strong>rõ ràng</strong>. Đối
               với chúng tôi, danh tiếng thương hiệu là cực kỳ quan trọng. Chính
               vì vậy <strong>tuyệt đối KHÔNG</strong> đánh đổi lợi ích để ảnh
               hưởng đến danh tiếng của thương hiệu. Cam kết luôn đồng hành và hỗ
@@ -129,7 +129,7 @@ function AboutUsContent() {
             </h3>
 
             <p className="text-gray-600 text-sm md:text-base font-medium">
-              Với sự tự tin về chất lượng dịch vụ. KAMIKEY cung cấp chính sách
+              Với sự tự tin về chất lượng dịch vụ. DEVINE cung cấp chính sách
               bảo hành dài hạn khi mua hàng. Nhiều sản phẩm được cam kết bảo
               hành trọn đời.
             </p>
@@ -165,7 +165,7 @@ function AboutUsContent() {
             </h3>
 
             <p className="text-gray-600 text-sm md:text-base font-medium">
-              KAMIKEY chú trọng xây dựng dịch vụ hỗ trợ khách hàng với tốc độ hỗ
+              DEVINE chú trọng xây dựng dịch vụ hỗ trợ khách hàng với tốc độ hỗ
               trợ NHANH nhất. Thời gian hỗ trợ khác hàng liên tục (đang xây dựng
               đội ngũ hỗ trợ 24/7)
             </p>
@@ -178,7 +178,7 @@ function AboutUsContent() {
 
             <p className="text-gray-600 text-sm md:text-base font-medium">
               Sử dụng các sản phẩm ảo như game, phần mềm, ứng dụng luôn tiềm ẩn
-              rủi ro bảo mật. KAMIKEY cam kết mang lại sự an toàn tuyệt đối cho
+              rủi ro bảo mật. DEVINE cam kết mang lại sự an toàn tuyệt đối cho
               khách hàng khi sử dụng.
             </p>
           </div>
@@ -194,7 +194,7 @@ function AboutUsContent() {
             </h1>
             <div className="text-lg text-black mb-5">
               Tất cả feedback đều là của khách hàng đã mua hàng hoặc sử dụng
-              dịch vụ của KAMIKEY. Feedback sẽ liên tục cập nhật thêm để các bạn
+              dịch vụ của DEVINE. Feedback sẽ liên tục cập nhật thêm để các bạn
               cùng tham khảo. Bạn cũng có thể xem thêm đánh giá (feedback) ở
               phần Reviews trong trang sản phẩm.
             </div>

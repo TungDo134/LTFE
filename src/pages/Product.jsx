@@ -46,10 +46,6 @@ function Product() {
       )}
       <Heading>Game trên Steam</Heading>
       <SearchBar />
-      <span className="flex items-center gap-x-3 text-red-500 cursor-pointer">
-        <GrPowerReset className="text-xl" />
-        <p className="text-sm hover:underline">Khôi phục bộ lọc</p>
-      </span>
 
       {/* CONTENT */}
       <ProductList />

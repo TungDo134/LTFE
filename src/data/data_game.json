@@ -18,7 +18,7 @@
       "username": "td",
       "email": "sont4036@gmail.com",
       "pwd": "123",
-      "balance": 14000,
+      "balance": 40000,
       "used": "100",
       "isUser": false
     },
@@ -37,6 +37,16 @@
       "used": "0",
       "username": "meo",
       "avt": "https://cdn.divineshop.vn/image/catalog/icon/avatar-khach-hang-2-52544.png?hash=1649933269"
+    },
+    {
+      "id": "9d44",
+      "avt": "https://cdn.divineshop.vn/image/catalog/icon/avatar-khach-hang-2-52544.png?hash=1649933269",
+      "name": "ltfe",
+      "username": "ltfe_3mem",
+      "email": "ltfe@gmail.com",
+      "pwd": "ltfe",
+      "balance": "0",
+      "used": "0"
     }
   ],
   "purchase_history": [
@@ -103,6 +113,62 @@
       "transaction_type": "DEPOSIT",
       "desc": "Nạp tiền qua Thanh toán VNPAY-QR",
       "amount": 10000
+    },
+    {
+      "id": "8bf4",
+      "id_user": "2",
+      "time": "2026-01-04 20:22:27",
+      "transaction_type": "DEPOSIT",
+      "desc": "Nạp tiền qua Nạp số dư tự động bằng thẻ ngân hàng",
+      "amount": 10000
+    },
+    {
+      "id": "558c",
+      "id_user": "2",
+      "time": "2026-01-04 20:23:04",
+      "transaction_type": "DEPOSIT",
+      "desc": "Nạp tiền qua Nạp số dư tự động bằng thẻ ngân hàng",
+      "amount": 10000
+    },
+    {
+      "id": "18f6",
+      "id_user": "2",
+      "time": "2026-01-06 14:49:17",
+      "transaction_type": "DEPOSIT",
+      "desc": "Nạp tiền qua Nạp số dư tự động bằng thẻ ngân hàng",
+      "amount": 13000
+    },
+    {
+      "id": "babf",
+      "id_user": "2",
+      "time": "2026-01-06 14:51:50",
+      "transaction_type": "PAYMENT",
+      "desc": "Thanh toán đơn hàng bằng Dcoin",
+      "amount": 9000
+    },
+    {
+      "id": "fedf",
+      "id_user": "2",
+      "time": "2026-01-06 14:52:43",
+      "transaction_type": "DEPOSIT",
+      "desc": "Nạp tiền qua Nạp số dư tự động bằng thẻ ngân hàng",
+      "amount": 2000
+    },
+    {
+      "id": "638a",
+      "id_user": "2",
+      "time": "2026-01-06 17:19:32",
+      "transaction_type": "PAYMENT",
+      "desc": "Thanh toán đơn hàng bằng bằng hình thức QR Banking",
+      "amount": 79000
+    },
+    {
+      "id": "6688",
+      "id_user": "2",
+      "time": "2026-01-06 17:39:49",
+      "transaction_type": "PAYMENT",
+      "desc": "Thanh toán đơn hàng bằng bằng hình thức VNPAY",
+      "amount": 98000
     }
   ],
   "categories": [
@@ -12058,6 +12124,28 @@
       "userId": "2",
       "items": [
         {
+          "productId": "12",
+          "title": "Hollow Knight: Silksong - Tài khoản Steam Offline",
+          "price": 49000,
+          "thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/1030300/header.jpg",
+          "quantity": 1,
+          "selected": true
+        },
+        {
+          "productId": "18",
+          "title": "No, I'm not a Human - Tài khoản Steam Offline",
+          "price": 49000,
+          "thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/3180070/header.jpg",
+          "quantity": 1,
+          "selected": true
+        }
+      ]
+    },
+    {
+      "id": "0dcd",
+      "userId": "9d44",
+      "items": [
+        {
           "productId": "2",
           "title": "ELDEN RING Shadow of the Erdtree Deluxe Edition - Tài khoản Steam Offline",
           "price": 99000,
@@ -12083,7 +12171,7 @@
       "total": 198000,
       "status": "success",
       "date": "2024-12-01",
-      "canReview": false
+      "canReview": true
     },
     {
       "id": "order-002",
@@ -12099,7 +12187,7 @@
       "total": 55000,
       "status": "canceled",
       "date": "2024-12-05",
-      "canReview": false
+      "canReview": true
     },
     {
       "id": "order-003",
@@ -12117,7 +12205,7 @@
       "total": 99000,
       "status": "success",
       "date": "2026-01-01",
-      "canReview": false
+      "canReview": true
     },
     {
       "id": "order-004",
@@ -12143,7 +12231,7 @@
       "total": 108000,
       "status": "success",
       "date": "2026-01-01",
-      "canReview": false
+      "canReview": true
     },
     {
       "id": "order-005",
@@ -12177,7 +12265,7 @@
       "total": 503000,
       "status": "waiting",
       "date": "2026-01-01",
-      "canReview": false
+      "canReview": true
     },
     {
       "id": "order-006",
@@ -12211,7 +12299,7 @@
       "total": 503000,
       "status": "waiting",
       "date": "2026-01-01",
-      "canReview": false
+      "canReview": true
     },
     {
       "id": "order-007",
@@ -12245,7 +12333,7 @@
       "total": 503000,
       "status": "waiting",
       "date": "2026-01-01",
-      "canReview": false
+      "canReview": true
     },
     {
       "id": "order-008",
@@ -12279,7 +12367,7 @@
       "total": 503000,
       "status": "success",
       "date": "2026-01-01",
-      "canReview": false
+      "canReview": true
     },
     {
       "id": "order-009",
@@ -12313,7 +12401,7 @@
       "total": 503000,
       "status": "waiting",
       "date": "2026-01-01",
-      "canReview": false
+      "canReview": true
     },
     {
       "id": "order-010",
@@ -12339,7 +12427,7 @@
       "total": 148000,
       "status": "success",
       "date": "2026-01-01",
-      "canReview": false
+      "canReview": true
     },
     {
       "id": "order-011",
@@ -12365,7 +12453,7 @@
       "total": 148000,
       "status": "waiting",
       "date": "2026-01-01",
-      "canReview": false
+      "canReview": true
     },
     {
       "id": "order-012",
@@ -12391,7 +12479,7 @@
       "total": 257000,
       "status": "success",
       "date": "2026-01-01",
-      "canReview": false
+      "canReview": true
     },
     {
       "id": "order-013",
@@ -12417,7 +12505,7 @@
       "total": 133200,
       "status": "waiting",
       "date": "2026-01-02",
-      "canReview": false
+      "canReview": true
     },
     {
       "id": "order-014",
@@ -12435,7 +12523,7 @@
       "total": 89100,
       "status": "waiting",
       "date": "2026-01-02",
-      "canReview": false
+      "canReview": true
     },
     {
       "id": "order-015",
@@ -12453,7 +12541,7 @@
       "total": 8100,
       "status": "waiting",
       "date": "2026-01-02",
-      "canReview": false
+      "canReview": true
     },
     {
       "id": "order-016",
@@ -12487,7 +12575,7 @@
       "total": 141300,
       "status": "waiting",
       "date": "2026-01-02",
-      "canReview": false
+      "canReview": true
     },
     {
       "id": "order-017",
@@ -12505,7 +12593,7 @@
       "total": 99000,
       "status": "waiting",
       "date": "2026-01-02",
-      "canReview": false
+      "canReview": true
     },
     {
       "id": "order-018",
@@ -12523,7 +12611,7 @@
       "total": 99000,
       "status": "waiting",
       "date": "2026-01-02",
-      "canReview": false
+      "canReview": true
     },
     {
       "id": "order-019",
@@ -12541,7 +12629,7 @@
       "total": 49000,
       "status": "waiting",
       "date": "2026-01-02",
-      "canReview": false
+      "canReview": true
     },
     {
       "id": "order-020",
@@ -12559,7 +12647,7 @@
       "total": 44100,
       "status": "waiting",
       "date": "2026-01-02",
-      "canReview": false
+      "canReview": true
     },
     {
       "id": "order-021",
@@ -12577,7 +12665,7 @@
       "total": 49000,
       "status": "waiting",
       "date": "2026-01-02",
-      "canReview": false
+      "canReview": true
     },
     {
       "id": "order-022",
@@ -12595,7 +12683,7 @@
       "total": 99000,
       "status": "success",
       "date": "2026-01-02",
-      "canReview": false
+      "canReview": true
     },
     {
       "id": "order-023",
@@ -12621,7 +12709,95 @@
       "total": 679000,
       "status": "waiting",
       "date": "2026-01-02",
-      "canReview": false
+      "canReview": true
+    },
+    {
+      "id": "order-024",
+      "userId": "2",
+      "items": [
+        {
+          "productId": "1",
+          "title": "Random Code Steam",
+          "price": 9000,
+          "thumbnail": "https://cdn.divineshop.vn/image/catalog/Anh/Banner/Random Code Steam.png?hash=1623754090",
+          "quantity": 1,
+          "selected": true
+        }
+      ],
+      "total": 9000,
+      "status": "success",
+      "date": "2026-01-06",
+      "canReview": true
+    },
+    {
+      "id": "order-025",
+      "userId": "2",
+      "items": [
+        {
+          "productId": "7",
+          "title": "Split Fiction - Thuê game (1 ngày)",
+          "price": 23000,
+          "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2001120/header.jpg?t=1741794685",
+          "quantity": 1,
+          "selected": true
+        },
+        {
+          "productId": "6",
+          "title": "Dispatch - Tài khoản Steam Offline",
+          "price": 59000,
+          "thumbnail": "https://cdn.divineshop.vn/image/catalog/header (1)-52907.jpg?hash=1763956743",
+          "quantity": 1,
+          "selected": true
+        }
+      ],
+      "total": 82000,
+      "status": "success",
+      "date": "2026-01-06",
+      "canReview": true
+    },
+    {
+      "id": "order-026",
+      "userId": "2",
+      "items": [
+        {
+          "productId": "10",
+          "title": "Sekiro Shadows Die Twice - Tài khoản Steam Offline",
+          "price": 79000,
+          "thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/814380/header.jpg",
+          "quantity": 1,
+          "selected": true
+        }
+      ],
+      "total": 79000,
+      "status": "success",
+      "date": "2026-01-06",
+      "canReview": true
+    },
+    {
+      "id": "order-027",
+      "userId": "2",
+      "items": [
+        {
+          "productId": "12",
+          "title": "Hollow Knight: Silksong - Tài khoản Steam Offline",
+          "price": 49000,
+          "thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/1030300/header.jpg",
+          "quantity": 1,
+          "selected": true
+        },
+        {
+          "productId": "18",
+          "title": "No, I'm not a Human - Tài khoản Steam Offline",
+          "price": 49000,
+          "thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/3180070/header.jpg",
+          "quantity": 1,
+          "selected": true
+        }
+      ],
+      "total": 98000,
+      "status": "success",
+      "date": "2026-01-06",
+      "canReview": true
     }
   ],
   "vouchers": [
@@ -12654,6 +12830,19 @@
       "reviewAt": "2/1/2026",
       "productId": "1",
       "orderId": "order-001"
+    },
+    {
+      "id": "e624",
+      "content": "hay hay",
+      "user": {
+        "id": "2",
+        "name": "Tùng Đỗ",
+        "username": "td",
+        "avt": "https://cdn.divineshop.vn/image/catalog/icon/avatar-khach-hang-2-52544.png?hash=1649933269"
+      },
+      "reviewAt": "6/1/2026",
+      "productId": "2",
+      "orderId": "order-012"
     }
   ]
 }
