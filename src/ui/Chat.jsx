@@ -10,7 +10,7 @@ export default function Chat() {
     const [history, setHistory] = useState([]);
     const {user} = useSelector((state) => state.auth);
     const [unreadCount, setUnreadCount] = useState(0);
-    
+
     useEffect(() => {
         let unsubscribe;
 
@@ -20,12 +20,9 @@ export default function Chat() {
 
                 const lastMsg = newMessage[newMessage.length - 1];
 
-                setIsOpen((currentOpen) => {
-                    if (!currentOpen && lastMsg && !lastMsg.isUser) {
-                        setUnreadCount(prev => prev + 1);
-                    }
-                    return currentOpen;
-                });
+                if (!isOpen && lastMsg && !lastMsg.isUser) {
+                    setUnreadCount(prev => prev + 1);
+                }
             });
         }
 
