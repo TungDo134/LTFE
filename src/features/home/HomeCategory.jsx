@@ -20,7 +20,7 @@ function HomeCategory() {
 
   return (
     <div className="w-full bg-white border-2 border-[#f3f4f6]">
-      <div className="mx-auto max-w-7xl py-2">
+      <div className="mx-auto max-w-7xl py-2 px-20">
         <div
           className="flex items-center my-3 gap-2 cursor-pointer"
           onClick={toggleMenu}

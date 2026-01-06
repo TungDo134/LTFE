@@ -18,7 +18,7 @@
       "username": "td",
       "email": "sont4036@gmail.com",
       "pwd": "123",
-      "balance": 14000,
+      "balance": 34000,
       "used": "100",
       "isUser": false
     },
@@ -102,6 +102,22 @@
       "time": "2026-01-03 10:12:30",
       "transaction_type": "DEPOSIT",
       "desc": "Nạp tiền qua Thanh toán VNPAY-QR",
+      "amount": 10000
+    },
+    {
+      "id": "8bf4",
+      "id_user": "2",
+      "time": "2026-01-04 20:22:27",
+      "transaction_type": "DEPOSIT",
+      "desc": "Nạp tiền qua Nạp số dư tự động bằng thẻ ngân hàng",
+      "amount": 10000
+    },
+    {
+      "id": "558c",
+      "id_user": "2",
+      "time": "2026-01-04 20:23:04",
+      "transaction_type": "DEPOSIT",
+      "desc": "Nạp tiền qua Nạp số dư tự động bằng thẻ ngân hàng",
       "amount": 10000
     }
   ],
