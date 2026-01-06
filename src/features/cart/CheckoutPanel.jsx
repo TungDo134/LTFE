@@ -86,13 +86,24 @@ function CheckoutPanel() {
           id_user: user.id,
           time: new Date().toLocaleString("sv-SE"),
           transaction_type: "PAYMENT",
-          desc: `Thanh toán đơn hàng bằng Dcoin`,
+          desc: `Thanh toán đơn hàng bằng ${paymentMethod}`,
           amount: finalTotal,
         };
         await createTransaction(newTransaction);
 
         // Cập nhật Redux Auth --> Ui rendex số dư mới
         dispatch(update(updatedUser));
+      } else {
+        // Lưu lịch sử giao dịch (K phai Dcoin)
+
+        const newTransaction = {
+          id_user: user.id,
+          time: new Date().toLocaleString("sv-SE"),
+          transaction_type: "PAYMENT",
+          desc: `Thanh toán đơn hàng bằng bằng hình thức ${paymentMethod}`,
+          amount: finalTotal,
+        };
+        await createTransaction(newTransaction);
       }
 
       // Tạo đơn hàng
@@ -104,7 +115,7 @@ function CheckoutPanel() {
         })
       ).unwrap();
 
-      //Clear cart + voucher
+      // Clear cart + voucher
       await dispatch(clearCartAndSync()).unwrap();
       dispatch(clearVoucher());
 
@@ -142,7 +153,7 @@ function CheckoutPanel() {
                 onClick={() => setShowReferral(!showReferral)}
                 className="flex justify-between w-full"
               >
-                <span className = "cursor-pointer">Bạn có mã giới thiệu?</span>
+                <span className="cursor-pointer">Bạn có mã giới thiệu?</span>
                 <span>""</span>
               </button>
               {showReferral && (
@@ -156,7 +167,7 @@ function CheckoutPanel() {
                 onClick={() => setShowVoucher(!showVoucher)}
                 className="flex justify-between w-full"
               >
-                <span className = "cursor-pointer">Bạn có mã ưu đãi?</span>
+                <span className="cursor-pointer">Bạn có mã ưu đãi?</span>
                 <span>%</span>
               </button>
               {showVoucher && (
@@ -185,7 +196,9 @@ function CheckoutPanel() {
                 onClick={() => setShowGift(!showGift)}
                 className="flex justify-between w-full"
               >
-                <span className = "cursor-pointer">Bạn muốn tặng cho bạn bè?</span>
+                <span className="cursor-pointer">
+                  Bạn muốn tặng cho bạn bè?
+                </span>
                 <span>""</span>
               </button>
               {showGift && (
@@ -218,13 +231,12 @@ function CheckoutPanel() {
               </div>
             )}
 
-              <div className="flex justify-between font-semibold">
-                  <span >Thanh toán</span>
-                  <span>{finalTotal.toLocaleString()}đ</span>
-              </div>
+            <div className="flex justify-between font-semibold">
+              <span>Thanh toán</span>
+              <span>{finalTotal.toLocaleString()}đ</span>
+            </div>
 
-
-              {/* PAYMENT */}
+            {/* PAYMENT */}
             <div className="space-y-2">
               <button
                 onClick={() => setPaymentMethod("VNPAY")}
@@ -292,12 +304,11 @@ function CheckoutPanel() {
 
             <button
               onClick={() =>
-                user.balance < finalTotal
+                paymentMethod === "Dcoin" && user.balance < finalTotal
                   ? toast.error("Không đủ số dư Dcoin, vui lòng nạp thêm")
                   : setShowConfirmModal(true)
               }
               className="w-full bg-green-600 text-white py-2 rounded font-semibold cursor-pointer"
-
             >
               Xác nhận thanh toán
             </button>
@@ -336,7 +347,7 @@ function CheckoutPanel() {
                 Hủy
               </button>
               <button
-                onClick={handleConfirmPayment}
+                onClick={() => handleConfirmPayment(paymentMethod)}
                 className="flex-1 bg-green-600 text-white rounded py-2"
               >
                 Xác nhận
