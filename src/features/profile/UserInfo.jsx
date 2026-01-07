@@ -195,13 +195,7 @@ export default function UserInfo() {
                         {formatNumber(user.balance)}
                     </span>
                 </div>
-
-                <div className="flex flex-col gap-2">
-                    <span className="text-gray-500 text-sm">Đã sử dụng</span>
-                    <span className="font-bold text-gray-800">
-                        {formatNumber(user.used)}
-                    </span>
-                </div>
+                
             </div>
 
             <div className={"py-4 flex items-center"}>

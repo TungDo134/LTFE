@@ -1,5 +1,6 @@
 import { Minus, Send, MessageCircle } from "lucide-react";
 import { useEffect, useRef } from "react";
+import {formatDate} from "../../utils/formatTime.js";
 
 export default function ChatBox({ isOpen, setIsOpen, history, message, setMessage, send }) {
     const scrollRef = useRef(null);
@@ -43,7 +44,7 @@ export default function ChatBox({ isOpen, setIsOpen, history, message, setMessag
                         >
                             {msg.content}
                             <div className={`text-[10px] mt-1 opacity-70 ${msg.isUser ? "text-right" : "text-left"}`}>
-                                {msg.timestamp}
+                                {formatDate(msg.timestamp)}
                             </div>
                         </div>
                     ))

@@ -9,20 +9,31 @@ export default function Chat() {
     const [message, setMessage] = useState("");
     const [history, setHistory] = useState([]);
     const {user} = useSelector((state) => state.auth);
+    const [unreadCount, setUnreadCount] = useState(0);
 
     useEffect(() => {
         let unsubscribe;
 
-        if (isOpen && user?.id) {
-            unsubscribe = firebaseService.subscribeToChat(1, (newMessage) => {
+        if (user?.id) {
+            unsubscribe = firebaseService.subscribeToChat(user.id, (newMessage) => {
                 setHistory(newMessage);
+
+                const lastMsg = newMessage[newMessage.length - 1];
+
+                if (!isOpen && lastMsg && !lastMsg.isUser) {
+                    setUnreadCount(prev => prev + 1);
+                }
             });
         }
 
-        return () => {
-            if (unsubscribe) unsubscribe();
-        };
-    }, [isOpen, user?.id]);
+        return () => unsubscribe?.();
+    }, [user?.id]);
+
+    useEffect(() => {
+        if (isOpen) {
+            setUnreadCount(0);
+        }
+    }, [isOpen]);
 
     const handleSend = async (e) => {
         e.preventDefault();
@@ -53,8 +64,14 @@ export default function Chat() {
                 onClick={() => setIsOpen(!isOpen)}
                 className={`flex gap-3 cursor-pointer p-3 rounded-full shadow-lg transition-all duration-300 ${
                     isOpen ? "bg-gray-500" : "bg-blue-500 hover:bg-blue-600"
-                } text-white`}
-            >
+                } text-white`}>
+
+                {!isOpen && unreadCount > 0 && (
+                    <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full border-2 border-white animate-bounce">
+                        {unreadCount > 9 ? "9+" : unreadCount}
+                    </span>
+                )}
+
                 {isOpen ? <X/> : <MessageCircle/>}
                 <span>{isOpen ? "Đóng" : "Chat"}</span>
             </button>
