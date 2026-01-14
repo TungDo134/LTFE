@@ -1,15 +1,19 @@
-import { useState } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 
 import { CiFilter } from "react-icons/ci";
 
 import { useCategories } from "./useCategories";
 import { GrPowerReset } from "react-icons/gr";
-function SearchBar() {
-  const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
 
-  const [value, setValue] = useState(searchParams.get("category") || "");
+function SearchBar() {
+  // lấy ra giá trị :category
+  const { category: categoryHome } = useParams();
+
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  const [value, setValue] = useState("");
   const [sortVal, setSortVal] = useState(searchParams.get("sort") || "");
 
   const { item } = useCategories();
@@ -22,14 +26,40 @@ function SearchBar() {
     setSortVal(e.target.value);
   }
 
-  if (!item) return;
+  useEffect(() => {
+    if (!item || item.length === 0) return;
 
+    //  Có categoryHome từ params (/product/:category)
+    if (categoryHome) {
+      const foundCategory = item.find((cat) => cat.name === categoryHome);
+      if (foundCategory) {
+        setValue(String(foundCategory.id));
+      }
+      return;
+    }
+
+    //  Có category trong searchParams (?category=...)
+    const categoryParam = searchParams.get("category");
+    if (categoryParam) {
+      const foundCategory = item.find((cat) => cat.name === categoryParam);
+      if (foundCategory) {
+        setValue(String(foundCategory.id));
+      } else {
+        setValue("");
+      }
+    } else {
+      // Không có category nào
+      setValue("");
+    }
+  }, [categoryHome, item]);
+
+  // Submit sự kiện
   function handleSubmit() {
     // giữ lại 'search' (nếu có)
     const params = new URLSearchParams(searchParams);
 
     // Category
-    const selectedCategory = item.find(
+    const selectedCategory = item?.find(
       (cat) => String(cat.id) === String(value)
     );
     if (selectedCategory) {
@@ -52,9 +82,7 @@ function SearchBar() {
   function resetAllSort() {
     setSortVal("");
     setValue("");
-    // item = "";
-
-    setSearchParams({});
+    navigate("/product");
   }
 
   return (
@@ -65,12 +93,12 @@ function SearchBar() {
           <label>Thể loại: </label>
           <select
             value={value}
-            onChange={(e) => handleChangeSelect(e)}
+            onChange={handleChangeSelect}
             name="tag"
             className="px-8 py-1 border border-solid rounded-sm text-sm w-[50%]"
           >
             <option value="">Tất cả</option>
-            {item.map((cat) => (
+            {(item || []).map((cat) => (
               <option key={cat.id} value={cat.id}>
                 {cat.name}
               </option>
@@ -81,10 +109,10 @@ function SearchBar() {
         {/* Sort */}
         <div className="flex items-center gap-2 ">
           <div>
-            <label>Sắp xếp: </label>
+            <label>Thứ tự: </label>
             <select
               value={sortVal}
-              onChange={(e) => handleChangeSort(e)}
+              onChange={handleChangeSort}
               className="px-8 py-1 border border-solid rounded-sm"
               name="sort"
             >
@@ -98,7 +126,7 @@ function SearchBar() {
           <div className="ml-4">
             <button
               onClick={handleSubmit}
-              className={`p-1 w-20 border border-solid rounded-sm bg-blue-500 text-white flex items-center justify-around cursor-pointer`}
+              className="p-1 w-20 border border-solid rounded-sm bg-blue-500 text-white flex items-center justify-around cursor-pointer"
             >
               <CiFilter />
               Lọc
@@ -117,4 +145,5 @@ function SearchBar() {
     </>
   );
 }
+
 export default SearchBar;

@@ -9,12 +9,19 @@ import ProductSkeleton from "./ProductSkeleton";
 import Spinner from "../../ui/Spinner";
 
 function ProductList() {
+  // lấy ra giá trị :category
+  const { category: categoryHome } = useParams();
+
   // query params (lấy từ url)
   const [searchParams] = useSearchParams();
 
   const keyword = searchParams.get("search") || "";
   const sortBy = searchParams.get("sort") || "";
-  const category = searchParams.get("category") || "";
+  let category = searchParams.get("category") || "";
+
+  if (categoryHome !== undefined) {
+    category = categoryHome;
+  }
 
   // lấy data mặc định (không filter)
   const {
