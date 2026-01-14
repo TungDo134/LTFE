@@ -4,6 +4,7 @@ import {useSelector} from "react-redux";
 import {useState} from "react";
 import {updateOrderCanReview} from "../../services/apiOrder.js";
 import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 function OrderItem({ order }) {
     const [isReviewing, setIsReviewing] = useState(false);
@@ -77,11 +78,17 @@ function OrderItem({ order }) {
       </div>
 
       <ul className="text-sm list-disc pl-5">
-        {order.items.map((item) => (
-          <li key={item.id}>
-            {item.title} × {item.quantity}
-          </li>
-        ))}
+          {order.items.map((item) => (
+              <li key={item.productId}>
+                  <Link
+                      to={`/product/${item.productId}`}
+                      className="text-blue-600 hover:underline"
+                  >
+                      {item.title}
+                  </Link>
+                  {" "}× {item.quantity}
+              </li>
+          ))}
       </ul>
 
       <div className="pt-2">
