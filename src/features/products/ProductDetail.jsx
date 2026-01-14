@@ -106,8 +106,6 @@ function ProductDetail() {
               <p className="font-semibold text-black tracking-tighter">
                 {formatNumber(sale_price)}
               </p>
-              <FaBell />
-              <FaHeart />
             </div>
 
             {/* Old Price */}
