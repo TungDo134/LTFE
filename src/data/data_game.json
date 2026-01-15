@@ -201,6 +201,14 @@
       "transaction_type": "PAYMENT",
       "desc": "Thanh toán đơn hàng bằng bằng hình thức VNPAY",
       "amount": 59000
+    },
+    {
+      "id": "650f",
+      "id_user": "2",
+      "time": "2026-01-15 10:48:36",
+      "transaction_type": "PAYMENT",
+      "desc": "Thanh toán đơn hàng bằng bằng hình thức VNPAY",
+      "amount": 23000
     }
   ],
   "categories": [
@@ -12848,6 +12856,24 @@
       "total": 59000,
       "status": "success",
       "date": "2026-01-14",
+      "canReview": true
+    },
+    {
+      "id": "order-030",
+      "userId": "2",
+      "items": [
+        {
+          "productId": "7",
+          "title": "Split Fiction - Thuê game (1 ngày)",
+          "price": 23000,
+          "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2001120/header.jpg?t=1741794685",
+          "quantity": 1,
+          "selected": true
+        }
+      ],
+      "total": 23000,
+      "status": "success",
+      "date": "2026-01-15",
       "canReview": true
     }
   ],

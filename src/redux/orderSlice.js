@@ -19,7 +19,13 @@ export const fetchOrdersByUser = createAsyncThunk(
   "orders/fetchByUser",
   async ({ userId, status }) => {
     const res = await getOrdersByUserApi(userId, status);
-    return res.data;
+
+    // Sort giảm dần
+    const sortedData = res.data.sort((a, b) => {
+      return new Date(b.date) - new Date(a.date);
+    });
+
+    return sortedData;
   }
 );
 
