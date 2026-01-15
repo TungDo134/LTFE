@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useParams} from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useProduct } from "./useProduct";
 import { useDispatch } from "react-redux";
 
@@ -22,6 +22,9 @@ import ProductReview from "./ProductReview.jsx";
 
 function ProductDetail() {
   const { productId } = useParams();
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { product, isLoading, error } = useProduct(productId);
 
@@ -46,18 +49,34 @@ function ProductDetail() {
   } = product;
 
   // Add cart
-  const dispatch = useDispatch();
-  const handleAddToCart = (e) => {
-        e.stopPropagation();
-        dispatch(addToCartAndSync({
-            id: productId,
-            title,
-            price: sale_price,
-            thumbnail,
-        }));
+  function handleAddToCart(e) {
+    e.stopPropagation();
+    dispatch(
+      addToCartAndSync({
+        id: productId,
+        title,
+        price: sale_price,
+        thumbnail,
+      })
+    );
 
-        toast.success("Đã thêm vào giỏ hàng 🛒");
-    };
+    toast.success("Đã thêm vào giỏ hàng 🛒");
+  }
+
+  // Mua ngay
+  function handleBuyNow(e) {
+    e.stopPropagation();
+    dispatch(
+      addToCartAndSync({
+        id: productId,
+        title,
+        price: sale_price,
+        thumbnail,
+      })
+    );
+
+    navigate("/cart");
+  }
 
   return (
     <>
@@ -118,37 +137,13 @@ function ProductDetail() {
               </p>
             </div>
 
-            {/* Other */}
-            {/* <div className="border-b border-gray-500/50 w-[40%]"></div> */}
-            {/* <p className="text-md font-bold">Sản phẩm khác:</p>
-            <div className="flex">
-              {metadata.related_products?.length > 0 ? (
-                metadata.related_products.map((item, index) => (
-                  <span key={item.id || index} className="flex items-center">
-                    <span
-                      className="border-2 border-[#ccc] rounded-md py-1 px-3.5 text-[14px] text-center
-                     inline-block hover:border-blue-600  cursor-pointer"
-                    >
-                      {" "}
-                      {item.name}
-                    </span>
-
-                    {index < metadata.related_products.length - 1 && (
-                      <span className="mx-1 text-gray-400"> </span>
-                    )}
-                  </span>
-                ))
-              ) : (
-                <span className="text-gray-400 italic">
-                  Không có sản phẩm liên quan
-                </span>
-              )}
-            </div> */}
-
             <div className="border-b border-gray-500/50 w-[60%]"></div>
             {/* Thanh toán */}
             <div className="flex gap-3 mb-8">
-              <button className="flex w-[25%] items-center justify-center gap-2 bg-[#2579f2] text-white py-2  rounded-lg  hover:bg-blue-600 transition-colors">
+              <button
+                onClick={handleBuyNow}
+                className="flex w-[25%] items-center justify-center gap-2 bg-[#2579f2] text-white py-2  rounded-lg  hover:bg-blue-600 transition-colors"
+              >
                 <FaCreditCard className="text-xl" />
                 <span>Mua ngay</span>
               </button>
@@ -161,17 +156,15 @@ function ProductDetail() {
                 <span>Thêm vào giỏ</span>
               </button>
             </div>
-
-            {/* Thông tin sản phẩm */}
           </div>
         </div>
       </div>
       <div>
         <ProductInformation metadata={metadata} />
       </div>
-        <div>
-            <ProductReview productId={productId}/>
-        </div>
+      <div>
+        <ProductReview productId={productId} />
+      </div>
     </>
   );
 }

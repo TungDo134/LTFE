@@ -19,7 +19,22 @@ export const fetchOrdersByUser = createAsyncThunk(
   "orders/fetchByUser",
   async ({ userId, status }) => {
     const res = await getOrdersByUserApi(userId, status);
-    return res.data;
+
+    // Sort date giảm dần, nếu trùng date => id giảm dần
+    const sortedData = res.data.sort((a, b) => {
+      // date
+      const dateCompare = new Date(b.date) - new Date(a.date);
+
+      // Nếu 2 date !==  => return theo date
+      if (dateCompare !== 0) {
+        return dateCompare;
+      }
+
+      // return theo id
+      return b.id.localeCompare(a.id);
+    });
+
+    return sortedData;
   }
 );
 

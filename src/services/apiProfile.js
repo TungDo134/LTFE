@@ -10,7 +10,12 @@ export async function getPurchaseHistory({ id_user }) {
   const data = await res.json();
   console.log("Dữ liệu thực tế từ API:", data);
 
-  return data;
+  // Sort giảm dần theo time
+  const sortedData = data.sort((a, b) => {
+    return new Date(b.time) - new Date(a.time);
+  });
+
+  return sortedData;
 }
 
 // Lưu lsu giao dịch
