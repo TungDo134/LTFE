@@ -18,7 +18,7 @@
       "username": "td",
       "email": "sont4036@gmail.com",
       "pwd": "123",
-      "balance": 40000,
+      "balance": 53000,
       "used": "100",
       "isUser": false
     },
@@ -201,6 +201,46 @@
       "transaction_type": "PAYMENT",
       "desc": "Thanh toán đơn hàng bằng bằng hình thức VNPAY",
       "amount": 59000
+    },
+    {
+      "id": "650f",
+      "id_user": "2",
+      "time": "2026-01-15 10:48:36",
+      "transaction_type": "PAYMENT",
+      "desc": "Thanh toán đơn hàng bằng bằng hình thức VNPAY",
+      "amount": 23000
+    },
+    {
+      "id": "3a47",
+      "id_user": "2",
+      "time": "2026-01-15 12:21:28",
+      "transaction_type": "PAYMENT",
+      "desc": "Thanh toán đơn hàng bằng bằng hình thức VNPAY",
+      "amount": 79000
+    },
+    {
+      "id": "9806",
+      "id_user": "2",
+      "time": "2026-01-15 12:26:11",
+      "transaction_type": "PAYMENT",
+      "desc": "Thanh toán đơn hàng bằng bằng hình thức VNPAY",
+      "amount": 79000
+    },
+    {
+      "id": "8d4d",
+      "id_user": "2",
+      "time": "2026-01-15 12:34:40",
+      "transaction_type": "DEPOSIT",
+      "desc": "Nạp tiền qua Nạp số dư tự động bằng thẻ ngân hàng",
+      "amount": 13000
+    },
+    {
+      "id": "d328",
+      "id_user": "2",
+      "time": "2026-01-15 12:46:51",
+      "transaction_type": "PAYMENT",
+      "desc": "Thanh toán đơn hàng bằng bằng hình thức VNPAY",
+      "amount": 315000
     }
   ],
   "categories": [
@@ -11912,6 +11952,76 @@
       "total": 59000,
       "status": "success",
       "date": "2026-01-14",
+      "canReview": true
+    },
+    {
+      "id": "order-030",
+      "userId": "2",
+      "items": [
+        {
+          "productId": "7",
+          "title": "Split Fiction - Thuê game (1 ngày)",
+          "price": 23000,
+          "thumbnail": "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2001120/header.jpg?t=1741794685",
+          "quantity": 1,
+          "selected": true
+        }
+      ],
+      "total": 23000,
+      "status": "success",
+      "date": "2026-01-15",
+      "canReview": true
+    },
+    {
+      "id": "order-031",
+      "userId": "2",
+      "items": [
+        {
+          "productId": "10",
+          "title": "Sekiro Shadows Die Twice - Tài khoản Steam Offline",
+          "price": 79000,
+          "thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/814380/header.jpg",
+          "quantity": 1,
+          "selected": true
+        }
+      ],
+      "total": 79000,
+      "status": "success",
+      "date": "2026-01-15",
+      "canReview": true
+    },
+    {
+      "id": "order-032",
+      "userId": "2",
+      "items": [
+        {
+          "productId": "11",
+          "title": "Manor Lords - Tài khoản Steam Offline",
+          "price": 59000,
+          "thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/1363080/header.jpg",
+          "quantity": 2,
+          "selected": true
+        },
+        {
+          "productId": "18",
+          "title": "No, I'm not a Human - Tài khoản Steam Offline",
+          "price": 49000,
+          "thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/3180070/header.jpg",
+          "quantity": 2,
+          "selected": true
+        },
+        {
+          "productId": "20",
+          "title": "inZOI - Tài khoản Steam Offline",
+          "price": 99000,
+          "thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/2456740/header.jpg",
+          "quantity": 1,
+          "selected": true
+        }
+      ],
+      "total": 315000,
+      "status": "success",
+      "date": "2026-01-15",
       "canReview": true
     }
   ],

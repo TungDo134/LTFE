@@ -12,6 +12,8 @@ import { getOrdersByUserApi } from "../../services/apiOrder";
 
 import { updateOrderStatus } from "../../redux/orderSlice";
 
+import CheckoutSuccess from "../../pages/CheckoutSuccess";
+
 function SendMail() {
   const { user } = useSelector((state) => state.auth);
   const [orders, setOrders] = useState([]);
@@ -103,7 +105,6 @@ function SendMail() {
         templateParams,
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       );
-      alert("Đã gửi thông tin đơn hàng tới email!");
 
       // Update status = success lên server (file json)
       if (orders[0]?.id) {
@@ -134,8 +135,8 @@ function SendMail() {
           </p>
         </>
       ) : hasTriggered ? (
-        <p className="text-green-600 font-bold">
-          ✅ Hoàn tất! Vui lòng kiểm tra email.
+        <p className="font-bold">
+          <CheckoutSuccess />
         </p>
       ) : (
         <p className="text-gray-500 italic">Đang chuẩn bị dữ liệu...</p>
