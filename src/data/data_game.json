@@ -169,6 +169,38 @@
       "transaction_type": "PAYMENT",
       "desc": "Thanh toán đơn hàng bằng bằng hình thức VNPAY",
       "amount": 98000
+    },
+    {
+      "id": "6d69",
+      "id_user": "2",
+      "time": "2026-01-14 20:00:27",
+      "transaction_type": "PAYMENT",
+      "desc": "Thanh toán đơn hàng bằng bằng hình thức VNPAY",
+      "amount": 178200
+    },
+    {
+      "id": "a8a1",
+      "id_user": "2",
+      "time": "2026-01-14 20:02:04",
+      "transaction_type": "PAYMENT",
+      "desc": "Thanh toán đơn hàng bằng bằng hình thức VNPAY",
+      "amount": 23000
+    },
+    {
+      "id": "2523",
+      "id_user": "2",
+      "time": "2026-01-14 20:03:42",
+      "transaction_type": "PAYMENT",
+      "desc": "Thanh toán đơn hàng bằng bằng hình thức VNPAY",
+      "amount": 49000
+    },
+    {
+      "id": "bfbf",
+      "id_user": "2",
+      "time": "2026-01-14 20:05:31",
+      "transaction_type": "PAYMENT",
+      "desc": "Thanh toán đơn hàng bằng bằng hình thức VNPAY",
+      "amount": 59000
     }
   ],
   "categories": [
@@ -12122,24 +12154,7 @@
     {
       "id": "f50a",
       "userId": "2",
-      "items": [
-        {
-          "productId": "12",
-          "title": "Hollow Knight: Silksong - Tài khoản Steam Offline",
-          "price": 49000,
-          "thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/1030300/header.jpg",
-          "quantity": 1,
-          "selected": true
-        },
-        {
-          "productId": "18",
-          "title": "No, I'm not a Human - Tài khoản Steam Offline",
-          "price": 49000,
-          "thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/3180070/header.jpg",
-          "quantity": 1,
-          "selected": true
-        }
-      ]
+      "items": []
     },
     {
       "id": "0dcd",
@@ -12797,6 +12812,42 @@
       "total": 98000,
       "status": "success",
       "date": "2026-01-06",
+      "canReview": true
+    },
+    {
+      "id": "order-028",
+      "userId": "2",
+      "items": [
+        {
+          "productId": "2",
+          "title": "ELDEN RING Shadow of the Erdtree Deluxe Edition - Tài khoản Steam Offline",
+          "price": 99000,
+          "thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/1245620/header.jpg",
+          "quantity": 2,
+          "selected": true
+        }
+      ],
+      "total": 178200,
+      "status": "success",
+      "date": "2026-01-14",
+      "canReview": true
+    },
+    {
+      "id": "order-029",
+      "userId": "2",
+      "items": [
+        {
+          "productId": "5",
+          "title": "Palworld - Tài khoản Steam Offline",
+          "price": 59000,
+          "thumbnail": "https://cdn.divineshop.vn/image/catalog/Anh-SP-New/Thang/palworld-36177.jpg?hash=1761014273",
+          "quantity": 1,
+          "selected": true
+        }
+      ],
+      "total": 59000,
+      "status": "success",
+      "date": "2026-01-14",
       "canReview": true
     }
   ],
