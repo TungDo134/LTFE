@@ -11,8 +11,8 @@ function CheckoutSuccess() {
           <div className="flex justify-center">
             <div className="w-full lg:w-2/3 md:w-5/6">
               <div className="bg-white p-12 rounded-lg shadow-sm flex flex-col items-center gap-4">
-                <h1 className="text-green-600 text-4xl mb-4 pt-12 font-semibold">
-                  Đặt hàng thành công!
+                <h1 className="text-green-600 text-3xl mb-4 pt-12 font-semibold">
+                  Thanh toán đơn hàng thành công!
                 </h1>
                 <p className="text-2xl font-light">
                   Cảm ơn bạn đã mua sắm tại cửa hàng của chúng tôi. Vui lòng

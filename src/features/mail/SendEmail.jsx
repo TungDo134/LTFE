@@ -12,7 +12,6 @@ import { getOrdersByUserApi } from "../../services/apiOrder";
 
 import { updateOrderStatus } from "../../redux/orderSlice";
 
-import toast from "react-hot-toast";
 import CheckoutSuccess from "../../pages/CheckoutSuccess";
 
 function SendMail() {
@@ -106,7 +105,6 @@ function SendMail() {
         templateParams,
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       );
-      toast.success("Đã gửi thông tin đơn hàng tới email!");
 
       // Update status = success lên server (file json)
       if (orders[0]?.id) {
